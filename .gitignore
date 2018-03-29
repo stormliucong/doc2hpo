@@ -1,0 +1,11 @@
+.DS_Store
+.classpath
+.project
+.settings/
+/src/main/webapp/WEB-INF/scripts
+/target/
+/logs/
+/src/test/
+/src/main/webapp/WEB-INF/lib/
+/src/main/java/metamap-api-2.0.jar
+
