@@ -31,6 +31,7 @@ function parse() {
 	var basePath = $('#basePath').val();
 	console.log(basePath);
 	var note = $("#note").val();
+	note = removeNonAsc(note);
 	if (note.length < 1) {
 		alert("Input your note please!");
 	} else {
@@ -261,4 +262,12 @@ function testController() {
 			// do what ever you want with data
 		}
 	})
+}
+
+function tryAnExample() {
+	$("#note").val('The index patient (III6, Fig. 1) was referred to our BHD interdisciplinary outpatient clinic at age 43 years, after he had suffered from more than five pneumothoraces caused by rupture of lung bullae starting at age 29 years (Fig. 2). Facial fibrofolliculoma began to occur at the age of 41 years. Results of screening examinations including computer tomography of kidneys, colonoscopy and ultrasonography of the thyroid gland were normal. The family’s medical history was obtained from the index patient. His only son (IV1), 15 years of age, is reportedly healthy, but - in agreement with German law - hasn’t been genetically tested yet. The index patient’s father (age 83 years) (II9) had his first and so far only pneumothorax at age 61 years. He noticed facial fibrofolliculomas for the first time 2–3 years ago around age 80 years. He suffers from chronic renal insufficiency stage III but has no known kidney tumors. Two of the father’s brothers (II4, II7) reportedly have multiple facial fibrofolliculomas since age 20 years. One of them (II7) had five spontaneous pneumothoraces starting after age 60 years and was diagnosed with kidney cancer and prostate cancer in his early 70s. The father also has four siblings (II1–2, II5, II8) not showing any BHDS symptoms. It is unknown, if pneumothorax or facial fibrofolliculomas occurred in the grandparents generation. The medical history of the index patient’s maternal family (II10) was unremarkable. Both sides of the family are of German origin. The CARE guidelines were followed in reporting this case.');
+}
+
+function removeNonAsc(rawString) {
+	return rawString.replace(/[^\x00-\x7F]/g, "");
 }

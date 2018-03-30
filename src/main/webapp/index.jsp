@@ -165,8 +165,10 @@ a {
 	<div class="gradient masthead">
 		<div class="container">
 			<h1 style="font-size: 300%">Note2Gene</h1>
-			<h3>Aim to help clinicians better identify causal gene in the
-				field of rare disease diagnosis.</h3>
+			<h3>A web server to convert the free-text of patient description
+				from genetic counselors into Human Phenotype Ontology (HPO) or UMLS
+				terms (CUI), which could then be further feeded into Phenolyzer for
+				gene analysis.</h3>
 			<p class="masthead-button-links">
 				<a class="btn btn-lg btn-success" id="starttoinput" target="_blank"
 					role="button">&nbsp;&nbsp;Start&nbsp;&nbsp;</a> <a
@@ -237,6 +239,10 @@ a {
 									to input the patient phenotype description</span>
 								<textarea class="form-control" rows="12" id="note"></textarea>
 							</div>
+							<div class="form-group">
+								<button type="button" class="btn btn-default" id="textExample">Try
+									an example</button>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -256,20 +262,22 @@ a {
 								<span class="help-block">Tips: Don't like it? Provide
 									your own phenotypes</span>
 								<div id="termTable" class="table-editable">
-									<span class="table-add glyphicon glyphicon-plus"></span>
 									<table class="table">
 										<thead>
 											<tr>
-												<th>Name <span title="Tips: copy the column and paste it in phenolyzer query box" id="copyName" class="glyphicon glyphicon-share"></span></th>
-												<th>Id <span title="Tips: copy the column and paste it in phenolyzer query box" id="copyId" class="glyphicon glyphicon-share"></span></th>
-												<th></th>
-												<th></th>
+												<th>Name <span
+													title="Tips: copy the column and paste it in phenolyzer query box"
+													id="copyName" class="glyphicon glyphicon-share"></span></th>
+												<th>Id <span
+													title="Tips: copy the column and paste it in phenolyzer query box"
+													id="copyId" class="glyphicon glyphicon-share"></span></th>
+												<th class="text-center"><span class="table-add glyphicon glyphicon-plus"></span></th>
 											</tr>
 											<!-- This is our clonable table line -->
 											<tr class="hide">
 												<td contenteditable="true">Untitled</td>
 												<td contenteditable="true">undefined</td>
-												<td><span
+												<td class="text-center"><span
 													class="table-remove glyphicon glyphicon-remove"></span></td>
 											</tr>
 										</thead>
@@ -427,7 +435,8 @@ a {
 										</form>
 									</div>
 								</div>
-								<div id="PhenolyzerConfig" class="tab-pane fade" style="display:none">
+								<div id="PhenolyzerConfig" class="tab-pane fade"
+									style="display: none">
 									<br>
 									<h3>Phenolyzer Config Wait for update</h3>
 								</div>
@@ -444,15 +453,16 @@ a {
 				<p class="masthead-button-links">
 					<a class="btn btn-success" id="parse" target="_blank" role="button">&nbsp;&nbsp;Parse&nbsp;&nbsp;</a>
 					<a class="btn btn-info" id="reset" role="button">&nbsp;&nbsp;&nbsp;Reset&nbsp;&nbsp;&nbsp;</a>
-					
+
 				</p>
 			</div>
 			<div class="col-sm-12 col-md-12 col-lg-12">
-				<p class="masthead-button-links" id="phenolyzer" style="display:none">
+				<p class="masthead-button-links" id="phenolyzer"
+					style="display: none">
 					<a class="btn btn-primary" role="button">&nbsp;&nbsp;Next
-						Step&nbsp;&nbsp;</a>
-					<span class="glyphicon glyphicon-play"></span> Next step will direct to the phenolyzer page	
-					
+						Step&nbsp;&nbsp;</a> <span class="glyphicon glyphicon-play"></span>
+					Next step will direct to the phenolyzer page
+
 				</p>
 			</div>
 		</div>
@@ -506,6 +516,9 @@ a {
 				//phenolyzer();
 				phenolyzerTmp();
 			});
+			$("#textExample").click(function() {
+				tryAnExample();
+			})
 		})
 	</script>
 </body>
