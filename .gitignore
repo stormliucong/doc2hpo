@@ -1,7 +1,4 @@
 .DS_Store
-.classpath
-.project
-.settings/
 /src/main/webapp/WEB-INF/scripts
 /target/
 /logs/
