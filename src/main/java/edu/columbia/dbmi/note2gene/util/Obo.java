@@ -12,6 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.python.antlr.PythonParser.print_stmt_return;
+import org.springframework.util.ResourceUtils;
 
 import com.jayway.jsonpath.internal.Path;
 
@@ -20,17 +21,32 @@ import jnr.ffi.Struct.in_addr_t;
 
 public class Obo {
 	public static void main (String[] args) throws IOException {
-		String name = "Developmental Regression";
-		File obo = new File("/Users/congliu/eclipse-workspace/note2gene/src/main/resources/hp.obo");
-		Obo o = new Obo(obo);
-		HashMap<String, String> hmCui2Hpo = o.Cui2Hpo();
-		System.out.println(hmCui2Hpo.size());
+		Obo o = new Obo();
+		HashMap<String, String> hmCui2Hpo = o.hmCui2Hpo;
+		System.out.println(hmCui2Hpo);
+
+
 	}
 	
-	
-	private File oboFile;
-	public Obo (File obo) {
-		this.oboFile = obo;
+	public HashMap<String, String> hmCui2Hpo = new HashMap<String, String>();
+	public HashMap<String, String> hmHpo2Name = new HashMap<String, String>();
+
+	File oboFile;
+
+	public Obo () {
+		
+		try {
+			this.oboFile = ResourceUtils.getFile("classpath:dictionary/hpo.obo");
+			this.hmCui2Hpo = Cui2Hpo();
+			this.hmHpo2Name = Hpo2Name();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 	public HashMap<String, String> Cui2Name () throws IOException{
 		HashMap<String, String> hmCui2Name = new HashMap<String, String>();
@@ -41,7 +57,7 @@ public class Obo {
 		while(newLine != null) {
 			newLine = newLine.trim();
 			String namePattern = "^name: (.+?)$";
-			String idPattern = "^xref: UMLS(.+?)$";
+			String idPattern = "^xref: UMLS:(.+?)$";
 			Pattern pName = Pattern.compile(namePattern, Pattern.CASE_INSENSITIVE);
 			Pattern pId = Pattern.compile(idPattern, Pattern.CASE_INSENSITIVE);
 			Matcher mName = pName.matcher(newLine);
@@ -88,7 +104,7 @@ public class Obo {
 			}
 			if (mCui.matches()) {
 				cui = mCui.group(1).trim();
-				String test = hmCui2Hpo.get(hpo);
+				String test = hmCui2Hpo.get(cui);
 				if(test == null) {
 					hmCui2Hpo.put(cui, hpo);
 				}else {

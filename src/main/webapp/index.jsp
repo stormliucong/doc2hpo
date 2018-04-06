@@ -382,7 +382,7 @@ a {
 											<div class="form-group col-sm-12 col-md-12 col-lg-12">
 												<div class="checkbox">
 													<label> <input title="Congenital Abnormality"
-														id="cgab" type="checkbox" checked='checked'>
+														id="cgab" type="checkbox">
 														Congenital Abnormality
 													</label>
 												</div>
@@ -390,7 +390,7 @@ a {
 											<div class="form-group col-sm-12 col-md-12 col-lg-12">
 												<div class="checkbox">
 													<label> <input title="Disease or Syndrome"
-														id="dsyn" type="checkbox" checked> Disease or
+														id="dsyn" type="checkbox"> Disease or
 														Syndrome
 													</label>
 												</div>
@@ -398,7 +398,7 @@ a {
 											<div class="form-group col-sm-12 col-md-12 col-lg-12">
 												<div class="checkbox">
 													<label> <input title="Genetic Function" id="genf"
-														type="checkbox" checked> Genetic Function
+														type="checkbox"> Genetic Function
 													</label>
 												</div>
 											</div>
