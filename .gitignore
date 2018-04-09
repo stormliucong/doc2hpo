@@ -1,5 +1,4 @@
 .DS_Store
-/src/main/webapp/WEB-INF/scripts
 /target/
 /logs/
 /src/test/
