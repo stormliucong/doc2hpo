@@ -2,7 +2,11 @@ package edu.columbia.dbmi.note2gene.util;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
+
 public class Test {
+	@Value("#{configProperties['metamapBinPath']}")
+    private String metamapBinPath;
 	
 	public static void main (String[] args) {
 		String x = "abc";
