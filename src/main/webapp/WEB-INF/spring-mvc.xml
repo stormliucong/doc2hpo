@@ -14,7 +14,6 @@
 
 	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
 	<context:component-scan base-package="edu.columbia.dbmi.note2gene.controller" />
-	<context:component-scan base-package="edu.columbia.dbmi.note2gene.util" />
 	<context:component-scan base-package="edu.columbia.dbmi.note2gene.pojo" />
 	<mvc:annotation-driven></mvc:annotation-driven>
 	

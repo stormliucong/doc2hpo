@@ -15,7 +15,7 @@ import edu.columbia.dbmi.note2gene.util.Obo;
 
 @Controller
 @RequestMapping("/parse")
-public class parseController {
+public class ParseController {
 	Obo o = new Obo();
 	
 	@Value("#{configProperties['MetamapBinPath']}")  

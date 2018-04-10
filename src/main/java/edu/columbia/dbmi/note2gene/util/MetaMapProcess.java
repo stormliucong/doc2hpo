@@ -67,12 +67,21 @@ public class MetaMapProcess {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			String mmpResult = mmp.runCmdMetamap(input, theOptions);
-			System.out.println(mmpResult);
-			HashMap<String, String>hmCui = mmp.extractCui(mmpResult);
-			for(String cui : hmCui.keySet()) {
-				System.out.println(cui+";"+hmCui.get(cui) + "\n");
+			input = "he was profoundly deaf and had completely lost the ability to speak.";
+//			String mmpResult = mmp.runCmdMetamap(input, theOptions);
+//			System.out.println(mmpResult);
+//			HashMap<String, String>hmCui = mmp.extractCui(mmpResult);
+//			for(String cui : hmCui.keySet()) {
+//				System.out.println(cui+";"+hmCui.get(cui) + "\n");
+//			}
+			theOptions = new ArrayList<String>();
+			theOptions.add("-y");
+			ArrayList<String[]> cui = mmp.getCUIbyRestrict(input, theOptions);
+			for(String[] c: cui) {
+				System.out.println("h");
+				System.out.println(Arrays.toString(c));
 			}
+			
 		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -233,25 +242,24 @@ public class MetaMapProcess {
 //					System.out.println(" Mapping:");
 //					System.out.println(" Map Score: " + map.getScore());
 					for (Ev mapEv : map.getEvList()) {
-//						String[] cuiname = new String[5];
+						String[] cuiname = new String[4];
 //						
-//						cuiname[0] = mapEv.getConceptName();
-//						cuiname[1] = mapEv.getConceptId();
-//						cuiname[2] = mapEv.getSemanticTypes().toString();
-//						cuiname[3] = mapEv.getSources().toString();
-//						cuiname[4] = mapEv.getScore();
+						cuiname[0] = mapEv.getConceptName();
+						cuiname[1] = mapEv.getConceptId();
+						cuiname[2] = mapEv.getSemanticTypes().toString();
+						cuiname[3] = mapEv.getSources().toString();
 //
-//						al.add(cuiname);
-						System.out.println(" Score: " + mapEv.getScore());
-						System.out.println(" Concept Id: " + mapEv.getConceptId());
-						System.out.println(" Concept Name: " + mapEv.getConceptName());
-						System.out.println(" Preferred Name: " + mapEv.getPreferredName());
-						System.out.println(" Matched Words: " + mapEv.getMatchedWords());
-						System.out.println(" Semantic Types: " + mapEv.getSemanticTypes());
-						System.out.println(" is Head?: " + mapEv.isHead());
-						System.out.println(" is Overmatch?: " + mapEv.isOvermatch());
-						System.out.println(" Sources: " + mapEv.getSources());
-						System.out.println(" Positional Info: " + mapEv.getPositionalInfo());
+						al.add(cuiname);
+//						System.out.println(" Score: " + mapEv.getScore());
+//						System.out.println(" Concept Id: " + mapEv.getConceptId());
+//						System.out.println(" Concept Name: " + mapEv.getConceptName());
+//						System.out.println(" Preferred Name: " + mapEv.getPreferredName());
+//						System.out.println(" Matched Words: " + mapEv.getMatchedWords());
+//						System.out.println(" Semantic Types: " + mapEv.getSemanticTypes());
+//						System.out.println(" is Head?: " + mapEv.isHead());
+//						System.out.println(" is Overmatch?: " + mapEv.isOvermatch());
+//						System.out.println(" Sources: " + mapEv.getSources());
+//						System.out.println(" Positional Info: " + mapEv.getPositionalInfo());
 					}
 				}
 			}
