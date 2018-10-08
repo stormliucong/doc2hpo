@@ -29,9 +29,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/prologbeans.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/umlsabbr.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/usagiapi.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/je-7.3.7.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/metamap-api-2.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
