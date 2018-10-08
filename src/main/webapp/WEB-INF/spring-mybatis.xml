@@ -9,7 +9,7 @@
                         http://www.springframework.org/schema/context/spring-context-3.1.xsd  
                         http://www.springframework.org/schema/mvc  
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
-	<context:component-scan base-package="edu.columbia.dbmi.note2gene.controller " />
+	<context:component-scan base-package="edu.columbia.dbmi.doc2hpo.controller " />
 	<!-- 引入配置文件 -->
 	<bean id="configProperties"  
         class="org.springframework.beans.factory.config.PropertiesFactoryBean">  

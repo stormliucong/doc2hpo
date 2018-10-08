@@ -12,7 +12,7 @@
 <head>
 
 <meta charset="utf-8">
-<title>Note2Gene</title>
+<title>doc2hpo</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="keywords" content="Genetic Phenotype EHR,">
 <meta name="author"
@@ -148,7 +148,7 @@ a {
 		<div class="container">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="<%=basePath%>" style="color: white"
-					onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'navbar-mainpage'])">Note2Gene</a>
+					onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'navbar-mainpage'])">doc2hpo</a>
 			</div>
 			<div class="navbar-collapse collapse" role="navigation">
 				<ul class="nav navbar-nav">
@@ -164,7 +164,7 @@ a {
 
 	<div class="gradient masthead">
 		<div class="container">
-			<h1 style="font-size: 300%">Note2Gene</h1>
+			<h1 style="font-size: 300%">doc2hpo</h1>
 			<h3>A web server to convert the free-text of patient description
 				from genetic counselors into Human Phenotype Ontology (HPO) or UMLS
 				terms (CUI), which could then be further feeded into Phenolyzer for
@@ -271,7 +271,8 @@ a {
 												<th>Id <span
 													title="Tips: copy the column and paste it in phenolyzer query box"
 													id="copyId" class="glyphicon glyphicon-share"></span></th>
-												<th class="text-center"><span class="table-add glyphicon glyphicon-plus"></span></th>
+												<th class="text-center"><span
+													class="table-add glyphicon glyphicon-plus"></span></th>
 											</tr>
 											<!-- This is our clonable table line -->
 											<tr class="hide">
@@ -304,150 +305,171 @@ a {
 						<div class="panel-body">
 
 
-							<ul class="nav nav-pills">
-								<li class="active" data-toggle="pill"><a data-toggle="pill"
-									href="#GeneralConfig">General Config</a></li>
-								<li><a data-toggle="pill" href="#SemanticConfig">Semantic
-										Config</a></li>
-								<li><a data-toggle="pill" href="#PhenolyzerConfig">Phenolyzer
-										Config</a></li>
-							</ul>
-
-							<div class="tab-content">
-								<div id="GeneralConfig" class="tab-pane fade in active">
-									<br>
-									<div class="form-group col-sm-12 col-md-12 col-lg-12">
-										<form class="form-inline">
-											<div class="form-group col-sm-12 col-md-12 col-lg-12">
-												<div class="checkbox">
-													<label> <input title="allow acronym variants"
-														id="all_acros_abbrs" type="checkbox" checked='checked'>
-														allow acronym variants
-													</label>
-												</div>
-											</div>
-											<div class="form-group col-sm-12 col-md-12 col-lg-12">
-												<div class="checkbox">
-													<label> <input title="allow concept gaps"
-														id="allow_concept_gaps" type="checkbox" checked='checked'>
-														allow concept gaps
-													</label>
-												</div>
-											</div>
-											<div class="form-group col-sm-12 col-md-12 col-lg-12">
-												<div class="checkbox">
-													<label> <input title="ignore word order"
-														id="ignore_word_order" type="checkbox" checked>
-														ignore word order
-													</label>
-												</div>
-											</div>
-											<div class="form-group col-sm-12 col-md-12 col-lg-12">
-												<div class="checkbox">
-													<label> <input title="ignore stop phrases"
-														id="ignore_stop_phrases" type="checkbox" checked>
-														ignore stop phrases
-													</label>
-												</div>
-											</div>
-											<div class="form-group col-sm-12 col-md-12 col-lg-12">
-												<div class="checkbox">
-													<label> <input
-														title="output hpo official term and ids" id="hpo"
-														type="checkbox" checked> HPO identifier
-													</label>
-												</div>
-											</div>
-										</form>
-									</div>
-								</div>
-								<div id="SemanticConfig" class="tab-pane fade">
-									<br>
-									<div class="form-group col-sm-12 col-md-12 col-lg-12">
-										<form class="form-inline">
-											<div class="form-group col-sm-12 col-md-12 col-lg-12">
-												<div class="checkbox">
-													<label> <input title="Anatomical Abnormality"
-														id="anab" type="checkbox"> Anatomical Abnormality
-													</label>
-												</div>
-											</div>
-											<div class="form-group col-sm-12 col-md-12 col-lg-12">
-												<div class="checkbox">
-													<label> <input title="Finding" id="fndg"
-														type="checkbox"> Finding
-													</label>
-												</div>
-											</div>
-											<div class="form-group col-sm-12 col-md-12 col-lg-12">
-												<div class="checkbox">
-													<label> <input title="Congenital Abnormality"
-														id="cgab" type="checkbox">
-														Congenital Abnormality
-													</label>
-												</div>
-											</div>
-											<div class="form-group col-sm-12 col-md-12 col-lg-12">
-												<div class="checkbox">
-													<label> <input title="Disease or Syndrome"
-														id="dsyn" type="checkbox"> Disease or
-														Syndrome
-													</label>
-												</div>
-											</div>
-											<div class="form-group col-sm-12 col-md-12 col-lg-12">
-												<div class="checkbox">
-													<label> <input title="Genetic Function" id="genf"
-														type="checkbox"> Genetic Function
-													</label>
-												</div>
-											</div>
-											<div class="form-group col-sm-12 col-md-12 col-lg-12">
-												<div class="checkbox">
-													<label> <input
-														title="Mental or Behavioral Dysfunction" id="mobd"
-														type="checkbox"> Mental or Behavioral Dysfunction
-													</label>
-												</div>
-											</div>
-											<div class="form-group col-sm-12 col-md-12 col-lg-12">
-												<div class="checkbox">
-													<label> <input title="Sign or Symptom" id="sosy"
-														type="checkbox"> Sign or Symptom
-													</label>
-												</div>
-											</div>
-											<div class="form-group col-sm-12 col-md-12 col-lg-12">
-												<div class="checkbox">
-													<label> <input title="Laboratory or Test Result"
-														id="lbtr" type="checkbox"> Laboratory or Test
-														Result
-													</label>
-												</div>
-											</div>
-											<div class="form-group col-sm-12 col-md-12 col-lg-12">
-												<div class="checkbox">
-													<label> <input title="Pathologic Function"
-														id="patf" type="checkbox"> Pathologic Function
-													</label>
-												</div>
-											</div>
-										</form>
-									</div>
-								</div>
-								<div id="PhenolyzerConfig" class="tab-pane fade"
-									style="display: none">
-									<br>
-									<h3>Phenolyzer Config Wait for update</h3>
-								</div>
+							<div class="form-group col-sm-12 col-md-12 col-lg-12">
+								<label>Select a parsing method:</label> <select
+									class="form-control" id="parsing-method" onchange="showOptions()">
+									<option value="1">fast string match</option>
+									<option value="2">metamap</option>
+									<option value="3">ncbo annotator</option>
+								</select>
 							</div>
 
+							<div id="mmp-option"
+								class="form-group col-sm-12 col-md-12 col-lg-12"
+								style="display: none">
+								<label>mmp general configuration</label>
+								<form class="form-inline">
+									<div class="form-group col-sm-12 col-md-12 col-lg-12">
+										<div class="checkbox">
+											<label> <input title="allow acronym variants"
+												id="all_acros_abbrs" type="checkbox" checked='checked'>
+												allow acronym variants
+											</label>
+										</div>
+									</div>
+									<div class="form-group col-sm-12 col-md-12 col-lg-12">
+										<div class="checkbox">
+											<label> <input title="allow concept gaps"
+												id="allow_concept_gaps" type="checkbox" checked='checked'>
+												allow concept gaps
+											</label>
+										</div>
+									</div>
+									<div class="form-group col-sm-12 col-md-12 col-lg-12">
+										<div class="checkbox">
+											<label> <input title="ignore word order"
+												id="ignore_word_order" type="checkbox" checked>
+												ignore word order
+											</label>
+										</div>
+									</div>
+									<div class="form-group col-sm-12 col-md-12 col-lg-12">
+										<div class="checkbox">
+											<label> <input title="ignore stop phrases"
+												id="ignore_stop_phrases" type="checkbox" checked>
+												ignore stop phrases
+											</label>
+										</div>
+									</div>
+									<div class="form-group col-sm-12 col-md-12 col-lg-12">
+										<div class="checkbox">
+											<label> <input
+												title="output hpo official term and ids" id="hpo"
+												type="checkbox" checked> HPO identifier
+											</label>
+										</div>
+									</div>
+								</form>
+							</div>
+							
+							<div id="ncbo-option"
+								class="form-group col-sm-12 col-md-12 col-lg-12"
+								style="display: none">
+								<label>ncbo general configuration</label>
+								<form class="form-inline">
+									<div class="form-group col-sm-12 col-md-12 col-lg-12">
+										<div class="checkbox">
+											<label> <input title="match longest only"
+												id="longest_only" type="checkbox" checked='checked'>
+												Match longest only
+											</label>
+										</div>
+									</div>
+									<div class="form-group col-sm-12 col-md-12 col-lg-12">
+										<div class="checkbox">
+											<label> <input title="whole word only"
+												id="whole_word_only" type="checkbox">
+												Whole word only
+											</label>
+										</div>
+									</div>
+									<div class="form-group col-sm-12 col-md-12 col-lg-12">
+										<div class="checkbox">
+											<label> <input title="exclude numbers"
+												id="exclude_numbers" type="checkbox">
+												Exclude numbers
+											</label>
+										</div>
+									</div>
+								</form>
+							</div>
+
+							<div id="semantic-option"
+								class="form-group col-sm-12 col-md-12 col-lg-12"
+								style="display: none">
+								<label>Select semantic types</label>
+								<form class="form-inline">
+									<div class="form-group col-sm-12 col-md-12 col-lg-12">
+										<div class="checkbox">
+											<label> <input title="Anatomical Abnormality"
+												id="anab" type="checkbox"> Anatomical Abnormality
+											</label>
+										</div>
+									</div>
+									<div class="form-group col-sm-12 col-md-12 col-lg-12">
+										<div class="checkbox">
+											<label> <input title="Finding" id="fndg"
+												type="checkbox"> Finding
+											</label>
+										</div>
+									</div>
+									<div class="form-group col-sm-12 col-md-12 col-lg-12">
+										<div class="checkbox">
+											<label> <input title="Congenital Abnormality"
+												id="cgab" type="checkbox"> Congenital Abnormality
+											</label>
+										</div>
+									</div>
+									<div class="form-group col-sm-12 col-md-12 col-lg-12">
+										<div class="checkbox">
+											<label> <input title="Disease or Syndrome" id="dsyn"
+												type="checkbox"> Disease or Syndrome
+											</label>
+										</div>
+									</div>
+									<div class="form-group col-sm-12 col-md-12 col-lg-12">
+										<div class="checkbox">
+											<label> <input title="Genetic Function" id="genf"
+												type="checkbox"> Genetic Function
+											</label>
+										</div>
+									</div>
+									<div class="form-group col-sm-12 col-md-12 col-lg-12">
+										<div class="checkbox">
+											<label> <input
+												title="Mental or Behavioral Dysfunction" id="mobd"
+												type="checkbox"> Mental or Behavioral Dysfunction
+											</label>
+										</div>
+									</div>
+									<div class="form-group col-sm-12 col-md-12 col-lg-12">
+										<div class="checkbox">
+											<label> <input title="Sign or Symptom" id="sosy"
+												type="checkbox"> Sign or Symptom
+											</label>
+										</div>
+									</div>
+									<div class="form-group col-sm-12 col-md-12 col-lg-12">
+										<div class="checkbox">
+											<label> <input title="Laboratory or Test Result"
+												id="lbtr" type="checkbox"> Laboratory or Test Result
+											</label>
+										</div>
+									</div>
+									<div class="form-group col-sm-12 col-md-12 col-lg-12">
+										<div class="checkbox">
+											<label> <input title="Pathologic Function" id="patf"
+												type="checkbox"> Pathologic Function
+											</label>
+										</div>
+									</div>
+								</form>
+							</div>
 						</div>
-
 					</div>
-
 				</div>
 			</div>
+
 
 			<div class="col-sm-12 col-md-12 col-lg-12">
 				<p class="masthead-button-links">
@@ -474,7 +496,7 @@ a {
 		<div class="row footer-top">
 			<div class="col-sm-6 col-lg-6">
 				<p>
-					<strong>Note2Query v0.1</strong>
+					<strong>Doc2Hpo v0.1</strong>
 				</p>
 				<p>This website was developed by Cong Liu, Chi Yuan,Kai
 					Wang,Chunhua Weng</p>
@@ -518,7 +540,7 @@ a {
 			});
 			$("#textExample").click(function() {
 				tryAnExample();
-			})
+			});
 		})
 	</script>
 </body>

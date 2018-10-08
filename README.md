@@ -1,6 +1,6 @@
-# note2gene
+# doc2hpo
 
-note2gene is a java spring mvc based webapp to parse clinical note and get the HPO or CUI terms for phenolyzer analysis.
+doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO or CUI terms for phenolyzer analysis.
 
 ## Getting Started
 It is not enough to use this git repo to deploy the webapp.
