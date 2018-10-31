@@ -16,6 +16,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import edu.columbia.dbmi.doc2hpo.pojo.ParsingResults;
+
 public class NcboParser {
 	public static String REST_URL = "http://data.bioontology.org";
     public String API_KEY = "";
@@ -130,8 +132,8 @@ public class NcboParser {
 //        }
 //    }
     
-    public HashMap<String, Object> parse(String content, List<String> theOptions){
-    	HashMap<String, Object> idName = new HashMap<String, Object>();
+    public List<ParsingResults> parse(String content, List<String> theOptions){
+    	List<ParsingResults> pResults = new ArrayList<ParsingResults>();
     	String urlParameters = String.join("&", theOptions);
     	System.out.println(urlParameters + "!!!");
         JsonNode annotations;
@@ -151,9 +153,22 @@ public class NcboParser {
 		            String Id = Ids[Ids.length - 1];
 		            String name = classDetails.get("prefLabel").asText();
 		            
-		            JsonNode annotationDetails = jsonToNode(get(annotation.get("annotations"));
+		            JsonNode annotationDetails = annotation.get("annotations");
+		            for (final JsonNode objNode : annotationDetails) {
+		            	int start = objNode.get("from").asInt();
+		            	int to = objNode.get("to").asInt();
+		            	int length = to - start;
+		            	start = start - 1;
+		            	ParsingResults pr = new ParsingResults();
+		            	pr.setHpoId(Id);
+		            	pr.setHpoName(name);
+		            	pr.setStart(start);
+		            	pr.setLength(length);
+		            	pResults.add(pr);
+		            	System.out.println("myInfo:" + "\t" + start + "\t" + to +  "\t" + Id + "\t" + name);
+		            }
 		            
-		            idName.put(name, Id);
+//		            idName.put(name, Id);
 //		            System.out.println("Class details");
 //		            System.out.println("\tid: " + classDetails.get("@id").asText());
 //		            System.out.println("\tprefLabel: " + classDetails.get("prefLabel").asText());
@@ -179,7 +194,7 @@ public class NcboParser {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return idName;
+		return pResults;
 
       
 		
@@ -216,7 +231,7 @@ public class NcboParser {
         theOptions.add("longest_only=false");
         theOptions.add("ontologies=HP");
 
-        HashMap <String, Object> hm = ncboparser.parse(input,theOptions);
+        List<ParsingResults> hm = ncboparser.parse(input,theOptions);
 
         // Get labels, synonyms, and definitions with returned annotations
 //        urlParameters = "include=prefLabel,synonym,definition&text=" + textToAnnotate;

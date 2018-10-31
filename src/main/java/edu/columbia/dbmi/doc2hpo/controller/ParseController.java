@@ -1,5 +1,6 @@
 package edu.columbia.dbmi.doc2hpo.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.columbia.dbmi.doc2hpo.pojo.ParseJob;
+import edu.columbia.dbmi.doc2hpo.pojo.ParsingResults;
 import edu.columbia.dbmi.doc2hpo.service.ACTrieParser;
 import edu.columbia.dbmi.doc2hpo.service.MetaMapParser;
 import edu.columbia.dbmi.doc2hpo.service.NcboParser;
@@ -78,7 +80,7 @@ public class ParseController {
 		List<String> theOptions = pj.getOption();
 		String urlParameters = String.join("&", theOptions);
 		System.out.println(urlParameters);
-		Map<String, Object> hmName2Id = new HashMap<String, Object>();
+		List<ParsingResults> hmName2Id = new ArrayList<ParsingResults>();
 
 		String content = pj.getNote();
 		hmName2Id = this.ncbo.parse(content, theOptions);

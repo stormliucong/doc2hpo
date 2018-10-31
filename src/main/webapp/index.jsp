@@ -501,7 +501,8 @@
 		$(function() {
 			showSearchBox();
 			refreshTable();
-			$("#note").val('');
+/* 			highlight(parsingJson);
+ */			$("#note").val('');
 			$("#term").val('');
 			$("#fbcontent").val('');
 			$("#fbsubmit").click(function() {
@@ -515,7 +516,7 @@
 			})
 			$("#parse").click(function() {
 				parsingJson = parse();
-				highlight(parsingJson);
+				console.log('here: ' + parsingJson);
 				//testController();
 			});
 

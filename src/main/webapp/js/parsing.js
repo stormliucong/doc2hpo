@@ -158,12 +158,14 @@ function parseNcbo(note) {
 				console.log(terms);
 				var hpoOption = data["hpoOption"];
 				updateTable(terms);
+				highlight(terms);
 				var t = $(window).scrollTop();
 				$('body,html').animate({
 					'scrollTop' : t + 1000
 				}, 200)
 				$("#phenolyzer").show();
 			}
+			return terms
 
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -203,44 +205,45 @@ function parse_bak() {
 }
 
 function parse() {
-//	$("#phenolyzer").hide();
-//	refreshTable();
-//
-//	var basePath = $('#basePath').val();
-//	console.log(basePath);
-//	var note = $("#note").val();
-//	note = removeNonAsc(note);
-//	if (note.length < 1) {
-//		alert("Input your note please!");
-//	} else {
-//		var e = document.getElementById("parsing-method");
-//		var radioMmp = e.options[e.selectedIndex].value;
-//
-//		if (radioMmp == "1") {
-//			console.log("parse act");
-//			parsingJson = parseACT(note);
-//		}
-//		if (radioMmp == "2") {
-//			console.log("parse mmp");
-//			parsingJson = parseMetamap(note);
-//		}
-//		if (radioMmp == "3") {
-//			console.log("parse ncbo");
-//			parsingJson = parseNcbo(note);
-//		}
-//
-//	}
-	parsingJson = [{
-		'start': 5,
-		'length': 10,
-		'hpo_id': 'HP:0003002',
-		'hpo_term': 'Breast cancer'
-	},{
-		'start': 50,
-		'length': 100,
-		'hpo_id': 'HP:0002896',
-		'hpo_term': 'Liver cancer'
-	}]
+	$("#phenolyzer").hide();
+	refreshTable();
+
+	var basePath = $('#basePath').val();
+	console.log(basePath);
+	var note = $("#note").val();
+	note = removeNonAsc(note);
+	if (note.length < 1) {
+		alert("Input your note please!");
+	} else {
+		var e = document.getElementById("parsing-method");
+		var radioMmp = e.options[e.selectedIndex].value;
+
+		if (radioMmp == "1") {
+			console.log("parse act");
+			parsingJson = parseACT(note);
+		}
+		if (radioMmp == "2") {
+			console.log("parse mmp");
+			parsingJson = parseMetamap(note);
+		}
+		if (radioMmp == "3") {
+			console.log("parse ncbo");
+			parsingJson = parseNcbo(note);
+		}
+
+	}
+	console.log("parse()" + parsingJson);
+//	parsingJson = [{
+//		'start': 5,
+//		'length': 10,
+//		'hpo_id': 'HP:0003002',
+//		'hpo_term': 'Breast cancer'
+//	},{
+//		'start': 50,
+//		'length': 100,
+//		'hpo_id': 'HP:0002896',
+//		'hpo_term': 'Liver cancer'
+//	}]
 	// Array of {start,end,hpo_id,hpo_term}
 	return parsingJson
 }

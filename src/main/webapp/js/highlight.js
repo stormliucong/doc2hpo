@@ -57,8 +57,8 @@ function processEachTag(node, range, parsingJson) {
 			// here you have access to
 			var start = parsingJson[key].start;
 			var length = parsingJson[key].length;
-			var hpo_id = parsingJson[key].hpo_id;
-			var hpo_term = parsingJson[key].hpo_term.toUpperCase();
+			var hpo_id = parsingJson[key].hpoId;
+			var hpo_term = parsingJson[key].hpoName.toUpperCase();
 
 			if (start == range.start && length == range.length) {
 				console.log('start' + start)
@@ -74,7 +74,11 @@ function processEachTag(node, range, parsingJson) {
 					$(this).toggleClass("data-entity");
 					$(this).find('.hpo-entity').toggle();
 					// TBD
-					// toggle shopping cart
+					if($(this).find('.hpo-entity').is(":visible")){
+						deleteTermsInSession(start,length);
+					}else{
+						addTermsInSession(start,length);
+					}
 					
 				});
 				
