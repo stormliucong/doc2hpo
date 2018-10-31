@@ -1,14 +1,8 @@
-function subset(obj, propList) {
-	return propList.reduce(function(newObj, prop) {
-		obj.hasOwnProperty(prop) && (newObj[prop] = obj[prop]);
-		return newObj;
-	}, {});
-}
-
 function highlight(parsingJson) {
 	console.log('highlight')
 	var note = $("#note").val();
 	$("#parsing-results").text(note);
+	$("#parsing-results").addClass('entities');
 	var context = document.querySelector("#parsing-results");
 
 	// using https://markjs.io/
@@ -21,7 +15,7 @@ function highlight(parsingJson) {
 	console.log(rangeArray);
 	var options = {
 		"element" : "mark",
-		"className" : "termTagger",
+		"className" : "",
 		"exclude" : [],
 		"iframes" : true,
 		"iframesTimeout" : 5000,
@@ -65,24 +59,27 @@ function processEachTag(node, range, parsingJson) {
 			var start = parsingJson[key].start;
 			var length = parsingJson[key].length;
 			var hpo_id = parsingJson[key].hpo_id;
-			var hpo_term = '(HPO:' + parsingJson[key].hpo_term + ')';
-
+			var hpo_term = parsingJson[key].hpo_term.toUpperCase();
+			
 			if (start == range.start && length == range.length) {
-				$(node).addClass("ic");
-				var hpo_finder = '<span class="hpo">'
-						+ hpo_term + '</span>';
-				$(node).append(hpo_finder);
-				$(node).tooltip({
-					
-				})
-				$(node).click(function() {
+				$(node).addClass('data-entity')
+				$(node).append("<span class='hpo-entity'>" + hpo_term + "</span>")
+				console.log(note);
+				$(node).on('click',function() {
 					// alert( "Handler for .click() called." );
-					var title = $(node).text();
-					console.log(title)
-					console.log(node)
-					$('#termManangeTitle').text(title);
-					$('#termManager').modal('show');
+					$(this).toggleClass("data-entity");
+					$(this).find('.hpo-entity').toggle();
+					// TBD 
+					// toggle shopping cart
 				});
+				$(node).find('span.hpo-entity').on('click',function(e) {
+					var hpo_link = 'https://hpo.jax.org/app/browse/term/' + hpo_id;
+					var hpo_html = '<a href="' + hpo_link + '">' + hpo_id + ' ' + hpo_term +'</a>';
+					$('#termManager').find('h4.modal-title').html(hpo_html);
+					$('#termManager').modal('show');
+					e.stopPropagation(); // do nothing.
+				});
+				
 			}
 		}
 	}

@@ -1,0 +1,187 @@
+.entities {
+	line-height: 2;
+}
+
+.data-entity {
+	cursor: pointer;
+	padding: 0.25em 0.35em;
+	margin: 0px 0.25em;
+	line-height: 1;
+	display: inline-block;
+	border-radius: 0.25em;
+	border: 1px solid;
+	background: rgba(166, 226, 45, 0.2);
+	border-color: rgb(166, 226, 45);
+}
+
+.hpo-entity {
+	box-sizing: border-box;
+	content: attr(data-entity);
+	font-size: 0.6em;
+	line-height: 1;
+	padding: 0.25em 0.35em;
+	border-radius: 0.35em;
+	text-transform: uppercase;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0px 0px 0.1rem 0.5rem;
+	background: rgb(166, 226, 45);
+}
+
+[data-entity][data-entity="person"] {
+	background: rgba(166, 226, 45, 0.2);
+	border-color: rgb(166, 226, 45);
+}
+
+[data-entity][data-entity="person"]::after {
+	background: rgb(166, 226, 45);
+}
+
+[data-entity][data-entity="norp"] {
+	background: rgba(224, 0, 132, 0.2);
+	border-color: rgb(224, 0, 132);
+}
+
+[data-entity][data-entity="norp"]::after {
+	background: rgb(224, 0, 132);
+}
+
+[data-entity][data-entity="facility"] {
+	background: rgba(67, 198, 252, 0.2);
+	border-color: rgb(67, 198, 252);
+}
+
+[data-entity][data-entity="facility"]::after {
+	background: rgb(67, 198, 252);
+}
+
+[data-entity][data-entity="org"] {
+	background: rgba(67, 198, 252, 0.2);
+	border-color: rgb(67, 198, 252);
+}
+
+[data-entity][data-entity="org"]::after {
+	background: rgb(67, 198, 252);
+}
+
+[data-entity][data-entity="gpe"] {
+	background: rgba(253, 151, 32, 0.2);
+	border-color: rgb(253, 151, 32);
+}
+
+[data-entity][data-entity="gpe"]::after {
+	background: rgb(253, 151, 32);
+}
+
+[data-entity][data-entity="loc"] {
+	background: rgba(253, 151, 32, 0.2);
+	border-color: rgb(253, 151, 32);
+}
+
+[data-entity][data-entity="loc"]::after {
+	background: rgb(253, 151, 32);
+}
+
+[data-entity][data-entity="product"] {
+	background: rgba(142, 125, 255, 0.2);
+	border-color: rgb(142, 125, 255);
+}
+
+[data-entity][data-entity="product"]::after {
+	background: rgb(142, 125, 255);
+}
+
+[data-entity][data-entity="event"] {
+	background: rgba(255, 204, 0, 0.2);
+	border-color: rgb(255, 204, 0);
+}
+
+[data-entity][data-entity="event"]::after {
+	background: rgb(255, 204, 0);
+}
+
+[data-entity][data-entity="work_of_art"] {
+	background: rgba(255, 204, 0, 0.2);
+	border-color: rgb(255, 204, 0);
+}
+
+[data-entity][data-entity="work_of_art"]::after {
+	background: rgb(255, 204, 0);
+}
+
+[data-entity][data-entity="language"] {
+	background: rgba(255, 204, 0, 0.2);
+	border-color: rgb(255, 204, 0);
+}
+
+[data-entity][data-entity="language"]::after {
+	background: rgb(255, 204, 0);
+}
+
+[data-entity][data-entity="date"] {
+	background: rgba(47, 187, 171, 0.2);
+	border-color: rgb(47, 187, 171);
+}
+
+[data-entity][data-entity="date"]::after {
+	background: rgb(47, 187, 171);
+}
+
+[data-entity][data-entity="time"] {
+	background: rgba(47, 187, 171, 0.2);
+	border-color: rgb(47, 187, 171);
+}
+
+[data-entity][data-entity="time"]::after {
+	background: rgb(47, 187, 171);
+}
+
+[data-entity][data-entity="percent"] {
+	background: rgba(153, 153, 153, 0.2);
+	border-color: rgb(153, 153, 153);
+}
+
+[data-entity][data-entity="percent"]::after {
+	background: rgb(153, 153, 153);
+}
+
+[data-entity][data-entity="money"] {
+	background: rgba(153, 153, 153, 0.2);
+	border-color: rgb(153, 153, 153);
+}
+
+[data-entity][data-entity="money"]::after {
+	background: rgb(153, 153, 153);
+}
+
+[data-entity][data-entity="quantity"] {
+	background: rgba(153, 153, 153, 0.2);
+	border-color: rgb(153, 153, 153);
+}
+
+[data-entity][data-entity="quantity"]::after {
+	background: rgb(153, 153, 153);
+}
+
+[data-entity][data-entity="ordinal"] {
+	background: rgba(153, 153, 153, 0.2);
+	border-color: rgb(153, 153, 153);
+}
+
+[data-entity][data-entity="ordinal"]::after {
+	background: rgb(153, 153, 153);
+}
+
+[data-entity][data-entity="cardinal"] {
+	background: rgba(153, 153, 153, 0.2);
+	border-color: rgb(153, 153, 153);
+}
+
+[data-entity][data-entity="cardinal"]::after {
+	background: rgb(153, 153, 153);
+}
+
+body {
+	padding: 25px 50px;
+	font: 18px Helvetica, Arial, sans-serif;
+}

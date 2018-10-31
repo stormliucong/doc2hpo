@@ -31,20 +31,21 @@
     <![endif]-->
 <!-- Custom styles for this template -->
 <link href="<%=basePath%>/css/dashboard.css" rel="stylesheet">
-<link href="<%=basePath%>/css/ner.css" rel="stylesheet">
 <link href="<%=basePath%>css/font-awesome.min.css" rel="stylesheet">
 <link href="<%=basePath%>css/site.min.css?v5" rel="stylesheet">
 <link rel="stylesheet" href="<%=basePath%>/css/bootstrap-table.min.css">
 <link rel="stylesheet" href="<%=basePath%>/css/styles.css">
-<link rel="stylesheet" href="<%=basePath%>/css/demo.css">
+<link rel="stylesheet" href="<%=basePath%>/css/ent-display.css">
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
 <style>
-
-
 </style>
 <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
 <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 <script src="<%=basePath%>/js/ie-emulation-modes-warning.js"></script>
 <script src="<%=basePath%>/js/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.js"></script>
 <script src="<%=basePath%>/js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="<%=basePath%>/js/ie10-viewport-bug-workaround.js"></script>
@@ -165,8 +166,8 @@
 			<div id="conceptMappingResults" class="col-sm-12 col-md-12 col-lg-12"
 				style="display: none">
 				<div class="panel-body context">
-					<p id='parsing-results' class="d-content l-wrapper u-b-lg l-wrapper--page u-t-md">
-					</p>
+					<p id='parsing-results'
+						class="d-content l-wrapper u-b-lg l-wrapper--page u-t-md"></p>
 				</div>
 			</div>
 			<div id="shoppingCart"
@@ -442,22 +443,14 @@
 					<h4 class="modal-title" id="termManangeTitle">Modal title</h4>
 				</div>
 				<div class="modal-body">
-					<div class="radio">
-						<label><input type="radio" name="term-change"
-							checked="checked" value="delete">Delete this term</label>
-					</div>
-					<div class="radio">
-						<label><input type="radio" name="term-change"
-							value="new">Input my HPO term</label>
-					</div>
-					<div>
-						<input class="form-control" type="text" placeholder="Search"
-							aria-label="Search" name='searchtext' style='display: none'>
+					<div class="ui category search">
+						<input class="prompt" type="text"
+							placeholder="Common passwords...">
+						<div class="results"></div>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
+					<button type="button" class="btn btn-primary" id="saveChange">Save changes</button>
 				</div>
 			</div>
 		</div>
@@ -472,6 +465,7 @@
 	<script type="text/javascript" src="<%=basePath%>/js/parsing.js"></script>
 	<script type="text/javascript" src="<%=basePath%>/js/shoppingCart.js"></script>
 	<script type="text/javascript" src="<%=basePath%>/js/highlight.js"></script>
+	<script type="text/javascript" src="<%=basePath%>/js/hpo-search.js"></script>
 
 	<script type="text/javascript">
 		$(document).ajaxStop($.unblockUI);
@@ -479,6 +473,7 @@
 		$(function() {
 			showSearchBox();
 			refreshTable();
+			uiSearch();
 			$("#note").val('');
 			$("#term").val('');
 			$("#fbcontent").val('');
@@ -507,6 +502,9 @@
 			$("#textExample").click(function() {
 				tryAnExample();
 			});
+			$("#saveChange").click(function() {
+				saveChange(); // TBI.
+			})
 		})
 	</script>
 </body>
