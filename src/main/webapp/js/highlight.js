@@ -51,8 +51,7 @@ function highlight(parsingJson) {
 function processEachTag(node, range, parsingJson) {
 	var start = range.start
 	var length = range.length
-	console.log(start)
-	console.log(length)
+
 	for ( var key in parsingJson) {
 		if (parsingJson.hasOwnProperty(key)) {
 			// here you have access to
@@ -60,26 +59,50 @@ function processEachTag(node, range, parsingJson) {
 			var length = parsingJson[key].length;
 			var hpo_id = parsingJson[key].hpo_id;
 			var hpo_term = parsingJson[key].hpo_term.toUpperCase();
-			
+
 			if (start == range.start && length == range.length) {
+				console.log('start' + start)
+				console.log('len' + length)
 				$(node).addClass('data-entity')
-				$(node).append("<span class='hpo-entity'>" + hpo_term + "</span>")
+				$(node).append(
+						"<span class='hpo-entity '>" + hpo_term + "</span>")
+
 				console.log(note);
-				$(node).on('click',function() {
+				$(node).on('click', function() {
 					// alert( "Handler for .click() called." );
 					$(this).toggleClass("data-entity");
 					$(this).find('.hpo-entity').toggle();
-					// TBD 
+					// TBD
 					// toggle shopping cart
 				});
-				$(node).find('span.hpo-entity').on('click',function(e) {
-					var hpo_link = 'https://hpo.jax.org/app/browse/term/' + hpo_id;
-					var hpo_html = '<a href="' + hpo_link + '">' + hpo_id + ' ' + hpo_term +'</a>';
-					$('#termManager').find('h4.modal-title').html(hpo_html);
-					$('#termManager').modal('show');
-					e.stopPropagation(); // do nothing.
-				});
 				
+//				$(node).find('span.hpo-entity').popup({
+//					popup : $('#searchPopup'),
+//					on: 'click'
+//				});
+				
+				$(node)
+						.find('span.hpo-entity')
+						.on(
+								'click',
+								function(e) {
+									var hpo_link = 'https://hpo.jax.org/app/browse/term/'
+											+ hpo_id;
+									var hpo_html = '<a href="' + hpo_link
+											+ '" target="_blank">' + hpo_id
+											+ ' ' + hpo_term + '</a>';
+									$('#termManager').find('.header').html(
+											hpo_html);
+									// $('#termManager').modal('show');
+									// $('#searchPopup').modal('show');
+									console.log('something')
+									$(this).popup({
+										popup : $('#searchPopup'),
+										on : 'click'
+									}).popup('show');
+									e.stopPropagation(); // do nothing.
+								});
+
 			}
 		}
 	}

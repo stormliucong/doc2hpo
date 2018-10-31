@@ -44,8 +44,6 @@
 <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 <script src="<%=basePath%>/js/ie-emulation-modes-warning.js"></script>
 <script src="<%=basePath%>/js/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.js"></script>
 <script src="<%=basePath%>/js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="<%=basePath%>/js/ie10-viewport-bug-workaround.js"></script>
@@ -57,6 +55,8 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/6.0.1/jquery.mark.es6.min.js"></script>
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.es6.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.js"></script>
 </head>
 <body>
 
@@ -66,7 +66,7 @@
 				<a class="navbar-brand" href="<%=basePath%>" style="color: white"
 					onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'navbar-mainpage'])">doc2hpo</a>
 			</div>
-			<div class="navbar-collapse collapse" role="navigation">
+			<!-- <div class="navbar-collapse collapse" role="navigation">
 				<ul class="nav navbar-nav">
 
 				</ul>
@@ -74,7 +74,7 @@
 					<li><a style="color: white" data-toggle="modal"
 						data-target="#myModal">Support</a></li>
 				</ul>
-			</div>
+			</div> -->
 		</div>
 	</div>
 
@@ -85,18 +85,18 @@
 				from genetic counselors into Human Phenotype Ontology (HPO) or UMLS
 				terms (CUI), which could then be further feeded into Phenolyzer for
 				gene analysis.</h3>
-			<p class="masthead-button-links">
+			<!-- <p class="masthead-button-links">
 				<a class="btn btn-lg btn-success" id="starttoinput" target="_blank"
 					role="button">&nbsp;&nbsp;Start&nbsp;&nbsp;</a> <a
 					class="btn btn-lg btn-info" id="feedback" data-toggle="modal"
 					data-target="#myModal" role="button">&nbsp;&nbsp;FeedBack&nbsp;&nbsp;</a>
-			</p>
+			</p> -->
 		</div>
 	</div>
 
 
 	<div class="container projects">
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		<!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -136,9 +136,15 @@
 				</div>
 			</div>
 		</div>
+ -->
 
 		<div class="row">
 			<div class="projects-header"></div>
+
+
+			<!-------------------------------------------------------------------------------------------------------------------------------------->
+			<!----------------------------------------------------------TEXTINPUT PANEL START------------------------------------------------------->
+			<!-------------------------------------------------------------------------------------------------------------------------------------->
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -153,69 +159,35 @@
 							<div class="form-group">
 								<span class="help-block">Tips: feel free to use free-text
 									to input the patient phenotype description</span>
-								<textarea class="form-control" rows="12" id="note"></textarea>
-							</div>
-							<div class="form-group">
 								<button type="button" class="btn btn-default" id="textExample">Try
 									an example</button>
+								<textarea class="form-control" rows="12" id="note"></textarea>
+								<p class="masthead-button-links">
+									<a class="btn btn-success" id="parse" target="_blank"
+										role="button">&nbsp;&nbsp;Parse&nbsp;&nbsp;</a> <a
+										class="btn btn-info" id="reset" role="button">&nbsp;&nbsp;&nbsp;Reset&nbsp;&nbsp;&nbsp;</a>
+
+								</p>
 							</div>
+
+
+
+
 						</div>
 					</div>
 				</div>
 			</div>
-			<div id="conceptMappingResults" class="col-sm-12 col-md-12 col-lg-12"
-				style="display: none">
-				<div class="panel-body context">
-					<p id='parsing-results'
-						class="d-content l-wrapper u-b-lg l-wrapper--page u-t-md"></p>
-				</div>
-			</div>
-			<div id="shoppingCart"
-				class="col-sm-12 col-md-12 col-lg-12 col-xl-12"
-				style="display: none">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordion"
-								href="#collapseTwo"><span
-								class="glyphicon glyphicon-list-alt"></span> Phenotype Terms </a>
-						</h4>
-					</div>
-					<div id="collapseTwo" class="panel-collapse collapse in">
-						<div class="panel-body">
-							<div class="form-group">
-								<span class="help-block">Tips: Don't like it? Provide
-									your own phenotypes</span>
-								<div id="termTable" class="table-editable">
-									<table class="table">
-										<thead>
-											<tr>
-												<th>Name <span
-													title="Tips: copy the column and paste it in phenolyzer query box"
-													id="copyName" class="glyphicon glyphicon-share"></span></th>
-												<th>Id <span
-													title="Tips: copy the column and paste it in phenolyzer query box"
-													id="copyId" class="glyphicon glyphicon-share"></span></th>
-												<th class="text-center"><span
-													class="table-add glyphicon glyphicon-plus"></span></th>
-											</tr>
-											<!-- This is our clonable table line -->
-											<tr class="hide">
-												<td contenteditable="true">Untitled</td>
-												<td contenteditable="true">undefined</td>
-												<td class="text-center"><span
-													class="table-remove glyphicon glyphicon-remove"></span></td>
-											</tr>
-										</thead>
-										<tbody>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+
+			<!-------------------------------------------------------------------------------------------------------------------------------------->
+			<!-----------------------------------------------------------TEXTINPUT PANEL END-------------------------------------------------------->
+			<!-------------------------------------------------------------------------------------------------------------------------------------->
+
+
+
+			<!-------------------------------------------------------------------------------------------------------------------------------------->
+			<!---------------------------------------------------------- CONFIG PANEL START -------------------------------------------------------->
+			<!-------------------------------------------------------------------------------------------------------------------------------------->
+
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -395,15 +367,135 @@
 					</div>
 				</div>
 			</div>
+			<!-------------------------------------------------------------------------------------------------------------------------------------->
+			<!---------------------------------------------------------- CONFIG PANEL END ---------------------------------------------------------->
+			<!-------------------------------------------------------------------------------------------------------------------------------------->
 
 
-			<div class="col-sm-12 col-md-12 col-lg-12">
-				<p class="masthead-button-links">
-					<a class="btn btn-success" id="parse" target="_blank" role="button">&nbsp;&nbsp;Parse&nbsp;&nbsp;</a>
-					<a class="btn btn-info" id="reset" role="button">&nbsp;&nbsp;&nbsp;Reset&nbsp;&nbsp;&nbsp;</a>
 
-				</p>
+			<!-------------------------------------------------------------------------------------------------------------------------------------->
+			<!---------------------------------------------------------- MAPPING RESULTS PANEL START ----------------------------------------------->
+			<!-------------------------------------------------------------------------------------------------------------------------------------->
+
+			<div id="conceptMappingResults" class="col-sm-12 col-md-12 col-lg-12"
+				style="display: none">
+				<div class="panel-body context">
+					<p id='parsing-results'
+						class="d-content l-wrapper u-b-lg l-wrapper--page u-t-md"></p>
+				</div>
 			</div>
+			<!--  POP UP -->
+
+			<div class="ui custom popup top left transition hidden"
+				id="searchPopup">
+				<div class="ui fluid search">
+					<input class="prompt" type="text" placeholder="Search HPO...">
+					<i class="plus circle icon"></i>
+				</div>
+				
+			</div>
+			<!--  POP UP -->
+
+			<!-- Modal content for tag deleting and search -->
+			<div class="ui small modal" id='termManager'>
+				<i class="close icon"></i>
+				<div class="header">Header</div>
+				<div class="content">
+					<div class="ui fluid search">
+						<input class="prompt" type="text"
+							placeholder="Input your own Phenotypes...">
+						<div class="results"></div>
+					</div>
+					<div class="actions">
+						<div class="ui approve button">Save changes</div>
+					</div>
+				</div>
+			</div>
+			<!-- <div id='termManager' class="modal fade" id="myModal" tabindex="-1"
+				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="termManangeTitle">Modal title</h4>
+						</div>
+						<div class="modal-body">
+							<div class="ui fluid search">
+								<input class="prompt" type="text"
+									placeholder="Input your own Phenotypes...">
+								<div class="results"></div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" id="saveChange">Save
+								changes</button>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			<!-------------------------------------------------------------------------------------------------------------------------------------->
+			<!---------------------------------------------------------- MAPPING RESULTS PANEL END ------------------------------------------------->
+			<!-------------------------------------------------------------------------------------------------------------------------------------->
+
+
+			<!-------------------------------------------------------------------------------------------------------------------------------------->
+			<!---------------------------------------------------------- SHOPPING CART PANEL START ------------------------------------------------->
+			<!-------------------------------------------------------------------------------------------------------------------------------------->
+
+			<div id="shoppingCart"
+				class="col-sm-12 col-md-12 col-lg-12 col-xl-12"
+				style="display: none">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion"
+								href="#collapseTwo"><span
+								class="glyphicon glyphicon-list-alt"></span> Phenotype Terms </a>
+						</h4>
+					</div>
+					<div id="collapseTwo" class="panel-collapse collapse in">
+						<div class="panel-body">
+							<div class="form-group">
+								<span class="help-block">Tips: Don't like it? Provide
+									your own phenotypes</span>
+								<div id="termTable" class="table-editable">
+									<table class="table">
+										<thead>
+											<tr>
+												<th>Name <span
+													title="Tips: copy the column and paste it in phenolyzer query box"
+													id="copyName" class="glyphicon glyphicon-share"></span></th>
+												<th>Id <span
+													title="Tips: copy the column and paste it in phenolyzer query box"
+													id="copyId" class="glyphicon glyphicon-share"></span></th>
+												<th class="text-center"><span
+													class="table-add glyphicon glyphicon-plus"></span></th>
+											</tr>
+											<!-- This is our clonable table line -->
+											<tr class="hide">
+												<td contenteditable="true">Untitled</td>
+												<td contenteditable="true">undefined</td>
+												<td class="text-center"><span
+													class="table-remove glyphicon glyphicon-remove"></span></td>
+											</tr>
+										</thead>
+										<tbody>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-------------------------------------------------------------------------------------------------------------------------------------->
+			<!---------------------------------------------------------- SHOPPING CART PANEL END --------------------------------------------------->
+			<!-------------------------------------------------------------------------------------------------------------------------------------->
+
 			<div class="col-sm-12 col-md-12 col-lg-12">
 				<p class="masthead-button-links" id="phenolyzer"
 					style="display: none">
@@ -426,32 +518,6 @@
 				</p>
 				<p>This website was developed by Cong Liu, Chi Yuan,Kai
 					Wang,Chunhua Weng</p>
-			</div>
-		</div>
-	</div>
-
-	<!-- Modal content for tag deleting and search -->
-	<div id='termManager' class="modal fade" id="myModal" tabindex="-1"
-		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="termManangeTitle">Modal title</h4>
-				</div>
-				<div class="modal-body">
-					<div class="ui category search">
-						<input class="prompt" type="text"
-							placeholder="Common passwords...">
-						<div class="results"></div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" id="saveChange">Save changes</button>
-				</div>
 			</div>
 		</div>
 	</div>
