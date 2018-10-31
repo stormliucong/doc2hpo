@@ -56,9 +56,14 @@ public class ParseController {
 		String[] hits = results.split("\n");
 		for (String h : hits) {
 			String[] fields = h.split("\t");
-			String hpoName = fields[0];
-			String hid = fields[1];
-			hmName2Id.put(hpoName, hid);
+			try {
+				String hpoName = fields[0];
+				String hid = fields[1];
+				hmName2Id.put(hpoName, hid);
+			}catch (Exception e) {
+				// TODO: handle exception
+				System.err.println(e);
+			}
 		}
 
 		map.put("hmName2Id", hmName2Id);

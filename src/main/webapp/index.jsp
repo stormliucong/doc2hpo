@@ -35,101 +35,11 @@
 <link href="<%=basePath%>css/font-awesome.min.css" rel="stylesheet">
 <link href="<%=basePath%>css/site.min.css?v5" rel="stylesheet">
 <link rel="stylesheet" href="<%=basePath%>/css/bootstrap-table.min.css">
+<link rel="stylesheet" href="<%=basePath%>/css/styles.css">
+<link rel="stylesheet" href="<%=basePath%>/css/demo.css">
 <style>
-a {
-	TEXT-DECORATION: none
-}
 
-.job-hot {
-	position: absolute;
-	color: #d9534f;
-	right: 0;
-	top: 15px;
-}
 
-.eliback {
-	color: white;
-	background-color: #1E90FF;
-	position: relative;
-}
-
-.navback {
-	background-color: #428bca;
-	color: white;
-}
-
-.gradient {
-	background: #428bca;
-	background: -moz-linear-gradient(top, #428bca 0%, #4169E1 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #428bca),
-		color-stop(100%, #4169E1));
-	background: -webkit-linear-gradient(top, #428bca 0%, #4169E1 100%);
-	background: -o-linear-gradient(top, #428bca 0%, #4169E1 100%);
-	background: -ms-linear-gradient(top, #428bca 0%, #4169E1 100%);
-	background: linear-gradient(to bottom, #428bca 0%, #4169E1 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#428bca',
-		endColorstr='#4169E1', GradientType=0);
-}
-
-.modal-backdrop {
-	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	z-index: 0;
-	background-color: #000;
-}
-
-.table-editable {
-	position: relative;
-	.
-	glyphicon
-	{
-	font-size
-	:
-	20px;
-}
-
-}
-.table-remove {
-	color: #700;
-	cursor: pointer;
-	&:
-	hover
-	{
-	color
-	:
-	#f00;
-}
-
-}
-.table-up, .table-down {
-	color: #007;
-	cursor: pointer;
-	&:
-	hover
-	{
-	color
-	:
-	#00f;
-}
-
-}
-.table-add {
-	color: #070;
-	cursor: pointer;
-	position: absolute;
-	top: 8px;
-	right: 0;
-	&:
-	hover
-	{
-	color
-	:
-	#0b0;
-}
-}
 </style>
 <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
 <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -139,8 +49,13 @@ a {
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="<%=basePath%>/js/ie10-viewport-bug-workaround.js"></script>
 <script src="<%=basePath%>/js/bootstrap-table.min.js"></script>
+<script src="<%=basePath%>/js/lodash.min.js"></script>
 <script type="text/javascript"
 	src="http://malsup.github.io/min/jquery.blockUI.min.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/6.0.1/jquery.mark.es6.min.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.es6.min.js"></script>
 </head>
 <body>
 
@@ -247,7 +162,16 @@ a {
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+			<div id="conceptMappingResults" class="col-sm-12 col-md-12 col-lg-12"
+				style="display: none">
+				<div class="panel-body context">
+					<p id='parsing-results' class="d-content l-wrapper u-b-lg l-wrapper--page u-t-md">
+					</p>
+				</div>
+			</div>
+			<div id="shoppingCart"
+				class="col-sm-12 col-md-12 col-lg-12 col-xl-12"
+				style="display: none">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h4 class="panel-title">
@@ -307,7 +231,8 @@ a {
 
 							<div class="form-group col-sm-12 col-md-12 col-lg-12">
 								<label>Select a parsing method:</label> <select
-									class="form-control" id="parsing-method" onchange="showOptions()">
+									class="form-control" id="parsing-method"
+									onchange="showOptions()">
 									<option value="1">fast string match</option>
 									<option value="2">metamap</option>
 									<option value="3">ncbo annotator</option>
@@ -361,7 +286,7 @@ a {
 									</div>
 								</form>
 							</div>
-							
+
 							<div id="ncbo-option"
 								class="form-group col-sm-12 col-md-12 col-lg-12"
 								style="display: none">
@@ -378,16 +303,16 @@ a {
 									<div class="form-group col-sm-12 col-md-12 col-lg-12">
 										<div class="checkbox">
 											<label> <input title="whole word only"
-												id="whole_word_only" type="checkbox">
-												Whole word only
+												id="whole_word_only" type="checkbox"> Whole word
+												only
 											</label>
 										</div>
 									</div>
 									<div class="form-group col-sm-12 col-md-12 col-lg-12">
 										<div class="checkbox">
 											<label> <input title="exclude numbers"
-												id="exclude_numbers" type="checkbox">
-												Exclude numbers
+												id="exclude_numbers" type="checkbox"> Exclude
+												numbers
 											</label>
 										</div>
 									</div>
@@ -503,16 +428,56 @@ a {
 			</div>
 		</div>
 	</div>
+
+	<!-- Modal content for tag deleting and search -->
+	<div id='termManager' class="modal fade" id="myModal" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="termManangeTitle">Modal title</h4>
+				</div>
+				<div class="modal-body">
+					<div class="radio">
+						<label><input type="radio" name="term-change"
+							checked="checked" value="delete">Delete this term</label>
+					</div>
+					<div class="radio">
+						<label><input type="radio" name="term-change"
+							value="new">Input my HPO term</label>
+					</div>
+					<div>
+						<input class="form-control" type="text" placeholder="Search"
+							aria-label="Search" name='searchtext' style='display: none'>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	</footer>
 
 	<!-- /.hidden for js only -->
 	<input style="display: none;" id="basePath" name="basePath"
 		value="<%=basePath%>" />
 	<script type="text/javascript" src="<%=basePath%>/js/script.js"></script>
+	<script type="text/javascript" src="<%=basePath%>/js/parsing.js"></script>
+	<script type="text/javascript" src="<%=basePath%>/js/shoppingCart.js"></script>
+	<script type="text/javascript" src="<%=basePath%>/js/highlight.js"></script>
+
 	<script type="text/javascript">
 		$(document).ajaxStop($.unblockUI);
 
 		$(function() {
+			showSearchBox();
 			refreshTable();
 			$("#note").val('');
 			$("#term").val('');
@@ -527,7 +492,8 @@ a {
 				}, 200)
 			})
 			$("#parse").click(function() {
-				parse();
+				parsingJson = parse();
+				highlight(parsingJson);
 				//testController();
 			});
 
