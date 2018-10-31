@@ -63,9 +63,10 @@ function processEachTag(node, range, parsingJson) {
 			if (start == range.start && length == range.length) {
 				console.log('start' + start)
 				console.log('len' + length)
+				var tagId = "id_" + start + "_" + length; 
 				$(node).addClass('data-entity')
 				$(node).append(
-						"<span class='hpo-entity '>" + hpo_term + "</span>")
+						"<span class='hpo-entity ' id='" + tagId + "'>" + hpo_term + "</span>")
 
 				console.log(note);
 				$(node).on('click', function() {
@@ -74,18 +75,16 @@ function processEachTag(node, range, parsingJson) {
 					$(this).find('.hpo-entity').toggle();
 					// TBD
 					// toggle shopping cart
+					
 				});
-				
-//				$(node).find('span.hpo-entity').popup({
-//					popup : $('#searchPopup'),
-//					on: 'click'
-//				});
 				
 				$(node)
 						.find('span.hpo-entity')
 						.on(
 								'click',
 								function(e) {
+									console.log("this attrid " + $(this).attr('id'));
+									$('#HpoNameEntity').text($(this).attr('id'));
 									var hpo_link = 'https://hpo.jax.org/app/browse/term/'
 											+ hpo_id;
 									var hpo_html = '<a href="' + hpo_link
@@ -93,16 +92,12 @@ function processEachTag(node, range, parsingJson) {
 											+ ' ' + hpo_term + '</a>';
 									$('#termManager').find('.header').html(
 											hpo_html);
-									// $('#termManager').modal('show');
-									// $('#searchPopup').modal('show');
-									console.log('something')
 									$(this).popup({
 										popup : $('#searchPopup'),
-										on : 'click'
+										on : 'click',
 									}).popup('show');
 									e.stopPropagation(); // do nothing.
 								});
-
 			}
 		}
 	}

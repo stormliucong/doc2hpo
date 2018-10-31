@@ -151,6 +151,8 @@ public class NcboParser {
 		            String Id = Ids[Ids.length - 1];
 		            String name = classDetails.get("prefLabel").asText();
 		            
+		            JsonNode annotationDetails = jsonToNode(get(annotation.get("annotations"));
+		            
 		            idName.put(name, Id);
 //		            System.out.println("Class details");
 //		            System.out.println("\tid: " + classDetails.get("@id").asText());

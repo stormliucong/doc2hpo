@@ -1,5 +1,7 @@
 function uiSearch() {
-	$('.ui.search').search({
+
+//	console.log(tagId);
+	$('#hpoSearch').search({
 		type : 'standard',
 		minCharacters : 3,
 		apiSettings : {
@@ -15,13 +17,28 @@ function uiSearch() {
 					}
 					// add result to category
 					response.results.push({
-						title : item.id,
-						description : item.name,
+						title : item.name,
+						description : item.id
 					});
 				});
 				return response;
 			},
 			url : 'https://hpo.jax.org/api/hpo/search?q={query}'
-		}
+		},
+		onSelect : function(result) {
+			$('#selectedResult').val(result.title);
+		},
 	});
+	$('#addHpoTerm').click(function(e) {
+		var tagId = $('#searchPopup').find('#HpoNameEntity').text();
+		$("#" + tagId).text($('#selectedResult').val());
+		// TBD
+		// toggle shopping cart
+	});
+	
+	
+}
+
+function updateHpoEntity(name) {
+	// 
 }

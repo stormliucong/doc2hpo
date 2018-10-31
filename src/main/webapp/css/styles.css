@@ -118,3 +118,7 @@ a {
 .hpo {
     background-color: white;
 }
+
+#addHpoTerm {
+	cursor:pointer
+}

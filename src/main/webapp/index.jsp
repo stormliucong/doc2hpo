@@ -34,10 +34,11 @@
 <link href="<%=basePath%>css/font-awesome.min.css" rel="stylesheet">
 <link href="<%=basePath%>css/site.min.css?v5" rel="stylesheet">
 <link rel="stylesheet" href="<%=basePath%>/css/bootstrap-table.min.css">
-<link rel="stylesheet" href="<%=basePath%>/css/styles.css">
-<link rel="stylesheet" href="<%=basePath%>/css/ent-display.css">
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+
+<link rel="stylesheet" href="<%=basePath%>/css/styles.css">
+<link rel="stylesheet" href="<%=basePath%>/css/ent-display.css">
 <style>
 </style>
 <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
@@ -385,57 +386,18 @@
 				</div>
 			</div>
 			<!--  POP UP -->
-
 			<div class="ui custom popup top left transition hidden"
 				id="searchPopup">
-				<div class="ui fluid search">
+				<div style="display:none" id="HpoNameEntity"></div>
+				<div class="ui fluid search" id='hpoSearch'>
 					<input class="prompt" type="text" placeholder="Search HPO...">
-					<i class="plus circle icon"></i>
+					<div style="display:none" id="selectedResult"></div>
+					<i class="plus circle icon" id="addHpoTerm"></i>
 				</div>
-				
-			</div>
-			<!--  POP UP -->
 
-			<!-- Modal content for tag deleting and search -->
-			<div class="ui small modal" id='termManager'>
-				<i class="close icon"></i>
-				<div class="header">Header</div>
-				<div class="content">
-					<div class="ui fluid search">
-						<input class="prompt" type="text"
-							placeholder="Input your own Phenotypes...">
-						<div class="results"></div>
-					</div>
-					<div class="actions">
-						<div class="ui approve button">Save changes</div>
-					</div>
-				</div>
 			</div>
-			<!-- <div id='termManager' class="modal fade" id="myModal" tabindex="-1"
-				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-							<h4 class="modal-title" id="termManangeTitle">Modal title</h4>
-						</div>
-						<div class="modal-body">
-							<div class="ui fluid search">
-								<input class="prompt" type="text"
-									placeholder="Input your own Phenotypes...">
-								<div class="results"></div>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-primary" id="saveChange">Save
-								changes</button>
-						</div>
-					</div>
-				</div>
-			</div> -->
+
+
 			<!-------------------------------------------------------------------------------------------------------------------------------------->
 			<!---------------------------------------------------------- MAPPING RESULTS PANEL END ------------------------------------------------->
 			<!-------------------------------------------------------------------------------------------------------------------------------------->
@@ -539,7 +501,6 @@
 		$(function() {
 			showSearchBox();
 			refreshTable();
-			uiSearch();
 			$("#note").val('');
 			$("#term").val('');
 			$("#fbcontent").val('');
@@ -570,7 +531,9 @@
 			});
 			$("#saveChange").click(function() {
 				saveChange(); // TBI.
-			})
+			});
+			uiSearch();
+			
 		})
 	</script>
 </body>
