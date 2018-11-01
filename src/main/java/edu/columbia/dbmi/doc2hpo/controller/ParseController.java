@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -45,7 +46,7 @@ public class ParseController {
 
 	@RequestMapping("/acdat")
 	@ResponseBody
-	public Map<String, Object> getTerm2(@RequestBody ParseJob pj) throws Exception {
+	public Map<String, Object> getTerm2(HttpSession httpSession, @RequestBody ParseJob pj) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		Map<String, String> hmName2Id = new HashMap<String, String>();
@@ -67,7 +68,7 @@ public class ParseController {
 				System.err.println(e);
 			}
 		}
-
+		httpSession.setAttribute("hmName2Id", hmName2Id);
 		map.put("hmName2Id", hmName2Id);
 		map.put("hpoOption", false);
 		return map;
@@ -75,7 +76,7 @@ public class ParseController {
 
 	@RequestMapping("/ncbo")
 	@ResponseBody
-	public Map<String, Object> getTerm3(@RequestBody ParseJob pj) throws Exception {
+	public Map<String, Object> getTerm3(HttpSession httpSession, @RequestBody ParseJob pj) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<String> theOptions = pj.getOption();
 		String urlParameters = String.join("&", theOptions);
@@ -84,6 +85,7 @@ public class ParseController {
 
 		String content = pj.getNote();
 		hmName2Id = this.ncbo.parse(content, theOptions);
+		httpSession.setAttribute("hmName2Id", hmName2Id);
 		map.put("hmName2Id", hmName2Id);
 		map.put("hpoOption", false);
 		return map;
@@ -91,7 +93,7 @@ public class ParseController {
 
 	@RequestMapping("/metamap")
 	@ResponseBody
-	public Map<String, Object> getTerm(@RequestBody ParseJob pj) throws Exception {
+	public Map<String, Object> getTerm(HttpSession httpSession, @RequestBody ParseJob pj) throws Exception {
 		HashMap<String, String> hmCui2Hpo = this.o.hmCui2Hpo;
 		HashMap<String, String> hmHpo2Name = this.o.hmHpo2Name;
 
@@ -132,6 +134,7 @@ public class ParseController {
 				hmName2Id.put(cuiName, cuiId);
 			}
 		}
+		httpSession.setAttribute("hmName2Id", hmName2Id);
 		map.put("hmName2Id", hmName2Id);
 		map.put("hpoOption", hpoOption);
 		return map;

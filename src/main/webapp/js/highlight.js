@@ -63,21 +63,30 @@ function processEachTag(node, range, parsingJson) {
 			if (start == range.start && length == range.length) {
 				console.log('start' + start)
 				console.log('len' + length)
-				var tagId = "id_" + start + "_" + length; 
+				var tagId = start + "_" + length;
 				$(node).addClass('data-entity')
 				$(node).append(
 						"<span class='hpo-entity ' id='" + tagId + "'>" + hpo_term + "</span>")
+				$(node).find('.hpo-entity').attr('hpo_term', hpo_term);
+				$(node).find('.hpo-entity').attr('hpo_id', hpo_id);
 
 				console.log(note);
 				$(node).on('click', function() {
 					// alert( "Handler for .click() called." );
 					$(this).toggleClass("data-entity");
 					$(this).find('.hpo-entity').toggle();
-					// TBD
+					var tagIdArray = $(node).find('.hpo-entity').attr('id').split("_");
+					var start = tagIdArray[0];
+					var length = tagIdArray[1];
+					var hpo_id = $(node).find('.hpo-entity').attr('hpo_id');
+					var hpo_term = $(node).find('.hpo-entity').attr('hpo_term');
 					if($(this).find('.hpo-entity').is(":visible")){
-						deleteTermsInSession(start,length);
+						console.log("delete " + start + "\t" + length + "\t" + hpo_id + "\t" + hpo_term)
+						//deleteTermsInSession(start,length,hpo_id,hpo_term);
 					}else{
-						addTermsInSession(start,length);
+						console.log("add " + start + "\t" + length + "\t" + hpo_id + "\t" + hpo_term)
+						//addTermsInSession(start,length,hpo_id,hpo_term);
+
 					}
 					
 				});

@@ -40,7 +40,31 @@ function refreshTable() {
 		copyColumn(2);
 	});
 }
-function updateTable(terms) {
+
+function termCounting(listOfTerms) {
+	var countTerms = {}
+	for (key in listOfTerms) {
+		if (listOfTerms.hasOwnProperty(key)) {
+			var val = listOfTerms[key];
+			var hpoName = val['hpoName'];
+			var hpoId = val['hpoId'];
+			if (!(hpoId in countTerms)) {
+				var countObj = {
+					'hpoName' : hpoName,
+					'count' : 1
+				}
+				countTerms[hpoId] = countObj
+			} else {
+				countTerms[hpoId]['count'] += 1;
+			}
+		}
+	}
+	console.log(countTerms);
+	return countTerms;
+}
+
+function updateTable(listOfTerms) {
+	terms = termCounting(listOfTerms);
 	var basePath = $('input[id=basePath]').val();
 	var $TABLE = $('#termTable');
 	var pre = '<tr>'
@@ -53,8 +77,9 @@ function updateTable(terms) {
 						var url_base = "#";
 						var re = /^HP/i;
 
-						var name = key;
-						var id = terms[key];
+						var id = key;
+						var name = terms[key]['hpoName'];
+						var count = terms[key]['count'];
 						var isHpo = re.test(id);
 						if (isHpo == true) {
 							url_base = 'http://compbio.charite.de/hpoweb/showterm?id=';
@@ -65,7 +90,8 @@ function updateTable(terms) {
 						var nameTd = '<td>' + name + '</td>';
 						var idTd = '<td><a href="' + idHref
 								+ '" target="_blank">' + id + '</a></td>';
-						var clone = pre + nameTd + idTd + cross + pos;
+						var count = '<td>' + count + '</td>';
+						var clone = pre + nameTd + idTd + count + cross + pos;
 						$TABLE.find('table').append(clone);
 					});
 	// have to define table-remove again inside the function.
@@ -74,8 +100,5 @@ function updateTable(terms) {
 		console.log("remove elements");
 		$(this).parents('tr').remove();
 	});
-}
-
-function deleteTerms() {
-	
+	$('#shoppingCart').show();
 }

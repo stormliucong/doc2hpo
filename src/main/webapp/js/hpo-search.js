@@ -26,19 +26,27 @@ function uiSearch() {
 			url : 'https://hpo.jax.org/api/hpo/search?q={query}'
 		},
 		onSelect : function(result) {
-			$('#selectedResult').val(result.title);
+			$('#selectedResult').val(result.title + ';;;' + result.description);
 		},
 	});
 	$('#addHpoTerm').click(function(e) {
 		var tagId = $('#searchPopup').find('#HpoNameEntity').text();
-		$("#" + tagId).text($('#selectedResult').val());
+		var tagIdArray = tagId.split('_');
+		var start = tagIdArray[0];
+		var length = tagIdArray[1];
+		var hpoArray = $('#selectedResult').val().split(';;;');
+		var hpo_term = hpoArray[0];
+		var hpoIdArray = hpoArray[1].split(':');
+		var hpo_id = hpoIdArray[0] + "_" + hpoIdArray[1];
+		$("#" + tagId).text(hpo_term);
+		$("#" + tagId).find('.hpo-entity').attr('hpo_term', hpo_term);
+		$("#" + tagId).find('.hpo-entity').attr('hpo_id', hpo_id);
 		// TBD
 		// toggle shopping cart
+		console.log("update " + start + "\t" + length + "\t" + hpo_id + "\t" + hpo_term)
+//		updateTermsInSession(start,length,hpo_id,hpo_term);
 	});
 	
 	
 }
 
-function updateHpoEntity(name) {
-	// 
-}

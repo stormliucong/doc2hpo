@@ -1,7 +1,9 @@
-function deleteTermsInSession(start, length){
+function deleteTermsInSession(start, length, hpo_id, hpo_term){
 	var formData = {
 		'start' : start,
-		'length' : length
+		'length' : length,
+		'hpoId': hpo_id,
+		'hpoName': hpo_term
 	};
 	$.blockUI({
 		message : '<h3><img src="' + basePath
@@ -16,7 +18,7 @@ function deleteTermsInSession(start, length){
 			'Content-Type' : 'application/json'
 		},
 		type : 'POST',
-		url : basePath + "/parse/ncbo",
+		url : basePath + "/session/addTerms",
 		data : JSON.stringify(formData),
 		dataType : "json",
 		success : function(data) {

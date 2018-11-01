@@ -157,8 +157,8 @@ function parseNcbo(note) {
 			} else {
 				console.log(terms);
 				var hpoOption = data["hpoOption"];
-				updateTable(terms);
 				highlight(terms);
+				updateTable(terms);
 				var t = $(window).scrollTop();
 				$('body,html').animate({
 					'scrollTop' : t + 1000
@@ -245,5 +245,4 @@ function parse() {
 //		'hpo_term': 'Liver cancer'
 //	}]
 	// Array of {start,end,hpo_id,hpo_term}
-	return parsingJson
 }

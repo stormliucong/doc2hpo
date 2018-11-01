@@ -156,9 +156,9 @@ public class NcboParser {
 		            JsonNode annotationDetails = annotation.get("annotations");
 		            for (final JsonNode objNode : annotationDetails) {
 		            	int start = objNode.get("from").asInt();
+		            	start = start - 1;
 		            	int to = objNode.get("to").asInt();
 		            	int length = to - start;
-		            	start = start - 1;
 		            	ParsingResults pr = new ParsingResults();
 		            	pr.setHpoId(Id);
 		            	pr.setHpoName(name);

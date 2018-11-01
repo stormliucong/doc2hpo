@@ -388,10 +388,10 @@
 			<!--  POP UP -->
 			<div class="ui custom popup top left transition hidden"
 				id="searchPopup">
-				<div style="display:none" id="HpoNameEntity"></div>
+				<div style="display: none" id="HpoNameEntity"></div>
 				<div class="ui fluid search" id='hpoSearch'>
 					<input class="prompt" type="text" placeholder="Search HPO...">
-					<div style="display:none" id="selectedResult"></div>
+					<div style="display: none" id="selectedResult"></div>
 					<i class="plus circle icon" id="addHpoTerm"></i>
 				</div>
 
@@ -433,6 +433,7 @@
 												<th>Id <span
 													title="Tips: copy the column and paste it in phenolyzer query box"
 													id="copyId" class="glyphicon glyphicon-share"></span></th>
+												<th> count </th>
 												<th class="text-center"><span
 													class="table-add glyphicon glyphicon-plus"></span></th>
 											</tr>
@@ -501,8 +502,7 @@
 		$(function() {
 			showSearchBox();
 			refreshTable();
-/* 			highlight(parsingJson);
- */			$("#note").val('');
+			$("#note").val('');
 			$("#term").val('');
 			$("#fbcontent").val('');
 			$("#fbsubmit").click(function() {
@@ -515,8 +515,7 @@
 				}, 200)
 			})
 			$("#parse").click(function() {
-				parsingJson = parse();
-				console.log('here: ' + parsingJson);
+				parse();
 				//testController();
 			});
 
@@ -530,11 +529,8 @@
 			$("#textExample").click(function() {
 				tryAnExample();
 			});
-			$("#saveChange").click(function() {
-				saveChange(); // TBI.
-			});
 			uiSearch();
-			
+
 		})
 	</script>
 </body>
