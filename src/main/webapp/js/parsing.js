@@ -4,16 +4,6 @@ function parseMetamap(note) {
 	var allow_concept_gaps = $('#allow_concept_gaps').is(':checked');
 	var ignore_word_order = $('#ignore_word_order').is(':checked');
 	var ignore_stop_phrases = $('#ignore_stop_phrases').is(':checked');
-	var hpoOutput = $('#hpo').is(':checked');
-	var anab = $('#anab').is(':checked');
-	var fndg = $('#fndg').is(':checked');
-	var cgab = $('#cgab').is(':checked');
-	var dsyn = $('#dsyn').is(':checked');
-	var genf = $('#genf').is(':checked');
-	var mobd = $('#mobd').is(':checked');
-	var sosy = $('#sosy').is(':checked');
-	var lbtr = $('#lbtr').is(':checked');
-	var patf = $('#patf').is(':checked');
 	var formData = {
 		'note' : note,
 		'mmpgeneral' : {
@@ -21,20 +11,7 @@ function parseMetamap(note) {
 			'acg' : allow_concept_gaps,
 			'iwo' : ignore_word_order,
 			"isp" : ignore_stop_phrases,
-			'ho' : hpoOutput
 		},
-		'semantic' : {
-			'anab' : anab,
-			'fndg' : fndg,
-			'cgab' : cgab,
-			'dsyn' : dsyn,
-			'genf' : genf,
-			'mobd' : mobd,
-			'sosy' : sosy,
-			'lbtr' : lbtr,
-			'patf' : patf,
-		}
-
 	};
 	console.log("formData before post: " + JSON.stringify(formData));
 	$.blockUI({
@@ -61,6 +38,7 @@ function parseMetamap(note) {
 			} else {
 				console.log(terms);
 				var hpoOption = data["hpoOption"];
+				highlight(terms);
 				updateTable(terms);
 				var t = $(window).scrollTop();
 				$('body,html').animate({
@@ -105,6 +83,7 @@ function parseACT(note) {
 			} else {
 				console.log(terms);
 				var hpoOption = data["hpoOption"];
+				highlight(terms);
 				updateTable(terms);
 				var t = $(window).scrollTop();
 				$('body,html').animate({
@@ -233,16 +212,4 @@ function parse() {
 
 	}
 	console.log("parse()" + parsingJson);
-//	parsingJson = [{
-//		'start': 5,
-//		'length': 10,
-//		'hpo_id': 'HP:0003002',
-//		'hpo_term': 'Breast cancer'
-//	},{
-//		'start': 50,
-//		'length': 100,
-//		'hpo_id': 'HP:0002896',
-//		'hpo_term': 'Liver cancer'
-//	}]
-	// Array of {start,end,hpo_id,hpo_term}
 }

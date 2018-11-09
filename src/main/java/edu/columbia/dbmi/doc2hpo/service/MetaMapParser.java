@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -13,6 +14,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import edu.columbia.dbmi.doc2hpo.pojo.ParsingResults;
+import edu.columbia.dbmi.doc2hpo.util.Obo;
 import edu.columbia.dbmi.doc2hpo.util.RunBashCommand;
 //import edu.columbia.dbmi.io.FileHelper;
 //import edu.columbia.dbmi.pojo.Cphrase;
@@ -31,100 +34,105 @@ import gov.nih.nlm.nls.metamap.Utterance;
 
 public class MetaMapParser {
 	String metamapBinPath;
+	private Obo o;
+
 	public static void main(String[] args) {
-		try {
-			MetaMapParser mmp=new MetaMapParser();
-			List<String> theOptions = new ArrayList<String>();
-			theOptions.add(" -I -p -J -K -8 --conj cgab,genf,lbpr,lbtr,patf,dsyn,fndg");
-			String currentDir = System.getProperty("user.dir");
-			File inputFile = new File(currentDir + "/src/main/resources/examples/mm_note.txt");
-			BufferedReader br = null;
-			try {
-				br = new BufferedReader(new InputStreamReader(new FileInputStream(inputFile)));
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			String strLine = null;
-			try {
-				strLine = br.readLine();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			String input = "";
-			while(strLine!=null) {
-				input += strLine;
-				try {
-					strLine = br.readLine();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			try {
-				br.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			input = "he was profoundly deaf and had completely lost the ability to speak.";
-//			String mmpResult = mmp.runCmdMetamap(input, theOptions);
-//			System.out.println(mmpResult);
-//			HashMap<String, String>hmCui = mmp.extractCui(mmpResult);
-//			for(String cui : hmCui.keySet()) {
-//				System.out.println(cui+";"+hmCui.get(cui) + "\n");
+//		try {
+//			MetaMapParser mmp = new MetaMapParser(metamapBinPath);
+//			List<String> theOptions = new ArrayList<String>();
+//			theOptions.add(" -I -p -J -K -8 --conj cgab,genf,lbpr,lbtr,patf,dsyn,fndg");
+//			String currentDir = System.getProperty("user.dir");
+//			File inputFile = new File(currentDir + "/src/main/resources/examples/mm_note.txt");
+//			BufferedReader br = null;
+//			try {
+//				br = new BufferedReader(new InputStreamReader(new FileInputStream(inputFile)));
+//			} catch (FileNotFoundException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
 //			}
-			theOptions = new ArrayList<String>();
-			theOptions.add("-y");
-			theOptions.add("-8");
-			ArrayList<String[]> cui = mmp.getCUIbyRestrict(input, theOptions);
-			for(String[] c: cui) {
-				System.out.println("h");
-				System.out.println(Arrays.toString(c));
-			}
-			
-		}catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//			String strLine = null;
+//			try {
+//				strLine = br.readLine();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			String input = "";
+//			while (strLine != null) {
+//				input += strLine;
+//				try {
+//					strLine = br.readLine();
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
+//			try {
+//				br.close();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			input = "he was profoundly deaf and had completely lost the ability to speak.";
+////			String mmpResult = mmp.runCmdMetamap(input, theOptions);
+////			System.out.println(mmpResult);
+////			HashMap<String, String>hmCui = mmp.extractCui(mmpResult);
+////			for(String cui : hmCui.keySet()) {
+////				System.out.println(cui+";"+hmCui.get(cui) + "\n");
+////			}
+//			theOptions = new ArrayList<String>();
+//			theOptions.add("-y");
+//			theOptions.add("-8");
+//			ArrayList<String[]> cui = mmp.getCUIbyRestrict(input, theOptions);
+//			for (String[] c : cui) {
+//				System.out.println("h");
+//				System.out.println(Arrays.toString(c));
+//			}
+//
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		String metamapBinPath
+		MetaMapParser mmp = new MetaMapParser();
+		String content = "Individual II-1 is a 10 year old boy. He was born at term with normal birth parameters and good APGAR scores (9/10/10). The neonatal period was uneventful, and he had normal motor development during early childhood: he began to look up at 3 months, sit by himself at 5 months, stand up at 11 months, walk at 13 months, and speak at 17 months. He attended a regular kindergarten, without any signs of difference in intelligence, compared to his peers. Starting at age 6, the parents observed ever increasing behavioral disturbance for the boy, manifesting in multiple aspects of life. For example, he can no longer wear clothes by himself, cannot obey instruction from parents/teachers, can no longer hold subjects tightly in hand, which were all things that he could do before 6 years of age. In addition, he no longer liked to play with others; instead, he just preferred to stay by himself, and he sometimes fell down when he walked on the stairs, which had rarely happened at age 5. The proband continued to deteriorate: at age 9, he could not say a single word and had no action or response to any instruction given in clinical exams. Additionally, rough facial features were noted with a flat nasal bridge, a synophrys (unibrow), a long and smooth philtrum, thick lips and an enlarged mouth. He also had rib edge eversion, and it was also discovered that he was profoundly deaf and had completely lost the ability to speak. He also had loss of bladder control. The diagnosis of severe intellectual disability was made, based on Wechsler Intelligence Scale examination. Brain MRI demonstrated cortical atrophy with enlargement of the subarachnoid spaces and ventricular dilatation (Figure 2). Brainstem evoked potentials showed moderate abnormalities. Electroencephalography (EEG) showed abnormal slee";
+		List<String> theOptions = new ArrayList<String>();
+		theOptions.add("-y");
+		List<ParsingResults> pr = mmp.parse(content, theOptions);
 	}
-	
+
 	public MetaMapParser() {
-		
+//		System.out.println(mmpBin);
+//		this.metamapBinPath = mmpBin;
+		o = new Obo();
 	}
-	
-	public MetaMapParser(String mmpBin) {
-		System.out.println(mmpBin);
-		this.metamapBinPath = mmpBin;
-	}
+
 	public String runCmdMetamap(String input, List<String> theOptions) {
 		String optionStr = "";
 		theOptions.add("-I"); // with cui.
-		for (String s : theOptions)
-		{
+		for (String s : theOptions) {
 			optionStr += s + " ";
 		}
 
 		// specifiy metamap bin.
 //		String currentDir = System.getProperty("user.dir");
-		//File metamapDir = new File("/Users/congliu/public_mm/bin");		
-		String command = metamapBinPath+"/metamap16 " + optionStr;
+		// File metamapDir = new File("/Users/congliu/public_mm/bin");
+		String command = metamapBinPath + "/metamap16 " + optionStr;
 		System.out.println(command);
 		RunBashCommand rbc = new RunBashCommand();
-		String resultByName = rbc.runCommand(command,input);
+		String resultByName = rbc.runCommand(command, input);
 		System.out.println(resultByName);
-		return resultByName; 
+		return resultByName;
 	}
-	
-	public HashMap<String,String> extractCui(String output){
-		HashMap<String,String> hmCui = new HashMap<String,String>();
+
+	public HashMap<String, String> extractCui(String output) {
+		HashMap<String, String> hmCui = new HashMap<String, String>();
 		String[] outputLine = output.split("\n");
-		for(String l: outputLine) {
-			String regexTerm1 = "^Processing.*"; 
-			String regexTerm2 = "^Meta Mapping.*"; 
-			String regexTerm3 = ".*metamap.*"; 
-			String regexTerm4 = ".*:.*"; 
+		for (String l : outputLine) {
+			String regexTerm1 = "^Processing.*";
+			String regexTerm2 = "^Meta Mapping.*";
+			String regexTerm3 = ".*metamap.*";
+			String regexTerm4 = ".*:.*";
 
 			Pattern pTerm1 = Pattern.compile(regexTerm1, Pattern.CASE_INSENSITIVE);
 			Pattern pTerm2 = Pattern.compile(regexTerm2, Pattern.CASE_INSENSITIVE);
@@ -136,30 +144,31 @@ public class MetaMapParser {
 			Matcher mTerm3 = pTerm3.matcher(l);
 			Matcher mTerm4 = pTerm4.matcher(l);
 
-			if(mTerm1.matches() || mTerm2.matches() || mTerm3.matches()) {
+			if (mTerm1.matches() || mTerm2.matches() || mTerm3.matches()) {
 				continue;
 			}
-			if(!mTerm4.matches()) {
+			if (!mTerm4.matches()) {
 				continue;
 			}
-			
+
 			System.out.println(l);
 			String[] tempStr = l.split(":");
 			String[] cuiStr = tempStr[0].split(" ");
-			String cui = cuiStr[cuiStr.length-1];
+			String cui = cuiStr[cuiStr.length - 1];
 			System.out.println(tempStr[0]);
 			System.out.println(tempStr[1]);
 			String[] cuiNameStr = tempStr[1].split("\\[");
-			String[] cuiNameArray = Arrays.copyOfRange(cuiNameStr, 0, cuiNameStr.length-1);
+			String[] cuiNameArray = Arrays.copyOfRange(cuiNameStr, 0, cuiNameStr.length - 1);
 			String cuiName = String.join(" ", cuiNameArray);
-			if(hmCui.get(cui)==null) {
-				hmCui.put(cui,cuiName);
+			if (hmCui.get(cui) == null) {
+				hmCui.put(cui, cuiName);
 			}
 
 		}
 		return hmCui;
-		
+
 	}
+
 	public static String machineOutput(String input) {
 		MetaMapApi api = new MetaMapApiImpl();
 		api.setOptions("-A");
@@ -168,9 +177,9 @@ public class MetaMapParser {
 		Result result = resultList.get(0);
 		String machineOutput = result.getMachineOutput();
 		return machineOutput;
-		
+
 	}
-	
+
 	public static String testMetamap(String str) throws Exception {
 		MetaMapApi api = new MetaMapApiImpl();
 		api.setOptions("-y");
@@ -191,7 +200,7 @@ public class MetaMapParser {
 				}
 				System.out.println("]");
 				System.out.print("ConceptPairs: [");
-				
+
 				System.out.println("]");
 				System.out.print("ConceptPositionList: [");
 				for (Position pos : e.getConceptPositionList()) {
@@ -217,14 +226,14 @@ public class MetaMapParser {
 		}
 		return "";
 	}
-	
-	public static ArrayList<String[]> getCUIbyRestrict(String input, List<String> theOptions) throws Exception{
-		
-	    ArrayList<String[]> al = new ArrayList<String[]>();
+
+	public static ArrayList<String[]> getCUIbyRestrict(String input, List<String> theOptions) throws Exception {
+
+		ArrayList<String[]> al = new ArrayList<String[]>();
 
 		MetaMapApi api = new MetaMapApiImpl(0);
 
-		for(String opt: theOptions) {
+		for (String opt : theOptions) {
 			api.setOptions(opt);
 		}
 
@@ -320,11 +329,12 @@ public class MetaMapParser {
 		// return null;
 
 	}
-	public static String getCUI(String input) throws Exception{
-		String cui=new String();
+
+	public static String getCUI(String input) throws Exception {
+		String cui = new String();
 		MetaMapApi api = new MetaMapApiImpl(0);
 		List<Result> resultList = api.processCitationsFromString(input);
-		//for (Result result: resultList) {
+		// for (Result result: resultList) {
 		Result result = resultList.get(0);
 		for (Utterance utterance : result.getUtteranceList()) {
 			System.out.println("Utterance:");
@@ -355,9 +365,9 @@ public class MetaMapParser {
 					System.out.println(" Mapping:");
 					System.out.println(" Map Score: " + map.getScore());
 					for (Ev mapEv : map.getEvList()) {
-						
+
 						cui = mapEv.getConceptId();
-						
+
 						System.out.println(" Score: " + mapEv.getScore());
 						System.out.println(" Concept Id: " + mapEv.getConceptId());
 						System.out.println(" Concept Name: " + mapEv.getConceptName());
@@ -370,13 +380,113 @@ public class MetaMapParser {
 						System.out.println(" Positional Info: " + mapEv.getPositionalInfo());
 					}
 				}
-			
-		}
+
+			}
 		}
 		api.getSession().disconnect();
 
 		return cui;
 		// return null;
+	}
+
+	public List<ParsingResults> parse(String content, List<String> theOptions) {
+		List<ParsingResults> pResults = new ArrayList<ParsingResults>();
+
+		// TODO Auto-generated method stub
+		MetaMapApi api = new MetaMapApiImpl(0);
+		if (theOptions.size() > 0) {
+			api.resetOptions();
+			api.setOptions(theOptions);
+		}
+
+		List<Result> resultList = api.processCitationsFromString(content);
+
+		Result result = resultList.get(0);
+		try {
+			for (Utterance utterance : result.getUtteranceList()) {
+
+//				System.out.println("Utterance:");
+//				System.out.println(" Id: " + utterance.getId());
+//				System.out.println(" Utterance text: " + utterance.getString());
+//				System.out.println(" Position: " + utterance.getPosition());
+
+				for (PCM pcm : utterance.getPCMList()) {
+//					System.out.println("Phrase:");
+//					System.out.println(" text: " + pcm.getPhrase().getPhraseText());
+//					System.out.println("Mappings:");
+					for (Mapping map : pcm.getMappingList()) {
+//						System.out.println(" Mapping:");
+//						System.out.println(" Map Score: " + map.getScore());
+						for (Ev mapEv : map.getEvList()) {
+							String[] cuiname = new String[4];
+//							
+							cuiname[0] = mapEv.getConceptName();
+							cuiname[1] = mapEv.getConceptId();
+							cuiname[2] = mapEv.getSemanticTypes().toString();
+							cuiname[3] = mapEv.getSources().toString();
+							//
+							if (o.hmCui2Hpo.containsKey(cuiname[1])) {
+								ParsingResults pr = new ParsingResults();
+
+//								System.out.println("Utterance:");
+//								System.out.println(" Id: " + utterance.getId());
+//								System.out.println(" Utterance text: " + utterance.getString());
+//								System.out.println(" Position: " + utterance.getPosition());
+//								System.out.println("Phrase:");
+//								System.out.println(" text: " + pcm.getPhrase().getPhraseText());
+//								System.out.println("Mappings:");
+								String Id = o.hmCui2Hpo.get(cuiname[1]);
+								if (Id.contains("|")) {
+									Id = Id.split("\\|")[0];
+								}
+								String name = o.hmHpo2Name.get(Id);
+								pr.setHpoId(Id);
+								pr.setHpoName(name);
+								List<Position> position = mapEv.getPositionalInfo();
+								int[] pos = getLongestPosition(position);
+								pr.setStart(pos[0]);
+								pr.setLength(pos[1]);
+								pResults.add(pr);
+							}
+//							System.out.println(" Score: " + mapEv.getScore());
+//							System.out.println(" Concept Id: " + mapEv.getConceptId());
+//							System.out.println(" Concept Name: " + mapEv.getConceptName());
+//							System.out.println(" Preferred Name: " + mapEv.getPreferredName());
+//							System.out.println(" Matched Words: " + mapEv.getMatchedWords());
+//							System.out.println(" Semantic Types: " + mapEv.getSemanticTypes());
+//							System.out.println(" is Head?: " + mapEv.isHead());
+//							System.out.println(" is Overmatch?: " + mapEv.isOvermatch());
+//							System.out.println(" Sources: " + mapEv.getSources());
+//							System.out.println(" Positional Info: " + mapEv.getPositionalInfo());
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return pResults;
+	}
+
+	private int[] getLongestPosition(List<Position> position) {
+		int[] posArray = new int[2];
+		int start = 999999999;
+		int end = -1;
+		for (Position p : position) {
+			int start_tmp = p.getX();
+			int end_tmp = p.getX() + p.getY();
+			if (start_tmp < start) {
+				start = start_tmp;
+			}
+			if (end_tmp > end) {
+				end = end_tmp;
+			}
+
+		}
+		posArray[0] = start;
+		posArray[1] = end - start;
+		return posArray;
 	}
 
 }

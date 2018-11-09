@@ -250,14 +250,6 @@
 											</label>
 										</div>
 									</div>
-									<div class="form-group col-sm-12 col-md-12 col-lg-12">
-										<div class="checkbox">
-											<label> <input
-												title="output hpo official term and ids" id="hpo"
-												type="checkbox" checked> HPO identifier
-											</label>
-										</div>
-									</div>
 								</form>
 							</div>
 
@@ -490,13 +482,13 @@
 	<!-- /.hidden for js only -->
 	<input style="display: none;" id="basePath" name="basePath"
 		value="<%=basePath%>" />
-	<script type="text/javascript" src="<%=basePath%>/js/script.js"></script>
 	<script type="text/javascript" src="<%=basePath%>/js/parsing.js"></script>
 	<script type="text/javascript" src="<%=basePath%>/js/shoppingCart.js"></script>
 	<script type="text/javascript" src="<%=basePath%>/js/highlight.js"></script>
 	<script type="text/javascript" src="<%=basePath%>/js/hpo-search.js"></script>
+	<script type="text/javascript" src="<%=basePath%>/js/script.js"></script>
 
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		$(document).ajaxStop($.unblockUI);
 
 		$(function() {
@@ -532,7 +524,7 @@
 			uiSearch();
 
 		})
-	</script>
+	</script> -->
 </body>
 
 

@@ -5,7 +5,6 @@ public class MmpGeneral {
 	private Boolean acg;
 	private Boolean iwo;
 	private Boolean isp;
-	private Boolean ho;
 	
 	public Boolean getAaa() {
 		return aaa;
@@ -31,11 +30,4 @@ public class MmpGeneral {
 	public void setIsp(Boolean isp) {
 		this.isp = isp;
 	}
-	public Boolean getHo() {
-		return ho;
-	}
-	public void setHo(Boolean ho) {
-		this.ho = ho;
-	}
-
 }

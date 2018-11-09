@@ -28,7 +28,6 @@ public class ParseController {
 	private MetaMapParser mmp;
 	private NcboParser ncbo;
 	private ACTrieParser actp;
-	private Obo o;
 
 	@Value("#{configProperties['MetamapBinPath']}")
 	private String metamapBinPath;
@@ -38,8 +37,7 @@ public class ParseController {
 
 	@PostConstruct
 	public void init() {
-		o = new Obo();
-		this.mmp = new MetaMapParser(metamapBinPath);
+		this.mmp = new MetaMapParser();
 		this.actp = new ACTrieParser();
 		this.ncbo = new NcboParser(NcboApiKey);
 	}
@@ -48,26 +46,11 @@ public class ParseController {
 	@ResponseBody
 	public Map<String, Object> getTerm2(HttpSession httpSession, @RequestBody ParseJob pj) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
-
-		Map<String, String> hmName2Id = new HashMap<String, String>();
-
+		List<ParsingResults> hmName2Id = new ArrayList<ParsingResults>();
 		String content = pj.getNote();
-//		System.out.println(content);
-		// TBD init rbp when start the server.
-		// ACTrieParsing rbp = new ACTrieParsing();
-		String results = this.actp.parse(this.actp, content);
-		String[] hits = results.split("\n");
-		for (String h : hits) {
-			String[] fields = h.split("\t");
-			try {
-				String hpoName = fields[0];
-				String hid = fields[1];
-				hmName2Id.put(hpoName, hid);
-			}catch (Exception e) {
-				// TODO: handle exception
-				System.err.println(e);
-			}
-		}
+		
+		hmName2Id = this.actp.parse(this.actp, content);
+		
 		httpSession.setAttribute("hmName2Id", hmName2Id);
 		map.put("hmName2Id", hmName2Id);
 		map.put("hpoOption", false);
@@ -78,13 +61,12 @@ public class ParseController {
 	@ResponseBody
 	public Map<String, Object> getTerm3(HttpSession httpSession, @RequestBody ParseJob pj) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<String> theOptions = pj.getOption();
-		String urlParameters = String.join("&", theOptions);
-		System.out.println(urlParameters);
 		List<ParsingResults> hmName2Id = new ArrayList<ParsingResults>();
-
+		List<String> theOptions = pj.getOption();
 		String content = pj.getNote();
+		
 		hmName2Id = this.ncbo.parse(content, theOptions);
+		
 		httpSession.setAttribute("hmName2Id", hmName2Id);
 		map.put("hmName2Id", hmName2Id);
 		map.put("hpoOption", false);
@@ -93,50 +75,72 @@ public class ParseController {
 
 	@RequestMapping("/metamap")
 	@ResponseBody
-	public Map<String, Object> getTerm(HttpSession httpSession, @RequestBody ParseJob pj) throws Exception {
-		HashMap<String, String> hmCui2Hpo = this.o.hmCui2Hpo;
-		HashMap<String, String> hmHpo2Name = this.o.hmHpo2Name;
-
-		System.out.println("mmp path +++++: " + metamapBinPath);
-
-		// get hpo options
-		List<String> theOptions = pj.getOption();
-		// System.out.println("Metamap Options:");
-		// System.out.println(theOptions);
-		String note = pj.getNote();
-		Boolean hpoOption = pj.getMmpgeneral().getHo();
-
-		String mmpResult = this.mmp.runCmdMetamap(note, theOptions);
-		HashMap<String, String> hmCui = this.mmp.extractCui(mmpResult);
+	public Map<String, Object> getTerm1(HttpSession httpSession, @RequestBody ParseJob pj) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
-		Map<String, String> hmName2Id = new HashMap<String, String>();
-		for (String cuiId : hmCui.keySet()) {
-			if (hpoOption == true) {
-				if (hmCui2Hpo.get(cuiId) != null) {
-					// get hpo id and name.
-					String hpoIdStr = hmCui2Hpo.get(cuiId);
-					// in case one CUI mapping to multiple HPO.
-					String[] hpoIdList = hpoIdStr.split("\\|");
-					for (String hid : hpoIdList) {
-						String hpoName = hmHpo2Name.get(hid);
-						if (hpoName != null) {
-							hmName2Id.put(hpoName, hid);
-						} else {
-							System.out.println(hid + "not found in hmHpo2Name");
-						}
-
-					}
-				} else {
-					System.out.println(cuiId + "not found in hmCui2Hpo");
-				}
-			} else {
-				String cuiName = hmCui.get(cuiId);
-				hmName2Id.put(cuiName, cuiId);
-			}
-		}
+		List<ParsingResults> hmName2Id = new ArrayList<ParsingResults>();
+		List<String> theOptions = pj.getOption();
+		String content = pj.getNote();
+		
+		hmName2Id = this.mmp.parse(content, theOptions);
+		
 		httpSession.setAttribute("hmName2Id", hmName2Id);
 		map.put("hmName2Id", hmName2Id);
-		map.put("hpoOption", hpoOption);
+		map.put("hpoOption", false);
 		return map;
 	}
+	
+	
+//	@RequestMapping("/metamap2")
+//	@ResponseBody
+//	public Map<String, Object> getTerm(HttpSession httpSession, @RequestBody ParseJob pj) throws Exception {
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		List<ParsingResults> hmName2Id = new ArrayList<ParsingResults>();
+//		String content = pj.getNote();
+//		
+//		
+//		HashMap<String, String> hmCui2Hpo = this.o.hmCui2Hpo;
+//		HashMap<String, String> hmHpo2Name = this.o.hmHpo2Name;
+//
+//		System.out.println("mmp path +++++: " + metamapBinPath);
+//
+//		// get hpo options
+//		List<String> theOptions = pj.getOption();
+//		// System.out.println("Metamap Options:");
+//		// System.out.println(theOptions);
+//		String note = pj.getNote();
+//		Boolean hpoOption = pj.getMmpgeneral().getHo();
+//
+//		String mmpResult = this.mmp.runCmdMetamap(note, theOptions);
+//		HashMap<String, String> hmCui = this.mmp.extractCui(mmpResult);
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		Map<String, String> hmName2Id = new HashMap<String, String>();
+//		for (String cuiId : hmCui.keySet()) {
+//			if (hpoOption == true) {
+//				if (hmCui2Hpo.get(cuiId) != null) {
+//					// get hpo id and name.
+//					String hpoIdStr = hmCui2Hpo.get(cuiId);
+//					// in case one CUI mapping to multiple HPO.
+//					String[] hpoIdList = hpoIdStr.split("\\|");
+//					for (String hid : hpoIdList) {
+//						String hpoName = hmHpo2Name.get(hid);
+//						if (hpoName != null) {
+//							hmName2Id.put(hpoName, hid);
+//						} else {
+//							System.out.println(hid + "not found in hmHpo2Name");
+//						}
+//
+//					}
+//				} else {
+//					System.out.println(cuiId + "not found in hmCui2Hpo");
+//				}
+//			} else {
+//				String cuiName = hmCui.get(cuiId);
+//				hmName2Id.put(cuiName, cuiId);
+//			}
+//		}
+//		httpSession.setAttribute("hmName2Id", hmName2Id);
+//		map.put("hmName2Id", hmName2Id);
+//		map.put("hpoOption", hpoOption);
+//		return map;
+//	}
 }

@@ -85,6 +85,7 @@ public class ParseJob {
 	public List<String> getOption(){
 		List<String> options = new ArrayList<String>();
 		if(this.mmpgeneral!=null) {
+			options.add("-y");
 			if(this.mmpgeneral.getAaa() == true) {
 				options.add("-a");
 			}
@@ -97,51 +98,51 @@ public class ParseJob {
 			if(this.mmpgeneral.getIwo() == true) {
 				options.add("-i");
 			}
-			if(this.mmpgeneral.getHo() == true) {
-				options.add("-R HPO");
-			}
-			List<String> semanticStr = new ArrayList<String>();
-			Boolean semantionTurnOn = false;
-			if(this.semantic.getAnab() == true) {
-				semanticStr.add("anab");
-				semantionTurnOn = true;
-			}
-			if(this.semantic.getFndg() == true) {
-				semanticStr.add("fndg");
-				semantionTurnOn = true;
-			}
-			if(this.semantic.getCgab() == true) {
-				semanticStr.add("cgab");
-				semantionTurnOn = true;
-			}
-			if(this.semantic.getDsyn() == true) {
-				semanticStr.add("dsyn");
-				semantionTurnOn = true;
-			}
-			if(this.semantic.getGenf() == true) {
-				semanticStr.add("genf");
-				semantionTurnOn = true;
-			}
-			if(this.semantic.getMobd() == true) {
-				semanticStr.add("mobd");
-				semantionTurnOn = true;
-			}
-			if(this.semantic.getSosy() == true) {
-				semanticStr.add("sosy");
-				semantionTurnOn = true;
-			}
-			if(this.semantic.getLbtr() == true) {
-				semanticStr.add("lbtr");
-				semantionTurnOn = true;
-			}
-			if(this.semantic.getPatf() == true) {
-				semanticStr.add("patf");
-				semantionTurnOn = true;
-			}
+//			if(this.mmpgeneral.getHo() == true) {
+//				options.add("-R HPO");
+//			}
+//			List<String> semanticStr = new ArrayList<String>();
+//			Boolean semantionTurnOn = false;
+//			if(this.semantic.getAnab() == true) {
+//				semanticStr.add("anab");
+//				semantionTurnOn = true;
+//			}
+//			if(this.semantic.getFndg() == true) {
+//				semanticStr.add("fndg");
+//				semantionTurnOn = true;
+//			}
+//			if(this.semantic.getCgab() == true) {
+//				semanticStr.add("cgab");
+//				semantionTurnOn = true;
+//			}
+//			if(this.semantic.getDsyn() == true) {
+//				semanticStr.add("dsyn");
+//				semantionTurnOn = true;
+//			}
+//			if(this.semantic.getGenf() == true) {
+//				semanticStr.add("genf");
+//				semantionTurnOn = true;
+//			}
+//			if(this.semantic.getMobd() == true) {
+//				semanticStr.add("mobd");
+//				semantionTurnOn = true;
+//			}
+//			if(this.semantic.getSosy() == true) {
+//				semanticStr.add("sosy");
+//				semantionTurnOn = true;
+//			}
+//			if(this.semantic.getLbtr() == true) {
+//				semanticStr.add("lbtr");
+//				semantionTurnOn = true;
+//			}
+//			if(this.semantic.getPatf() == true) {
+//				semanticStr.add("patf");
+//				semantionTurnOn = true;
+//			}
 			
-			if(semantionTurnOn == true) {
-				options.add("-J " + String.join(",", semanticStr));
-			}
+//			if(semantionTurnOn == true) {
+//				options.add("-J " + String.join(",", semanticStr));
+//			}
 		}
 		
 		if(this.ncbogeneral!=null) {

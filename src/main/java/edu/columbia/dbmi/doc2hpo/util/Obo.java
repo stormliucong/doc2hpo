@@ -31,6 +31,7 @@ public class Obo {
 	public HashMap<String, String> hmCui2Hpo = new HashMap<String, String>();
 	public HashMap<String, String> hmHpo2Name = new HashMap<String, String>();
 
+
 	File oboFile;
 
 	public Obo () {

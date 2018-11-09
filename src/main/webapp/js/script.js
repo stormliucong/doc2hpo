@@ -1,5 +1,45 @@
 // custermized js.
 
+$( document ).ready( onload() );
+
+function onload(){
+	$(document).ajaxStop($.unblockUI);
+
+	$(function() {
+		showSearchBox();
+		refreshTable();
+		$("#note").val('');
+		$("#term").val('');
+		$("#fbcontent").val('');
+		$("#fbsubmit").click(function() {
+			sendFeedback();
+		});
+		$("#starttoinput").click(function() {
+			var t = $(window).scrollTop();
+			$('body,html').animate({
+				'scrollTop' : t + 410
+			}, 200)
+		})
+		$("#parse").click(function() {
+			parse();
+			//testController();
+		});
+
+		$("#reset").click(function() {
+			reset();
+		});
+		$("#phenolyzer").click(function() {
+			//phenolyzer();
+			phenolyzerTmp();
+		});
+		$("#textExample").click(function() {
+			tryAnExample();
+		});
+		uiSearch();
+
+	})
+}
+
 function sendFeedback() {
 	var basePath = $('input[id=basePath]').val();
 	var email = $("#fbemail").val();
@@ -167,3 +207,6 @@ function showSearchBox() {
 	    }
 	});
 }
+
+
+
