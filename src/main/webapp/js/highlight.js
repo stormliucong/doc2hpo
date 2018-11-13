@@ -1,3 +1,97 @@
+function getSelectionCharOffsetsWithin() {
+	var start = 0;
+	var end = 0;
+	var sel, range, priorRange, text;
+	$('.hpo-entity').hide();
+	if (typeof window.getSelection != "undefined") {
+		sel = window.getSelection();
+		text = sel + '';
+		range = window.getSelection().getRangeAt(0);
+		priorRange = range.cloneRange();
+		// priorRange.selectNodeContents(element);
+		// priorRange.setEnd(range.startContainer, range.startOffset);
+		start = priorRange.toString().length;
+		end = start + (sel + '').length;
+	} else if (typeof document.selection != "undefined"
+			&& (sel = document.selection).type != "Control") {
+		text = sel + '';
+		range = sel.createRange();
+		priorRange = document.body.createTextRange();
+		// priorRange.moveToElementText(element);
+		// priorRange.setEndPoint("EndToStart", range);
+		start = priorRange.text.length;
+		end = start + (sel + '').length;
+	}
+	var span = document.createElement("span");
+
+	var selectedText = range.extractContents();
+	var span = document.createElement("span");
+	span.style.backgroundColor = "yellow";
+	span.appendChild(selectedText);
+	range.insertNode(span);
+	$('#parsing-results').popup({
+		popup : $('#searchPopup'),
+		on : 'click',
+	}).popup('show');
+
+	$('.hpo-entity').show();
+	alert(text);
+
+}
+
+function highlightMouseSelected() {
+	$("#parsing-results").bind(
+			'mouseup',
+			function() {
+				if (typeof window.getSelection != "undefined") {
+					sel = window.getSelection();
+					text = sel + '';
+					if (text.length < 5){
+						return;
+					}
+				} else if (typeof document.selection != "undefined"
+					&& (sel = document.selection).type != "Control") {
+					text = sel + '';
+					if (text.length < 5){
+						return;
+					}
+				}
+				var start = 0;
+				var end = 0;
+				var sel, range, priorRange, text;
+				var context = document.querySelector("#parsing-results");
+				var instance = new Mark(context);
+				$('.hpo-entity').remove();
+				if (typeof window.getSelection != "undefined") {
+					sel = window.getSelection();
+					text = sel + '';
+					range = window.getSelection().getRangeAt(0);
+					ref = document.getElementById("parsing-results")
+					console.log(range);
+					priorRange = range.cloneRange();
+					priorRange.selectNodeContents(context);
+					priorRange.setEnd(range.startContainer,range.startOffset);
+					start = priorRange.toString().length;
+					end = start + (sel + '').length;
+
+
+				} else if (typeof document.selection != "undefined"
+						&& (sel = document.selection).type != "Control") {
+					text = sel + '';
+					range = sel.createRange();
+					priorRange = document.body.createTextRange();
+					priorRange.moveToElementText(context);
+					priorRange.setEndPoint("EndToStart", range);
+					start = priorRange.text.length;
+					end = start + (sel + '').length;
+
+				}
+				length = end - start + 1;
+				addTermsInSessionWithHighlight(start, length, 'CLICKME', 'CLICKME');
+			});
+	
+}
+
 function highlight(parsingJson) {
 	console.log('highlight')
 	var note = $("#note").val();
@@ -66,38 +160,50 @@ function processEachTag(node, range, parsingJson) {
 				var tagId = start + "_" + length;
 				$(node).addClass('data-entity')
 				$(node).append(
-						"<span class='hpo-entity ' id='" + tagId + "'>" + hpo_term + "</span>")
+						"<span class='hpo-entity' id='" + tagId + "'>"
+								+ hpo_term + "</span>")
 				$(node).find('.hpo-entity').attr('hpo_term', hpo_term);
 				$(node).find('.hpo-entity').attr('hpo_id', hpo_id);
 
 				console.log(note);
-				$(node).on('click', function() {
-					// alert( "Handler for .click() called." );
-					$(this).toggleClass("data-entity");
-					$(this).find('.hpo-entity').toggle();
-					var tagIdArray = $(node).find('.hpo-entity').attr('id').split("_");
-					var start = tagIdArray[0];
-					var length = tagIdArray[1];
-					var hpo_id = $(node).find('.hpo-entity').attr('hpo_id');
-					var hpo_term = $(node).find('.hpo-entity').attr('hpo_term');
-					if($(this).find('.hpo-entity').is(":visible")){
-						console.log("delete " + start + "\t" + length + "\t" + hpo_id + "\t" + hpo_term)
-						//deleteTermsInSession(start,length,hpo_id,hpo_term);
-					}else{
-						console.log("add " + start + "\t" + length + "\t" + hpo_id + "\t" + hpo_term)
-						//addTermsInSession(start,length,hpo_id,hpo_term);
+				$(node).on(
+						'click',
+						function() {
+							// alert( "Handler for .click() called." );
+							$(this).toggleClass("data-entity");
+							$(this).find('.hpo-entity').toggle();
+							var tagIdArray = $(node).find('.hpo-entity').attr(
+									'id').split("_");
+							var start = tagIdArray[0];
+							var length = tagIdArray[1];
+							var hpo_id = $(node).find('.hpo-entity').attr(
+									'hpo_id');
+							var hpo_term = $(node).find('.hpo-entity').attr(
+									'hpo_term');
+							if ($(this).find('.hpo-entity').is(":visible")) {
+								console.log("add " + start + "\t" + length
+										+ "\t" + hpo_id + "\t" + hpo_term)
+								addTermsInSession(start, length, hpo_id,
+										hpo_term);
+							} else {
+								console.log("delete " + start + "\t" + length
+										+ "\t" + hpo_id + "\t" + hpo_term)
+								deleteTermsInSession(start, length, hpo_id,
+										hpo_term);
 
-					}
-					
-				});
-				
+							}
+
+						});
+
 				$(node)
 						.find('span.hpo-entity')
 						.on(
 								'click',
 								function(e) {
-									console.log("this attrid " + $(this).attr('id'));
-									$('#HpoNameEntity').text($(this).attr('id'));
+									console.log("this attrid "
+											+ $(this).attr('id'));
+									$('#HpoNameEntity')
+											.text($(this).attr('id'));
 									var hpo_link = 'https://hpo.jax.org/app/browse/term/'
 											+ hpo_id;
 									var hpo_html = '<a href="' + hpo_link

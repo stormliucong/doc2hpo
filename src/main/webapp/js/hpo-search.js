@@ -1,6 +1,6 @@
 function uiSearch() {
 
-//	console.log(tagId);
+// console.log(tagId);
 	$('#hpoSearch').search({
 		type : 'standard',
 		minCharacters : 3,
@@ -44,9 +44,8 @@ function uiSearch() {
 		// TBD
 		// toggle shopping cart
 		console.log("update " + start + "\t" + length + "\t" + hpo_id + "\t" + hpo_term)
-//		updateTermsInSession(start,length,hpo_id,hpo_term);
+		updateTermsInSession(start,length,hpo_id,hpo_term);
+				
 	});
-	
-	
 }
 

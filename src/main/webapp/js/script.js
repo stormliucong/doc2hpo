@@ -36,7 +36,7 @@ function onload(){
 			tryAnExample();
 		});
 		uiSearch();
-
+		highlightMouseSelected();
 	})
 }
 

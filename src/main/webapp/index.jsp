@@ -58,6 +58,8 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.es6.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.js"></script>
+<script src="<%=basePath%>/js/jquery-textrange.js"></script>
+
 </head>
 <body>
 
@@ -425,7 +427,7 @@
 												<th>Id <span
 													title="Tips: copy the column and paste it in phenolyzer query box"
 													id="copyId" class="glyphicon glyphicon-share"></span></th>
-												<th> count </th>
+												<th>count</th>
 												<th class="text-center"><span
 													class="table-add glyphicon glyphicon-plus"></span></th>
 											</tr>
@@ -487,44 +489,10 @@
 	<script type="text/javascript" src="<%=basePath%>/js/highlight.js"></script>
 	<script type="text/javascript" src="<%=basePath%>/js/hpo-search.js"></script>
 	<script type="text/javascript" src="<%=basePath%>/js/script.js"></script>
+	<script type="text/javascript" src="<%=basePath%>/js/updateSession.js"></script>
 
-	<!-- <script type="text/javascript">
-		$(document).ajaxStop($.unblockUI);
-
-		$(function() {
-			showSearchBox();
-			refreshTable();
-			$("#note").val('');
-			$("#term").val('');
-			$("#fbcontent").val('');
-			$("#fbsubmit").click(function() {
-				sendFeedback();
-			});
-			$("#starttoinput").click(function() {
-				var t = $(window).scrollTop();
-				$('body,html').animate({
-					'scrollTop' : t + 410
-				}, 200)
-			})
-			$("#parse").click(function() {
-				parse();
-				//testController();
-			});
-
-			$("#reset").click(function() {
-				reset();
-			});
-			$("#phenolyzer").click(function() {
-				//phenolyzer();
-				phenolyzerTmp();
-			});
-			$("#textExample").click(function() {
-				tryAnExample();
-			});
-			uiSearch();
-
-		})
-	</script> -->
+	</script>
+	-->
 </body>
 
 

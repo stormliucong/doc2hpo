@@ -1,5 +1,7 @@
 package edu.columbia.dbmi.doc2hpo.controller;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -15,51 +17,66 @@ import edu.columbia.dbmi.doc2hpo.pojo.ParsingResults;
 @Controller
 @RequestMapping("/session")
 public class ResultManagerController {
-	
 
 	@RequestMapping("/addTerms")
 	@ResponseBody
-	public List<ParsingResults> addTerms(HttpSession httpSession, @RequestBody ParsingResults pr)
-			throws Exception {
-		
-		List<ParsingResults> hmName2Id = (List<ParsingResults>) httpSession.getAttribute("hmName2Id");
-		hmName2Id.add(pr);
-		httpSession.setAttribute("hmName2Id",hmName2Id);
-		return hmName2Id;
-	}
-	
-	@RequestMapping("/deleteTerms")
-	@ResponseBody
-	public List<ParsingResults> deleteTerms(HttpSession httpSession, @RequestBody ParsingResults pr)
-			throws Exception {
-
-		
-		List<ParsingResults> hmName2Id = (List<ParsingResults>) httpSession.getAttribute("hmName2Id");
-		for(ParsingResults prIn : hmName2Id) {
-			if(prIn.getStart() == pr.getStart() && prIn.getLength() == pr.getLength()) {
-				hmName2Id.remove(prIn);
-			}
-		}
-		httpSession.setAttribute("hmName2Id",hmName2Id);
-		return hmName2Id;
-	}
-	
-	@RequestMapping("/updateTerms")
-	@ResponseBody
-	public List<ParsingResults> updateTerms(HttpSession httpSession, @RequestBody ParsingResults pr)
-			throws Exception {
+	public Map<String, Object> addTerms(HttpSession httpSession, @RequestBody ParsingResults pr) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
 
 		String hpoId = pr.getHpoId();
 		String hpoName = pr.getHpoName();
+
+		List<ParsingResults> hmName2Id = (List<ParsingResults>) httpSession.getAttribute("hmName2Id");
+		
+		ParsingResults prIn = new ParsingResults();
+		prIn.setHpoName(hpoName.toLowerCase());
+		prIn.setHpoId(hpoId.replaceAll("_", ":"));
+		prIn.setStart(pr.getStart());
+		prIn.setLength(pr.getLength());
+		hmName2Id.add(prIn);
+
+		httpSession.setAttribute("hmName2Id", hmName2Id);
+		map.put("hmName2Id", hmName2Id);
+		return map;
+	}
+
+	@RequestMapping("/deleteTerms")
+	@ResponseBody
+	public Map<String, Object> deleteTerms(HttpSession httpSession, @RequestBody ParsingResults pr) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
 		
 		List<ParsingResults> hmName2Id = (List<ParsingResults>) httpSession.getAttribute("hmName2Id");
-		for(ParsingResults prIn : hmName2Id) {
-			if(prIn.getStart() == pr.getStart() && prIn.getLength() == pr.getLength()) {
-				prIn.setHpoName(hpoName);
-				prIn.setHpoId(hpoId);
+		Iterator<ParsingResults> it = hmName2Id.iterator();
+		while(it.hasNext()) {
+			ParsingResults prIn = it.next();
+			if (prIn.getStart() == pr.getStart() && prIn.getLength() == pr.getLength()) {
+				it.remove();
 			}
 		}
-		httpSession.setAttribute("hmName2Id",hmName2Id);
-		return hmName2Id;
+		httpSession.setAttribute("hmName2Id", hmName2Id);
+		map.put("hmName2Id", hmName2Id);
+		return map;
+	}
+
+	@RequestMapping("/updateTerms")
+	@ResponseBody
+	public Map<String, Object> updateTerms(HttpSession httpSession, @RequestBody ParsingResults pr) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		String hpoId = pr.getHpoId();
+		String hpoName = pr.getHpoName();
+
+		List<ParsingResults> hmName2Id = (List<ParsingResults>) httpSession.getAttribute("hmName2Id");
+		for (ParsingResults prIn : hmName2Id) {
+			System.out.println(prIn.getHpoId());
+			if (prIn.getStart() == pr.getStart() && prIn.getLength() == pr.getLength()) {
+				prIn.setHpoName(hpoName.toLowerCase());
+				prIn.setHpoId(hpoId.replaceAll("_", ":"));
+			}
+		}
+		httpSession.setAttribute("hmName2Id", hmName2Id);
+		map.put("hmName2Id", hmName2Id);
+		return map;
 	}
 }

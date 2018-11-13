@@ -64,6 +64,7 @@ function termCounting(listOfTerms) {
 }
 
 function updateTable(listOfTerms) {
+	refreshTable();
 	terms = termCounting(listOfTerms);
 	var basePath = $('input[id=basePath]').val();
 	var $TABLE = $('#termTable');

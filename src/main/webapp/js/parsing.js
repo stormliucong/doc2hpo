@@ -84,6 +84,7 @@ function parseACT(note) {
 				console.log(terms);
 				var hpoOption = data["hpoOption"];
 				highlight(terms);
+				highlight(terms);
 				updateTable(terms);
 				var t = $(window).scrollTop();
 				$('body,html').animate({
@@ -107,9 +108,9 @@ function parseNcbo(note) {
 	var formData = {
 		'note' : note,
 		'ncbogeneral' : {
-			'lo': longest_only,
-			'wwo': whole_word_only,
-			'en': exclude_numbers
+			'lo' : longest_only,
+			'wwo' : whole_word_only,
+			'en' : exclude_numbers
 		}
 	};
 	$.blockUI({
