@@ -178,6 +178,7 @@ function addTermsInSessionWithHighlight(start, length, hpo_id, hpo_term) {
 			} else {
 				console.log(terms);
 				highlight(terms);
+				updateTable(terms);
 			}
 			return terms
 

@@ -1,5 +1,5 @@
 function highlightMouseSelected() {
-	$("#parsing-results").bind(
+	$("#parsingResults").bind(
 			'mouseup',
 			function() {
 				if (typeof window.getSelection != "undefined") {
@@ -18,15 +18,14 @@ function highlightMouseSelected() {
 				var start = 0;
 				var end = 0;
 				var sel, range, priorRange, text;
-				var context = document.querySelector("#parsing-results");
+				var context = document.querySelector("#parsingResults");
 				var instance = new Mark(context);
 				$('.hpo-entity').remove();
 				if (typeof window.getSelection != "undefined") {
 					sel = window.getSelection();
 					text = sel + '';
 					range = window.getSelection().getRangeAt(0);
-					ref = document.getElementById("parsing-results")
-					console.log(range);
+					ref = document.getElementById("parsingResults")
 					priorRange = range.cloneRange();
 					priorRange.selectNodeContents(context);
 					priorRange.setEnd(range.startContainer,range.startOffset);
@@ -46,26 +45,23 @@ function highlightMouseSelected() {
 
 				}
 				length = end - start + 1;
-				addTermsInSessionWithHighlight(start, length, 'CLICKME', 'CLICKME');
+				addTermsInSessionWithHighlight(start, length, 'ADD', 'ADD');
 			});
 	
 }
 
 function highlight(parsingJson) {
-	console.log('highlight')
 	var note = $("#note").val();
-	$("#parsing-results").text(note);
-	$("#parsing-results").addClass('entities');
-	var context = document.querySelector("#parsing-results");
+	$("#parsingResults").text(note);
+	$("#parsingResults").addClass('entities');
+	var context = document.querySelector("#parsingResults");
 
 	// using https://markjs.io/
-	console.log(parsingJson);
 	rangeArray = []
 	for ( var key in parsingJson) {
 		subObj = _.pick(parsingJson[key], [ 'start', 'length' ]);
 		rangeArray.push(subObj);
 	}
-	console.log(rangeArray);
 	var options = {
 		"element" : "mark",
 		"className" : "",
@@ -97,7 +93,7 @@ function highlight(parsingJson) {
 	var instance = new Mark(context);
 	instance.markRanges(rangeArray, options);
 	// instance.mark('Individual');
-	$("#conceptMappingResults").show();
+	$("#parsingResultsPanel").show();
 
 }
 
@@ -114,8 +110,6 @@ function processEachTag(node, range, parsingJson) {
 			var hpo_term = parsingJson[key].hpoName.toUpperCase();
 
 			if (start == range.start && length == range.length) {
-				console.log('start' + start)
-				console.log('len' + length)
 				var tagId = start + "_" + length;
 				$(node).addClass('data-entity')
 				$(node).append(
@@ -124,7 +118,6 @@ function processEachTag(node, range, parsingJson) {
 				$(node).find('.hpo-entity').attr('hpo_term', hpo_term);
 				$(node).find('.hpo-entity').attr('hpo_id', hpo_id);
 
-				console.log(note);
 				$(node).on(
 						'click',
 						function() {
@@ -140,13 +133,9 @@ function processEachTag(node, range, parsingJson) {
 							var hpo_term = $(node).find('.hpo-entity').attr(
 									'hpo_term');
 							if ($(this).find('.hpo-entity').is(":visible")) {
-								console.log("add " + start + "\t" + length
-										+ "\t" + hpo_id + "\t" + hpo_term)
 								addTermsInSession(start, length, hpo_id,
 										hpo_term);
 							} else {
-								console.log("delete " + start + "\t" + length
-										+ "\t" + hpo_id + "\t" + hpo_term)
 								deleteTermsInSession(start, length, hpo_id,
 										hpo_term);
 
@@ -159,17 +148,8 @@ function processEachTag(node, range, parsingJson) {
 						.on(
 								'click',
 								function(e) {
-									console.log("this attrid "
-											+ $(this).attr('id'));
 									$('#HpoNameEntity')
 											.text($(this).attr('id'));
-									var hpo_link = 'https://hpo.jax.org/app/browse/term/'
-											+ hpo_id;
-									var hpo_html = '<a href="' + hpo_link
-											+ '" target="_blank">' + hpo_id
-											+ ' ' + hpo_term + '</a>';
-									$('#termManager').find('.header').html(
-											hpo_html);
 									$(this).popup({
 										popup : $('#searchPopup'),
 										on : 'click',

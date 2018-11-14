@@ -1,3 +1,22 @@
+function parse() {
+	var basePath = $('#basePath').val();
+	var note = $("#note").val();
+	note = removeNonAsc(note);
+
+	var value = $("#parsingEngine").val();
+	
+	if (value == "act") {
+		parseACT(note);
+	}
+	if (value == "mmp") {
+		alert("parse mmp");
+		parsingJson = parseMetamap(note);
+	}
+	if (value == "ncbo") {
+		parseNcbo(note);
+	}
+}
+
 function parseMetamap(note) {
 	var basePath = $('input[id=basePath]').val();
 	var all_acros_abbrs = $('#all_acros_abbrs').is(':checked');
@@ -76,21 +95,12 @@ function parseACT(note) {
 		data : JSON.stringify(formData),
 		dataType : "json",
 		success : function(data) {
-			console.log("parse succuss.\n");
-			var terms = data["hmName2Id"];
-			if (jQuery.isEmptyObject(terms)) {
-				alert("No UMLS or HPO terms found!");
+			var parsingJson = data["hmName2Id"];
+			if (jQuery.isEmptyObject(parsingJson)) {
+				alert("No HPO terms found by parser!");
 			} else {
-				console.log(terms);
-				var hpoOption = data["hpoOption"];
-				highlight(terms);
-				highlight(terms);
-				updateTable(terms);
-				var t = $(window).scrollTop();
-				$('body,html').animate({
-					'scrollTop' : t + 1000
-				}, 200)
-				$("#phenolyzer").show();
+				highlight(parsingJson);
+				updateTable(parsingJson);
 			}
 
 		},
@@ -154,63 +164,25 @@ function parseNcbo(note) {
 	});
 }
 
-function parse_bak() {
-	$("#phenolyzer").hide();
-	refreshTable();
-
+function testController() {
 	var basePath = $('#basePath').val();
-	console.log(basePath);
-	var note = $("#note").val();
-	note = removeNonAsc(note);
-	if (note.length < 1) {
-		alert("Input your note please!");
-	} else {
-		var e = document.getElementById("parsing-method");
-		var radioMmp = e.options[e.selectedIndex].value;
-
-		if (radioMmp == "1") {
-			console.log("parse act");
-			parseACT(note);
-		}
-		if (radioMmp == "2") {
-			console.log("parse mmp");
-			parseMetamap(note);
-		}
-		if (radioMmp == "3") {
-			console.log("parse ncbo");
-			parseNcbo(note);
-		}
-
+	var search = {
+		pName : "bhanu",
+		lName : "prasad"
 	}
-}
+	console.log(JSON.stringify(search));
+	$.ajax({
+		type : "POST",
+		headers : {
+			'Accept' : 'application/json',
+			'Content-Type' : 'application/json'
+		},
 
-function parse() {
-	$("#phenolyzer").hide();
-	refreshTable();
-
-	var basePath = $('#basePath').val();
-	console.log(basePath);
-	var note = $("#note").val();
-	note = removeNonAsc(note);
-	if (note.length < 1) {
-		alert("Input your note please!");
-	} else {
-		var e = document.getElementById("parsing-method");
-		var radioMmp = e.options[e.selectedIndex].value;
-
-		if (radioMmp == "1") {
-			console.log("parse act");
-			parsingJson = parseACT(note);
+		dataType : 'json',
+		url : basePath + "/test/test1",
+		data : JSON.stringify(search), // Note it is important
+		success : function(result) {
+			// do what ever you want with data
 		}
-		if (radioMmp == "2") {
-			console.log("parse mmp");
-			parsingJson = parseMetamap(note);
-		}
-		if (radioMmp == "3") {
-			console.log("parse ncbo");
-			parsingJson = parseNcbo(note);
-		}
-
-	}
-	console.log("parse()" + parsingJson);
+	})
 }
