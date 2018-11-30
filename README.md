@@ -21,11 +21,11 @@ It is not enough to use this git repo to deploy the webapp.
 - Change MetamapBinPath in `doc2hpo/src/main/webapp/WEB-INF/config.properties`
 - Register a free account on ncbo annotator https://bioportal.bioontology.org/account
 - Please change Api key for ncbo annotator in `doc2hpo/src/main/webapp/WEB-INF/config.properties`
-- 
 
 ## Versioning
 
 V_0.1.2
+
 ## Authors
 
 Cong Liu, Chi Yuan, Kai Wang, Chunhua Weng
