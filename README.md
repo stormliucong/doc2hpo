@@ -16,7 +16,7 @@ It is not enough to use this git repo to deploy the webapp.
 
 ### Configure
 - Install metamap and metamap java api (https://metamap.nlm.nih.gov/Installation.shtml and https://metamap.nlm.nih.gov/Docs/README_javaapi.shtml#Downloading,%20Extracting%20and%20Installing%20the%20API%20distribution)
-* You have to get a free UMLS license to install the software
+  * You have to get a free UMLS license to install the software
 - Starting supporting servers and running the MetaMap server
 - Change MetamapBinPath in `doc2hpo/src/main/webapp/WEB-INF/config.properties`
 - Register a free account on ncbo annotator https://bioportal.bioontology.org/account
