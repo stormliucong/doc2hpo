@@ -52,6 +52,7 @@ function highlightMouseSelected() {
 
 function highlight(parsingJson) {
 	var note = $("#note").val();
+	note = formatText(note);
 	$("#parsingResults").text(note);
 	$("#parsingResults").addClass('entities');
 	var context = document.querySelector("#parsingResults");

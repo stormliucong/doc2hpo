@@ -4,7 +4,7 @@
 	<groupId>edu.columbia.dbmi</groupId>
 	<artifactId>doc2hpo</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.2-SNAPSHOT</version>
 	<name>doc2hpo Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>

@@ -30,7 +30,6 @@
 <link rel="stylesheet" href="<%=basePath%>/css/styles.css">
 <link rel="stylesheet" href="<%=basePath%>/css/ent-display.css">
 
-.footer{ position:fixed; bottom:0; }
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 <script type="text/javascript" charset="utf8"
@@ -74,8 +73,9 @@
 <body>
 	<div class="ui fixed menu">
 		<div class="header item">
-			<img class="logo" src="<%=basePath%>/img/doc2hpo.png"> Doc2Hpo:
-			A webservice to extract hpo terms from clinical notes
+			<img class="logo" src="<%=basePath%>/img/doc2hpo2.png"
+				style="width: 120px; height: 50px;"> A webservice to extract
+			human phenotype ontology terms from clinical notes
 		</div>
 	</div>
 	<div class="html ui top attached segment" style="margin: 100px auto 0;">
@@ -167,7 +167,7 @@
 			<div class="ui two column very relaxed stackable divided grid">
 				<div class="ten wide column">
 					<div class="ui raised segment">
-						<p id="parsingResults">Pellentesque habitant morbi tristique
+						<p id="parsingResults" style="white-space: pre-wrap">Pellentesque habitant morbi tristique
 							senectus et netus et malesuada fames ac turpis egestas.
 							Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit
 							amet, ante. Donec eu libero sit amet quam egestas semper. Aenean

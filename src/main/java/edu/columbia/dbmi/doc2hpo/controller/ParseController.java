@@ -34,12 +34,18 @@ public class ParseController {
 
 	@Value("#{configProperties['NcboApiKey']}")
 	private String NcboApiKey;
+	
+	@Value("#{configProperties['Proxy']}")
+	private String proxy;
+	
+	@Value("#{configProperties['Port']}")
+	private int port;
 
 	@PostConstruct
 	public void init() {
 		this.mmp = new MetaMapParser();
 		this.actp = new ACTrieParser();
-		this.ncbo = new NcboParser(NcboApiKey);
+		this.ncbo = new NcboParser(NcboApiKey,proxy,port);
 	}
 
 	@RequestMapping("/acdat")

@@ -1,7 +1,10 @@
 function parse() {
 	var basePath = $('#basePath').val();
 	var note = $("#note").val();
-	note = removeNonAsc(note);
+	console.log("1",note);
+	note = formatText(note);
+	console.log("2",note);
+
 
 	var value = $("#parsingEngine").val();
 	
@@ -9,7 +12,6 @@ function parse() {
 		parseACT(note);
 	}
 	if (value == "mmp") {
-		alert("parse mmp");
 		parsingJson = parseMetamap(note);
 	}
 	if (value == "ncbo") {
