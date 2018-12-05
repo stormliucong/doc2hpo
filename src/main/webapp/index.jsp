@@ -202,6 +202,16 @@
 							eleifend leo.</p>
 					</div>
 				</div>
+
+				<div class="ui custom popup top left transition hidden"
+					id="searchPopup">
+					<div style="display: none" id="HpoNameEntity"></div>
+					<div class="ui fluid search" id='hpoSearch'>
+						<input class="prompt" type="text" placeholder="Search HPO...">
+						<div style="display: none" id="selectedResult"></div>
+						<i class="plus circle icon" id="addHpoTerm"></i>
+					</div>
+				</div>
 				<div class="five wide column">
 					<div class="container" style="padding-bottom: 20px">
 						<table class="ui very basic collapsing celled table"
@@ -218,13 +228,16 @@
 					<div class="row" style="padding-bottom: 20px">
 						<div class="ui buttons" id="buttonGroups">
 
-							<button class="ui button" id="copyColumnButton" data-tooltip="Copy the first column as Phenolyzer Input">Copy
+							<button class="ui button" id="copyColumnButton"
+								data-tooltip="Copy the first column as Phenolyzer Input">Copy
 								terms</button>
 							<div class="or"></div>
 						</div>
 					</div>
 					<div class="row">
-						<div class="ui blue labeled icon button" id="phenolyzerButton" data-tooltip="Redirect to Phenolyzer interface" data-position="right center">
+						<div class="ui blue labeled icon button" id="phenolyzerButton"
+							data-tooltip="Redirect to Phenolyzer interface"
+							data-position="right center">
 							Next <i class="right arrow icon"></i>
 						</div>
 
@@ -238,16 +251,6 @@
 
 
 	<!--  POP UP -->
-	<div class="ui custom popup top left transition hidden"
-		id="searchPopup">
-		<div style="display: none" id="HpoNameEntity"></div>
-		<div class="ui fluid search" id='hpoSearch'>
-			<input class="prompt" type="text" placeholder="Search HPO...">
-			<div style="display: none" id="selectedResult"></div>
-			<i class="plus circle icon" id="addHpoTerm"></i>
-		</div>
-
-	</div>
 	<div class="ui inverted vertical footer segment form-page">
 		<div class="ui center aligned container">Chunhua Weng Lab 2018.
 			All Rights Reserved</div>

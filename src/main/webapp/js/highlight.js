@@ -175,6 +175,7 @@ function processEachTag(node, range, parsingJson) {
 					$(this).popup({
 						popup : $('#searchPopup'),
 						on : 'click',
+						closable: false
 					}).popup('show');
 					e.stopPropagation(); // do nothing.
 

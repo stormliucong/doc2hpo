@@ -21,6 +21,7 @@ function uiSearch() {
 								description : item.id
 							});
 						});
+
 						return response;
 					},
 					url : 'https://hpo.jax.org/api/hpo/search?q={query}'
@@ -30,7 +31,9 @@ function uiSearch() {
 							result.title + ';;;' + result.description);
 				},
 			});
-
+	
+	$('#addHpoTerm').popup('hide');
+	
 	$('#addHpoTerm').click(function(e) {
 		var tagId = $('#searchPopup').find('#HpoNameEntity').text();
 		var tagIdArray = tagId.split('_');
@@ -44,6 +47,7 @@ function uiSearch() {
 		$("#" + tagId).find('.hpo-entity').attr('hpo_term', hpo_term);
 		$("#" + tagId).find('.hpo-entity').attr('hpo_id', hpo_id);
 		updateTermsInSession(start, length, hpo_id, hpo_term);
+		$('#searchPopup').removeClass('visible').addClass('hidden');
 
 	});
 }

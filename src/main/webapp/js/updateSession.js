@@ -34,6 +34,7 @@ function updateTermsInSession(start, length, hpo_id, hpo_term) {
 				alert("No UMLS or HPO terms found!");
 			} else {
 				console.log(terms);
+				highlight(terms);
 				updateTable(terms);
 				$('body,html').animate({
 					'scrollTop' : t
@@ -83,6 +84,7 @@ function deleteTermsInSession(start, length, hpo_id, hpo_term) {
 				alert("No UMLS or HPO terms found!");
 			} else {
 				console.log(terms);
+				highlight(terms);
 				updateTable(terms);
 				$('body,html').animate({
 					'scrollTop' : t
@@ -133,6 +135,7 @@ function addTermsInSession(start, length, hpo_id, hpo_term) {
 				alert("No UMLS or HPO terms found!");
 			} else {
 				console.log(terms);
+				highlight(terms);
 				updateTable(terms);
 				$('body,html').animate({
 					'scrollTop' : t
