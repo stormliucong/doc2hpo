@@ -30,24 +30,27 @@ function uiSearch() {
 					$('#selectedResult').val(
 							result.title + ';;;' + result.description);
 				},
+				
 			});
-	
-	$('#addHpoTerm').popup('hide');
-	
+		
 	$('#addHpoTerm').click(function(e) {
 		var tagId = $('#searchPopup').find('#HpoNameEntity').text();
 		var tagIdArray = tagId.split('_');
 		var start = tagIdArray[0];
 		var length = tagIdArray[1];
 		var hpoArray = $('#selectedResult').val().split(';;;');
-		var hpo_term = hpoArray[0];
-		var hpoIdArray = hpoArray[1].split(':');
-		var hpo_id = hpoIdArray[0] + "_" + hpoIdArray[1];
-		$("#" + tagId).text(hpo_term);
-		$("#" + tagId).find('.hpo-entity').attr('hpo_term', hpo_term);
-		$("#" + tagId).find('.hpo-entity').attr('hpo_id', hpo_id);
-		updateTermsInSession(start, length, hpo_id, hpo_term);
-		$('#searchPopup').removeClass('visible').addClass('hidden');
-
+		if(hpoArray[0] === 'NORESULTS'){
+			// won't change the annotation if no results returned.
+			$('#searchPopup').removeClass('visible').addClass('hidden');
+		}else{
+			var hpo_term = hpoArray[0];
+			var hpoIdArray = hpoArray[1].split(':');
+			var hpo_id = hpoIdArray[0] + "_" + hpoIdArray[1];
+			$("#" + tagId).text(hpo_term);
+			$("#" + tagId).find('.hpo-entity').attr('hpo_term', hpo_term);
+			$("#" + tagId).find('.hpo-entity').attr('hpo_id', hpo_id);
+			updateTermsInSession(start, length, hpo_id, hpo_term);
+			$('#searchPopup').removeClass('visible').addClass('hidden');
+		}
 	});
 }

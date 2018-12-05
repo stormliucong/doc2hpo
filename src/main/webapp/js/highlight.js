@@ -171,7 +171,8 @@ function processEachTag(node, range, parsingJson) {
 				$(node).find('span.hpo-entity').on('click', function(e) {
 					$('#HpoNameEntity').text($(this).attr('id'));
 					// detach events.
-
+					$('#selectedResult').val(
+							'NORESULTS' + ';;;' + 'NORESULTS');
 					$(this).popup({
 						popup : $('#searchPopup'),
 						on : 'click',
