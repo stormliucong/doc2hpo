@@ -5,17 +5,17 @@ function uiSearch() {
 				type : 'standard',
 				minCharacters : 3,
 				apiSettings : {
-					onResponse : function(githubResponse) {
+					onResponse : function(res) {
 						var response = {
 							results : []
 						};
 						// translate GitHub API response to work with search
-						$.each(githubResponse.terms, function(index, item) {
+						$.each(res.terms, function(index, item) {
 							var maxResults = 20;
 							if (index >= maxResults) {
 								return false;
 							}
-							// add result to category
+							// * result to category
 							response.results.push({
 								title : item.name,
 								description : item.id

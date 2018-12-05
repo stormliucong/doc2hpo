@@ -1,4 +1,7 @@
 // custermized js.
+var keys = {};
+window.onkeydown = function(e) { keys[e.keyCode] = true;}
+window.onkeyup = function(e) { keys[e.keyCode] = false;}
 
 $(document).ready(onload());
 

@@ -163,18 +163,46 @@
 	<div class="html ui top attached segment" id="parsingResultsPanel"
 		style="display: none">
 		<div class="ui top attached label">Parsing Results</div>
+
 		<div class="row">
 			<div class="ui two column very relaxed stackable divided grid">
-				<div class="ten wide column">
-					<div class="ui raised segment">
-						<p id="parsingResults" style="white-space: pre-wrap">Pellentesque habitant morbi tristique
-							senectus et netus et malesuada fames ac turpis egestas.
-							Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit
-							amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
-							ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+				<div class="eleven wide column">
+					<div class="ui three top attached steps">
+						<div class="step">
+							<i class="mouse pointer icon"></i>
+							<div class="content">
+								<div class="title">Highlight</div>
+								<div class="description">Press q and use mouse to select
+									the context</div>
+							</div>
+						</div>
+						<div class="step">
+							<i class="hand pointer outline icon"></i>
+							<div class="content">
+								<div class="title">Cancel</div>
+								<div class="description">double click to cancel the
+									highlighted context</div>
+							</div>
+						</div>
+						<div class="step">
+							<i class="plus square outline icon"></i>
+							<div class="content">
+								<div class="title">Search</div>
+								<div class="description">click dark green box to search
+									desired HPO terms</div>
+							</div>
+						</div>
+					</div>
+					<div class="ui segment">
+						<p id="parsingResults" style="white-space: pre-wrap">Pellentesque
+							habitant morbi tristique senectus et netus et malesuada fames ac
+							turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies
+							eget, tempor sit amet, ante. Donec eu libero sit amet quam
+							egestas semper. Aenean ultricies mi vitae est. Mauris placerat
+							eleifend leo.</p>
 					</div>
 				</div>
-				<div class="six wide column">
+				<div class="five wide column">
 					<div class="container" style="padding-bottom: 20px">
 						<table class="ui very basic collapsing celled table"
 							id="shoppingCart" style="width: 100%">
@@ -190,13 +218,13 @@
 					<div class="row" style="padding-bottom: 20px">
 						<div class="ui buttons" id="buttonGroups">
 
-							<button class="ui button" id="copyColumnButton">Copy
+							<button class="ui button" id="copyColumnButton" data-tooltip="Copy the first column as Phenolyzer Input">Copy
 								terms</button>
 							<div class="or"></div>
 						</div>
 					</div>
 					<div class="row">
-						<div class="ui blue labeled icon button" id="phenolyzerButton">
+						<div class="ui blue labeled icon button" id="phenolyzerButton" data-tooltip="Redirect to Phenolyzer interface" data-position="right center">
 							Next <i class="right arrow icon"></i>
 						</div>
 

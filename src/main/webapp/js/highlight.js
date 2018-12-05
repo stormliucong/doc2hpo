@@ -1,53 +1,76 @@
 function highlightMouseSelected() {
-	$("#parsingResults").bind(
-			'mouseup',
-			function() {
-				if (typeof window.getSelection != "undefined") {
-					sel = window.getSelection();
-					text = sel + '';
-					if (text.length < 5){
-						return;
-					}
-				} else if (typeof document.selection != "undefined"
-					&& (sel = document.selection).type != "Control") {
-					text = sel + '';
-					if (text.length < 5){
-						return;
-					}
-				}
-				var start = 0;
-				var end = 0;
-				var sel, range, priorRange, text;
-				var context = document.querySelector("#parsingResults");
-				var instance = new Mark(context);
-				$('.hpo-entity').remove();
-				if (typeof window.getSelection != "undefined") {
-					sel = window.getSelection();
-					text = sel + '';
-					range = window.getSelection().getRangeAt(0);
-					ref = document.getElementById("parsingResults")
-					priorRange = range.cloneRange();
-					priorRange.selectNodeContents(context);
-					priorRange.setEnd(range.startContainer,range.startOffset);
-					start = priorRange.toString().length;
-					end = start + (sel + '').length;
+	// var key = {};
+	// windows.ke
+	// $("#parsingResults").mousedown(function (e) {
+	// if (e.ctrlKey || e.shiftKey) {
+	// // For non-IE browsers
+	// e.preventDefault();
+	//
+	// // For IE
+	// if ($.browser.msie) {
+	// this.onselectstart = function () { return false; };
+	// var me = this; // capture in a closure
+	// window.setTimeout(function () { me.onselectstart = null; }, 0);
+	// }
+	// }
+	// });
 
+	$("#parsingResults")
+			.bind(
+					'mouseup',
+					function(e) {
+						if (keys[81]) {
+							// Press Q
+							if (typeof window.getSelection != "undefined") {
+								sel = window.getSelection();
+								text = sel + '';
+								// if (text.length < 5) {
+								// return;
+								// }
+							} else if (typeof document.selection != "undefined"
+									&& (sel = document.selection).type != "Control") {
+								text = sel + '';
+								if (text.length < 5) {
+									return;
+								}
+							}
+							var start = 0;
+							var end = 0;
+							var sel, range, priorRange, text;
+							var context = document
+									.querySelector("#parsingResults");
+							var instance = new Mark(context);
+							$('.hpo-entity').remove();
+							if (typeof window.getSelection != "undefined") {
+								sel = window.getSelection();
+								text = sel + '';
+								range = window.getSelection().getRangeAt(0);
+								ref = document.getElementById("parsingResults")
+								priorRange = range.cloneRange();
+								priorRange.selectNodeContents(context);
+								priorRange.setEnd(range.startContainer,
+										range.startOffset);
+								start = priorRange.toString().length;
+								end = start + (sel + '').length;
 
-				} else if (typeof document.selection != "undefined"
-						&& (sel = document.selection).type != "Control") {
-					text = sel + '';
-					range = sel.createRange();
-					priorRange = document.body.createTextRange();
-					priorRange.moveToElementText(context);
-					priorRange.setEndPoint("EndToStart", range);
-					start = priorRange.text.length;
-					end = start + (sel + '').length;
+							} else if (typeof document.selection != "undefined"
+									&& (sel = document.selection).type != "Control") {
+								text = sel + '';
+								range = sel.createRange();
+								priorRange = document.body.createTextRange();
+								priorRange.moveToElementText(context);
+								priorRange.setEndPoint("EndToStart", range);
+								start = priorRange.text.length;
+								end = start + (sel + '').length;
 
-				}
-				length = end - start + 1;
-				addTermsInSessionWithHighlight(start, length, 'ADD', 'ADD');
-			});
-	
+							}
+							length = end - start + 1;
+							addTermsInSessionWithHighlight(start, length,
+									'ADD', 'ADD');
+						}
+
+					});
+
 }
 
 function highlight(parsingJson) {
@@ -120,8 +143,9 @@ function processEachTag(node, range, parsingJson) {
 				$(node).find('.hpo-entity').attr('hpo_id', hpo_id);
 
 				$(node).on(
-						'click',
-						function() {
+						'dblclick',
+						function(e) {
+
 							// alert( "Handler for .click() called." );
 							$(this).toggleClass("data-entity");
 							$(this).find('.hpo-entity').toggle();
@@ -144,19 +168,18 @@ function processEachTag(node, range, parsingJson) {
 
 						});
 
-				$(node)
-						.find('span.hpo-entity')
-						.on(
-								'click',
-								function(e) {
-									$('#HpoNameEntity')
-											.text($(this).attr('id'));
-									$(this).popup({
-										popup : $('#searchPopup'),
-										on : 'click',
-									}).popup('show');
-									e.stopPropagation(); // do nothing.
-								});
+				$(node).find('span.hpo-entity').on('click', function(e) {
+					$('#HpoNameEntity').text($(this).attr('id'));
+					// detach events.
+
+					$(this).popup({
+						popup : $('#searchPopup'),
+						on : 'click',
+					}).popup('show');
+					e.stopPropagation(); // do nothing.
+
+					// attach again.
+				});
 			}
 		}
 	}
