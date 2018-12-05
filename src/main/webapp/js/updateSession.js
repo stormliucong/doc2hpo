@@ -16,6 +16,8 @@ function updateTermsInSession(start, length, hpo_id, hpo_term) {
 			border : '1px solid khaki'
 		}
 	});
+	var t = $(window).scrollTop();
+
 	$.ajax({
 		headers : {
 			'Accept' : 'application/json',
@@ -33,9 +35,8 @@ function updateTermsInSession(start, length, hpo_id, hpo_term) {
 			} else {
 				console.log(terms);
 				updateTable(terms);
-				var t = $(window).scrollTop();
 				$('body,html').animate({
-					'scrollTop' : t + 1000
+					'scrollTop' : t
 				}, 200)
 			}
 		},
@@ -63,6 +64,9 @@ function deleteTermsInSession(start, length, hpo_id, hpo_term) {
 			border : '1px solid khaki'
 		}
 	});
+	
+	var t = $(window).scrollTop();
+
 	$.ajax({
 		headers : {
 			'Accept' : 'application/json',
@@ -80,9 +84,8 @@ function deleteTermsInSession(start, length, hpo_id, hpo_term) {
 			} else {
 				console.log(terms);
 				updateTable(terms);
-				var t = $(window).scrollTop();
 				$('body,html').animate({
-					'scrollTop' : t + 1000
+					'scrollTop' : t
 				}, 200)
 				$("#phenolyzer").show();
 			}
@@ -112,6 +115,8 @@ function addTermsInSession(start, length, hpo_id, hpo_term) {
 			border : '1px solid khaki'
 		}
 	});
+	var t = $(window).scrollTop();
+
 	$.ajax({
 		headers : {
 			'Accept' : 'application/json',
@@ -129,9 +134,8 @@ function addTermsInSession(start, length, hpo_id, hpo_term) {
 			} else {
 				console.log(terms);
 				updateTable(terms);
-				var t = $(window).scrollTop();
 				$('body,html').animate({
-					'scrollTop' : t + 1000
+					'scrollTop' : t
 				}, 200)
 				$("#phenolyzer").show();
 			}
@@ -161,6 +165,9 @@ function addTermsInSessionWithHighlight(start, length, hpo_id, hpo_term) {
 			border : '1px solid khaki'
 		}
 	});
+	
+	var t = $(window).scrollTop();
+
 	$.ajax({
 		headers : {
 			'Accept' : 'application/json',
@@ -179,6 +186,10 @@ function addTermsInSessionWithHighlight(start, length, hpo_id, hpo_term) {
 				console.log(terms);
 				highlight(terms);
 				updateTable(terms);
+				$('body,html').animate({
+					'scrollTop' : t
+				}, 200)
+				$("#phenolyzer").show();
 			}
 			return terms
 

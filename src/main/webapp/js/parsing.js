@@ -1,10 +1,7 @@
 function parse() {
 	var basePath = $('#basePath').val();
 	var note = $("#note").val();
-	console.log("1",note);
 	note = formatText(note);
-	console.log("2",note);
-
 
 	var value = $("#parsingEngine").val();
 	
@@ -98,6 +95,7 @@ function parseACT(note) {
 		dataType : "json",
 		success : function(data) {
 			var parsingJson = data["hmName2Id"];
+			parsingJson = longestParsingJson(parsingJson);
 			if (jQuery.isEmptyObject(parsingJson)) {
 				alert("No HPO terms found by parser!");
 			} else {

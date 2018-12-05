@@ -30,7 +30,5 @@ public class ParsingResults {
 	public void setHpoName(String hpoName) {
 		this.hpoName = hpoName;
 	}
-	
-	
 
 }

@@ -23,3 +23,39 @@ function formatText(s){
 	s = normalizeSpace(s);
 	return s;
 }
+
+function longestParsingJson(parsingJson){
+	// sort by start first.
+	parsingJson = parsingJson.sort(function(a, b) {
+	    return a.start - b.start;
+	});
+	console.log(parsingJson);
+	// Create an empty stack of intervals 
+    var s = []; 
+    
+    // push the first interval to stack 
+    s.push(parsingJson[0]); 
+
+    // loop and compare to the previous one
+	for(var i = 1; i <= parsingJson.length - 1; i++){
+		// get interval from stack top 
+        var top = s[s.length-1];
+        // if current interval is not overlapping with stack top, 
+        // push it to the stack 
+        if ( (top.start + top.length) < parsingJson[i].start) {
+            s.push(parsingJson[i]); 
+        }
+        
+        // Otherwise select the longest one.
+        else{
+        	if(top.length < parsingJson[i].length){
+        		s.pop();
+        		s.push(parsingJson[i]); 
+        	}else{
+        		continue;
+        	}
+        } 
+	}
+	console.log(s);
+	return s;
+}

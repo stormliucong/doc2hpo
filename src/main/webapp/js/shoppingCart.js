@@ -95,6 +95,5 @@ function termCounting(listOfTerms) {
 			"count" : countTerms[hpoId]['count']
 		});
 	}
-	console.log(result);
 	return result;
 }
