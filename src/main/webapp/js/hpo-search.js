@@ -52,4 +52,7 @@ function uiSearch() {
 			updateTermsInSession(start, length, hpo_id, hpo_term);
 		}
 	});
+	$('#closeAddHpoTerm').click(function(e) {
+		$('#searchPopup').removeClass('visible').addClass('hidden');
+	});
 }

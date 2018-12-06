@@ -203,13 +203,15 @@
 					</div>
 				</div>
 
-				<div class="ui custom popup top left transition hidden"
+				<div class="ui custom popup top left transition flowing hidden "
 					id="searchPopup">
 					<div style="display: none" id="HpoNameEntity"></div>
 					<div class="ui fluid search" id='hpoSearch'>
 						<input class="prompt" type="text" placeholder="Search HPO...">
+						<span><i class="large plus square outline icon" id="addHpoTerm"></i>
+						<i class="large red window close link icon" id="closeAddHpoTerm"></i></span>
 						<div style="display: none" id="selectedResult"></div>
-						<i class="plus circle icon" id="addHpoTerm"></i>
+						
 					</div>
 				</div>
 				<div class="five wide column">
