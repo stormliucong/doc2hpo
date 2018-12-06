@@ -30,7 +30,8 @@ import opennlp.tools.sentdetect.SentenceModel;
 public class ACTrieParser {
 	AhoCorasickDoubleArrayTrie<String> acdat = new AhoCorasickDoubleArrayTrie<String>();
 	HashMap<String,String> hpodic=new HashMap<String,String>();
-
+	private HpoCleaner cleaner;
+	
 	public ACTrieParser() {
 		try {
 			TreeMap<String, String> map = new TreeMap<String, String>();
@@ -48,7 +49,8 @@ public class ACTrieParser {
 			// TODO: handle exception
 			System.err.println(e);
 		}
-		
+		cleaner = new HpoCleaner();
+
 	}
 
 	// public String parse(String par){
@@ -105,6 +107,7 @@ public class ACTrieParser {
 			}
 		}
 		//System.out.println("text2="+text2);
+		pResults = cleaner.getPhenotypeOnly(pResults);
 		return pResults;
 	}
 

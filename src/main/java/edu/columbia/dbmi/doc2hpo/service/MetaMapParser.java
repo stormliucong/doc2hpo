@@ -35,6 +35,7 @@ import gov.nih.nlm.nls.metamap.Utterance;
 public class MetaMapParser {
 	String metamapBinPath;
 	private Obo o;
+	private HpoCleaner cleaner;
 
 	public static void main(String[] args) {
 //		try {
@@ -105,6 +106,8 @@ public class MetaMapParser {
 //		System.out.println(mmpBin);
 //		this.metamapBinPath = mmpBin;
 		o = new Obo();
+		cleaner = new HpoCleaner();
+		
 	}
 
 	public String runCmdMetamap(String input, List<String> theOptions) {
@@ -466,6 +469,7 @@ public class MetaMapParser {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		pResults = cleaner.getPhenotypeOnly(pResults);
 		return pResults;
 	}
 

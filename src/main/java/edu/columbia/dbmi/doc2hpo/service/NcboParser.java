@@ -11,7 +11,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -24,17 +23,22 @@ public class NcboParser {
 	public static String REST_URL = "http://data.bioontology.org";
 	public String API_KEY = "";
 	public String PROXY = "";
-	int PORT;
+	public String PORT;
 	public ObjectMapper mapper = new ObjectMapper();
+	private HpoCleaner cleaner;
+
 
 	public NcboParser(String apikey) {
 		this.API_KEY = apikey;
+		this.cleaner = new HpoCleaner();
 	}
 	
-	public NcboParser(String apikey, String proxy, int port) {
+	public NcboParser(String apikey, String proxy, String port) {
 		this.API_KEY = apikey;
 		this.PROXY = proxy;
 		this.PORT = port;
+		this.cleaner = new HpoCleaner();
+
 	}
 
 	private String get(String urlToGet) {
@@ -44,19 +48,37 @@ public class NcboParser {
 		String line;
 		String result = "";
 		try {
-			// Proxy instance http_proxy="bcp3.cumc.columbia.edu:8080"
-			Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(this.PROXY, this.PORT));
-			System.out.println(proxy);
-			url = new URL(urlToGet);
-			conn = (HttpURLConnection) url.openConnection(proxy);
-			conn.setRequestMethod("GET");
-			conn.setRequestProperty("Authorization", "apikey token=" + this.API_KEY);
-			conn.setRequestProperty("Accept", "application/json");
-			rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			while ((line = rd.readLine()) != null) {
-				result += line;
+			if(this.PROXY.equals("")) {
+				url = new URL(urlToGet);
+				conn = (HttpURLConnection) url.openConnection();
+				conn.setRequestMethod("GET");
+				conn.setRequestProperty("Authorization", "apikey token=" + this.API_KEY);
+				conn.setRequestProperty("Accept", "application/json");
+				rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+				while ((line = rd.readLine()) != null) {
+					result += line;
+				}
+				rd.close();
+				conn.disconnect();
+
+			}else {
+				// Proxy instance http_proxy="bcp3.cumc.columbia.edu:8080"
+				int PORT_INT = Integer.parseInt(this.PORT);
+				Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(this.PROXY, PORT_INT));
+				url = new URL(urlToGet);
+				conn = (HttpURLConnection) url.openConnection(proxy);
+				conn.setRequestMethod("GET");
+				conn.setRequestProperty("Authorization", "apikey token=" + this.API_KEY);
+				conn.setRequestProperty("Accept", "application/json");
+				rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+				while ((line = rd.readLine()) != null) {
+					result += line;
+				}
+				rd.close();
+				conn.disconnect();
+
 			}
-			rd.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -74,33 +96,59 @@ public class NcboParser {
 		String line;
 		String result = "";
 		try {
-			// Proxy instance http_proxy="bcp3.cumc.columbia.edu:8080"
-			Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(this.PROXY, this.PORT));
-			System.out.println(proxy);
-			System.out.println(this.API_KEY);
-			url = new URL(urlToGet);
-			conn = (HttpURLConnection) url.openConnection(proxy);
-			conn.setDoOutput(true);
-			conn.setDoInput(true);
-			conn.setInstanceFollowRedirects(false);
-			conn.setRequestMethod("POST");
-			conn.setRequestProperty("Authorization", "apikey token=" + this.API_KEY);
-			conn.setRequestProperty("Accept", "application/json");
-			conn.setRequestProperty("charset", "utf-8");
-			conn.setUseCaches(false);
-			conn.setRequestProperty("Content-Length", Integer.toString(postDataLength));
+			if(this.PROXY.equals("")) {
+				url = new URL(urlToGet);
+				conn = (HttpURLConnection) url.openConnection();
+				conn.setDoOutput(true);
+				conn.setDoInput(true);
+				conn.setInstanceFollowRedirects(false);
+				conn.setRequestMethod("POST");
+				conn.setRequestProperty("Authorization", "apikey token=" + this.API_KEY);
+				conn.setRequestProperty("Accept", "application/json");
+				conn.setRequestProperty("charset", "utf-8");
+				conn.setUseCaches(false);
+				conn.setRequestProperty("Content-Length", Integer.toString(postDataLength));
 
-			DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
-			wr.writeBytes(urlParameters);
-			wr.flush();
-			wr.close();
-			conn.disconnect();
+				DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
+				wr.writeBytes(urlParameters);
+				wr.flush();
+				wr.close();
+				conn.disconnect();
 
-			BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			while ((line = rd.readLine()) != null) {
-				result += line;
+				BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+				while ((line = rd.readLine()) != null) {
+					result += line;
+				}
+				rd.close();
+			}else {
+				// Proxy instance http_proxy="bcp3.cumc.columbia.edu:8080"
+				int PORT_INT = Integer.parseInt(this.PORT);
+				Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(this.PROXY, PORT_INT));
+				url = new URL(urlToGet);
+				conn = (HttpURLConnection) url.openConnection(proxy);
+				conn.setDoOutput(true);
+				conn.setDoInput(true);
+				conn.setInstanceFollowRedirects(false);
+				conn.setRequestMethod("POST");
+				conn.setRequestProperty("Authorization", "apikey token=" + this.API_KEY);
+				conn.setRequestProperty("Accept", "application/json");
+				conn.setRequestProperty("charset", "utf-8");
+				conn.setUseCaches(false);
+				conn.setRequestProperty("Content-Length", Integer.toString(postDataLength));
+
+				DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
+				wr.writeBytes(urlParameters);
+				wr.flush();
+				wr.close();
+				conn.disconnect();
+
+				BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+				while ((line = rd.readLine()) != null) {
+					result += line;
+				}
+				rd.close();
 			}
-			rd.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -120,35 +168,10 @@ public class NcboParser {
 		return root;
 	}
 
-//    private void printAnnotations(JsonNode annotations) {
-//        for (JsonNode annotation : annotations) {
-//            // Get the details for the class that was found in the annotation and print
-//            JsonNode classDetails = jsonToNode(get(annotation.get("annotatedClass").get("links").get("self").asText()));
-//            System.out.println("Class details");
-//            System.out.println("\tid: " + classDetails.get("@id").asText());
-//            System.out.println("\tprefLabel: " + classDetails.get("prefLabel").asText());
-//            System.out.println("\tontology: " + classDetails.get("links").get("ontology").asText());
-//            System.out.println("\n");
-//
-//            JsonNode hierarchy = annotation.get("hierarchy");
-//            // If we have hierarchy annotations, print the related class information as well
-//            if (hierarchy.isArray() && hierarchy.elements().hasNext()) {
-//                System.out.println("\tHierarchy annotations");
-//                for (JsonNode hierarchyAnnotation : hierarchy) {
-//                    classDetails = jsonToNode(get(hierarchyAnnotation.get("annotatedClass").get("links").get("self").asText()));
-//                    System.out.println("\t\tClass details");
-//                    System.out.println("\t\t\tid: " + classDetails.get("@id").asText());
-//                    System.out.println("\t\t\tprefLabel: " + classDetails.get("prefLabel").asText());
-//                    System.out.println("\t\t\tontology: " + classDetails.get("links").get("ontology").asText());
-//                }
-//            }
-//        }
-//    }
 
 	public List<ParsingResults> parse(String content, List<String> theOptions) {
 		List<ParsingResults> pResults = new ArrayList<ParsingResults>();
 		String urlParameters = String.join("&", theOptions);
-		System.out.println(urlParameters + "!!!");
 		JsonNode annotations;
 		String textToAnnotate;
 		try {
@@ -162,7 +185,6 @@ public class NcboParser {
 				// Get the details for the class that was found in the annotation and print
 				JsonNode classDetails = jsonToNode(
 						get(annotation.get("annotatedClass").get("links").get("self").asText()));
-				System.out.println("==" + classDetails.get("@id").asText() + "==");
 				String[] Ids = classDetails.get("@id").asText().split("/");
 				String Id = Ids[Ids.length - 1];
 				String name = classDetails.get("prefLabel").asText();
@@ -179,29 +201,10 @@ public class NcboParser {
 					pr.setStart(start);
 					pr.setLength(length);
 					pResults.add(pr);
-					System.out.println("myInfo:" + "\t" + start + "\t" + to + "\t" + Id + "\t" + name);
 				}
-
-//		            idName.put(name, Id);
-//		            System.out.println("Class details");
-//		            System.out.println("\tid: " + classDetails.get("@id").asText());
-//		            System.out.println("\tprefLabel: " + classDetails.get("prefLabel").asText());
-//		            System.out.println("\tontology: " + classDetails.get("links").get("ontology").asText());
-//		            System.out.println("\n");
-
-//		            JsonNode hierarchy = annotation.get("hierarchy");
-				// If we have hierarchy annotations, print the related class information as well
-//		            if (hierarchy.isArray() && hierarchy.elements().hasNext()) {
-//		                System.out.println("\tHierarchy annotations");
-//		                for (JsonNode hierarchyAnnotation : hierarchy) {
-//		                    classDetails = jsonToNode(get(hierarchyAnnotation.get("annotatedClass").get("links").get("self").asText()));
-//		                    System.out.println("\t\tClass details");
-//		                    System.out.println("\t\t\tid: " + classDetails.get("@id").asText());
-//		                    System.out.println("\t\t\tprefLabel: " + classDetails.get("prefLabel").asText());
-//		                    System.out.println("\t\t\tontology: " + classDetails.get("links").get("ontology").asText());
-//		                }
-//		            }
 			}
+			pResults = cleaner.changeHpoIdComma(pResults);
+			pResults = cleaner.getPhenotypeOnly(pResults);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
