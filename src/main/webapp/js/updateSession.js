@@ -45,6 +45,8 @@ function updateTermsInSession(start, length, hpo_id, hpo_term) {
 			console.log(url);
 		}
 	});
+	$('#searchPopup').removeClass('visible').addClass('hidden');
+
 
 }
 
@@ -98,6 +100,8 @@ function deleteTermsInSession(start, length, hpo_id, hpo_term) {
 			console.log(url);
 		}
 	});
+	$('#searchPopup').removeClass('visible').addClass('hidden');
+
 }
 
 function addTermsInSession(start, length, hpo_id, hpo_term) {
@@ -149,6 +153,8 @@ function addTermsInSession(start, length, hpo_id, hpo_term) {
 			console.log(url);
 		}
 	});
+	$('#searchPopup').removeClass('visible').addClass('hidden');
+
 }
 
 function addTermsInSessionWithHighlight(start, length, hpo_id, hpo_term) {
@@ -201,4 +207,5 @@ function addTermsInSessionWithHighlight(start, length, hpo_id, hpo_term) {
 			console.log(url);
 		}
 	});
+	$('#searchPopup').removeClass('visible').addClass('hidden');
 }

@@ -50,7 +50,6 @@ function uiSearch() {
 			$("#" + tagId).find('.hpo-entity').attr('hpo_term', hpo_term);
 			$("#" + tagId).find('.hpo-entity').attr('hpo_id', hpo_id);
 			updateTermsInSession(start, length, hpo_id, hpo_term);
-			$('#searchPopup').removeClass('visible').addClass('hidden');
 		}
 	});
 }
