@@ -51,4 +51,23 @@ public class HpoCleaner {
 		}
 		return pResults;
 	}
+
+	public List<ParsingResults> removeAcrny(List<ParsingResults> pResults) {
+		// TODO Auto-generated method stub
+		List<ParsingResults> pResultsNew = new ArrayList<ParsingResults>();
+
+		ArrayList<String> acryn = new ArrayList<String>();
+		acryn.add("mi");
+		acryn.add("bo");
+		acryn.add("gist");
+		acryn.add("tia");
+
+		for(ParsingResults result : pResults) {
+			String hpoName = result.getHpoName();
+			if (acryn.contains(hpoName) == false) {
+				pResultsNew.add(result);
+			}
+		}
+		return pResultsNew;
+	}
 }
