@@ -13,7 +13,7 @@ function updateTable(parsingJson) {
 									"data" : "hpoid",
 									"render" : function(data, type, row, meta) {
 										if (type === 'display') {
-											var url_base = 'http://compbio.charite.de/hpoweb/showterm?id=';
+											var url_base = 'https://hpo.jax.org/app/browse/term/';
 											data = '<a href="' + url_base
 													+ data
 													+ '" target="_blank">'

@@ -9,6 +9,7 @@ function uiSearch() {
 						var response = {
 							results : []
 						};
+						var url_base = 'https://hpo.jax.org/app/browse/term/';
 						// translate GitHub API response to work with search
 						$.each(res.terms, function(index, item) {
 							var maxResults = 20;
@@ -16,9 +17,13 @@ function uiSearch() {
 								return false;
 							}
 							// * result to category
+							var href = url_base + item.id;
 							response.results.push({
-								title : item.name,
-								description : item.id
+								title : item.name + '<div class="ui right floated basic icon button" onClick="window.open(\'' + href + '\', \'_blank\', \'location=yes,height=600,width=600,scrollbars=yes,status=yes\')" ><i class="zoom icon"></i></div>',
+								description : item.id 
+								
+						
+//								url : 'https://hpo.jax.org/app/browse/term/' + item.id
 							});
 						});
 
@@ -26,6 +31,11 @@ function uiSearch() {
 					},
 					url : 'https://hpo.jax.org/api/hpo/search?q={query}'
 				},
+				fields: {
+			        results: 'results',
+			        title: 'title',
+			        actionURL: "url"
+			    },
 				onSelect : function(result) {
 					$('#selectedResult').val(
 							result.title + ';;;' + result.description);
