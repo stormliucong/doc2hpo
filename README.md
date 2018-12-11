@@ -33,7 +33,7 @@ doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO
 ## Versioning
 0.15.0
 
-## New feature under development
+## New features under development
 - Add context based annotation in backend
 - Using different color to seperate the category (e.g. family, negation, education) in frontend
 - Add more parsers
