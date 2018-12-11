@@ -41,6 +41,9 @@ doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO
   - cTakes http://ctakes.apache.org/
   - ClinPhen http://bejerano.stanford.edu/clinphen/
 
+## Publications
+under preparation
+
 ## Authors
 Cong Liu, Chi Yuan, Kai Wang, Chunhua Weng
 stormliucong@gmail.com
