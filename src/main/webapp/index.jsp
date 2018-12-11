@@ -203,15 +203,17 @@
 					</div>
 				</div>
 
+				<!--  POP UP -->
 				<div class="ui custom popup top left transition flowing hidden "
 					id="searchPopup">
 					<div style="display: none" id="HpoNameEntity"></div>
 					<div class="ui fluid search" id='hpoSearch'>
 						<input class="prompt" type="text" placeholder="Search HPO...">
-						<span><i class="large plus square outline icon" id="addHpoTerm"></i>
-						<i class="large red window close link icon" id="closeAddHpoTerm"></i></span>
+						<span><i class="large plus square outline icon"
+							id="addHpoTerm"></i> <i class="large red window close link icon"
+							id="closeAddHpoTerm"></i></span>
 						<div style="display: none" id="selectedResult"></div>
-						
+
 					</div>
 				</div>
 				<div class="five wide column">
@@ -250,9 +252,28 @@
 			</div>
 		</div>
 	</div>
+	<!-- agreement  -->
 
+	<div class="ui modal" id="phiAgreement">
+		<div class="header">Doc2Hpo Agreement</div>
+		<div class="content">
+			<p>1. Only de-identified notes could be uploaded</p>
+			<p>2. Doc2Hpo don't take any responsibility for protecting PHI
+				data</p>
+			<p>
+				3. If you want to install your internal Doc2Hpo please visit the <a
+					href="https://github.com/stormliucong/doc2hpo"> source </a>
+			</p>
 
-	<!--  POP UP -->
+		</div>
+		<div class="actions">
+			<div class="ui black deny button" id="rejectAgreement">Reject</div>
+			<div class="ui positive right labeled icon button">
+				Accept<i class="checkmark icon"></i>
+			</div>
+		</div>
+	</div>
+
 	<div class="ui inverted vertical footer segment form-page">
 		<div class="ui center aligned container">Chunhua Weng Lab 2018.
 			All Rights Reserved</div>

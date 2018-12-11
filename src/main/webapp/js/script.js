@@ -1,7 +1,11 @@
 // custermized js.
 var keys = {};
-window.onkeydown = function(e) { keys[e.keyCode] = true;}
-window.onkeyup = function(e) { keys[e.keyCode] = false;}
+window.onkeydown = function(e) {
+	keys[e.keyCode] = true;
+}
+window.onkeyup = function(e) {
+	keys[e.keyCode] = false;
+}
 
 $(document).ready(onload());
 
@@ -11,6 +15,21 @@ function onload() {
 	formControl();
 	uiSearch();
 	highlightMouseSelected();
+	showPhiAgreement()
+}
+
+function showPhiAgreement() {
+	$('#phiAgreement')
+			.modal(
+					'setting',
+					{
+						closable : false,
+						onDeny : function() {
+//							$('#phiAgreementWarning').modal('show');
+							alert('Without accepting this terms & conditions you can\'t use public Doc2Hpo.');
+							return false;
+						},
+					}).modal('show');
 }
 
 function semantiUIInit() {
@@ -61,13 +80,12 @@ function formControl() {
 			parse();
 		}
 	});
-	
-	$("#phenolyzerButton").on("click",function() {
+
+	$("#phenolyzerButton").on("click", function() {
 		window.open('http://phenolyzer.wglab.org/', '_blank');
 	});
-	
-	$("#copyColumnButton").on("click",function() {
+
+	$("#copyColumnButton").on("click", function() {
 		copyColumn();
 	})
 }
-

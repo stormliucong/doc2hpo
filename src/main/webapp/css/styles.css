@@ -122,3 +122,14 @@ a {
 #addHpoTerm {
 	cursor:pointer
 }
+
+/* correct modal bug of semantic ui */
+.ui.modal {
+width: calc(100% - 50px) !important;
+margin-left: 25px !important;
+margin-top: 25px !important;
+}
+
+.ui.page.modals.dimmer.transition.visible.active {
+display:flex !important;
+}
