@@ -20,6 +20,7 @@ doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO
   * Follow the instruction here https://metamap.nlm.nih.gov/Docs/README_javaapi.shtml#Using%20the%20MetaMap%20server
 - Install ncbo bioportal docker image (https://github.com/stormliucong/docker-compose-bioportal)
   * add a proxy setup when build the docker container if necessary (https://docs.docker.com/network/proxy/)
+  * change docker-compose-bioportal/bioportal-api/Dockerfile `bundle config git.allow_insecure true install` if necessary
 - Change MetamapBinPath in `doc2hpo/src/main/webapp/WEB-INF/config.properties`
 - Please change Api key for ncbo annotator in `doc2hpo/src/main/webapp/WEB-INF/config.properties`
   * You need to register a free account to get api key https://bioportal.bioontology.org/account
