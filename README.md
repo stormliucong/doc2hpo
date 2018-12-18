@@ -22,7 +22,8 @@ doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO
   * add a proxy setup when build the docker container if necessary (https://docs.docker.com/network/proxy/)
   * change docker-compose-bioportal/bioportal-api/Dockerfile `bundle config git.allow_insecure true install` if necessary
   * add proxy for maven if necessart docker-compose-bioportal/bioportal-annotator-proxy/Dockerfile (http://maven.apache.org/guides/mini/guide-proxies.html)
-  * change tomcat link if necessary (https://archive.apache.org/dist/tomcat/tomcat-6/v6.0.53/bin/apache-tomcat-6.0.53.tar.gz)
+  * change war file to `/annotators/sifr-bioportal-annotator-proxy/target/annotator.war` if necessary in docker-compose-bioportal/bioportal-annotator-proxy/Dockerfile 
+  * change tomcat link if necessary (https://archive.apache.org/dist/tomcat/tomcat-6/v6.0.53/bin/apache-tomcat-6.0.53.tar.gz) in docker-compose-bioportal/bioportal-annotator-proxy/Dockerfile
 - Change MetamapBinPath in `doc2hpo/src/main/webapp/WEB-INF/config.properties`
 - Please change Api key for ncbo annotator in `doc2hpo/src/main/webapp/WEB-INF/config.properties`
   * You need to register a free account to get api key https://bioportal.bioontology.org/account
