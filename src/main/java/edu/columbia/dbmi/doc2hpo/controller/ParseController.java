@@ -39,15 +39,22 @@ public class ParseController {
 	
 	@Value("#{configProperties['Port']}")
 	private String port;
+	
+	@Value("#{configProperties['NcboUrl']}")
+	private String ncboUrl;
 
 	@PostConstruct
 	public void init() {
 		this.mmp = new MetaMapParser();
 		this.actp = new ACTrieParser();
-		if(proxy.equals("null")) {
-			this.ncbo = new NcboParser(NcboApiKey);
+		if(this.ncboUrl.trim().toLowerCase().equals("null")) {
+			this.ncboUrl = "http://data.bioontology.org"; // default using public ncbo api.
+		}
+		System.out.println(this.ncboUrl);
+		if(this.proxy.trim().toLowerCase().equals("null")) {
+			this.ncbo = new NcboParser(this.NcboApiKey,this.ncboUrl);
 		}else {
-			this.ncbo = new NcboParser(NcboApiKey,proxy,port);
+			this.ncbo = new NcboParser(this.NcboApiKey,this.ncboUrl,this.proxy,this.port);
 		}
 	}
 
