@@ -37,6 +37,7 @@ function uiSearch() {
 			        actionURL: "url"
 			    },
 				onSelect : function(result) {
+					result.title = result.title.replace(/^(.+?)<.+?>$/,'$1')
 					$('#selectedResult').val(
 							result.title + ';;;' + result.description);
 				},
