@@ -62,30 +62,46 @@ public class ParseController {
 	@ResponseBody
 	public Map<String, Object> getTerm2(HttpSession httpSession, @RequestBody ParseJob pj) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<ParsingResults> hmName2Id = new ArrayList<ParsingResults>();
-		String content = pj.getNote();
-		
-		hmName2Id = this.actp.parse(this.actp, content);
-		
-		httpSession.setAttribute("hmName2Id", hmName2Id);
-		map.put("hmName2Id", hmName2Id);
-		map.put("hpoOption", false);
+
+		try {
+			List<ParsingResults> hmName2Id = new ArrayList<ParsingResults>();
+			String content = pj.getNote();
+			
+			hmName2Id = this.actp.parse(this.actp, content);
+			
+			httpSession.setAttribute("hmName2Id", hmName2Id);
+			map.put("hmName2Id", hmName2Id);
+			map.put("hpoOption", false);
+			return map;
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("hmName2Id", "ERROR");
+		}
 		return map;
+		
 	}
 
 	@RequestMapping("/ncbo")
 	@ResponseBody
 	public Map<String, Object> getTerm3(HttpSession httpSession, @RequestBody ParseJob pj) throws Exception {
+		
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<ParsingResults> hmName2Id = new ArrayList<ParsingResults>();
-		List<String> theOptions = pj.getOption();
-		String content = pj.getNote();
-		
-		hmName2Id = this.ncbo.parse(content, theOptions);
-		
-		httpSession.setAttribute("hmName2Id", hmName2Id);
-		map.put("hmName2Id", hmName2Id);
-		map.put("hpoOption", false);
+		try {
+			List<ParsingResults> hmName2Id = new ArrayList<ParsingResults>();
+			List<String> theOptions = pj.getOption();
+			String content = pj.getNote();
+			
+			hmName2Id = this.ncbo.parse(content, theOptions);
+			
+			httpSession.setAttribute("hmName2Id", hmName2Id);
+			map.put("hmName2Id", hmName2Id);
+			map.put("hpoOption", false);
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("hmName2Id", "ERROR");
+		}
 		return map;
 	}
 
@@ -93,16 +109,23 @@ public class ParseController {
 	@ResponseBody
 	public Map<String, Object> getTerm1(HttpSession httpSession, @RequestBody ParseJob pj) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<ParsingResults> hmName2Id = new ArrayList<ParsingResults>();
-		List<String> theOptions = pj.getOption();
-		String content = pj.getNote();
-		
-		hmName2Id = this.mmp.parse(content, theOptions);
-		
-		httpSession.setAttribute("hmName2Id", hmName2Id);
-		map.put("hmName2Id", hmName2Id);
-		map.put("hpoOption", false);
+		try {
+			List<ParsingResults> hmName2Id = new ArrayList<ParsingResults>();
+			List<String> theOptions = pj.getOption();
+			String content = pj.getNote();
+			
+			hmName2Id = this.mmp.parse(content, theOptions);
+			
+			httpSession.setAttribute("hmName2Id", hmName2Id);
+			map.put("hmName2Id", hmName2Id);
+			map.put("hpoOption", false);
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("hmName2Id", "ERROR");
+		}
 		return map;
+		
 	}
 	
 }

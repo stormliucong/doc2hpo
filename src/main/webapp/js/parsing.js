@@ -30,10 +30,13 @@ function parseMetamap(note) {
 		},
 	};
 	$.blockUI({
-		message : '<h3><img src="./img/squares.gif" /> Term Parsing...</h3>',
-		css : {
-			border : '1px solid khaki'
-		}
+		message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">Loading...It may take up to few minutes.</div><p></p><p></p><p></p><p></p></div></div>',
+		css: { 
+            border: 'none',
+            '-webkit-border-radius': '40px', 
+            '-moz-border-radius': '40px', 
+            opacity: .5, 
+        },
 	});
 	$.ajax({
 		headers : {
@@ -49,14 +52,17 @@ function parseMetamap(note) {
 			if (jQuery.isEmptyObject(terms)) {
 				alert("No UMLS or HPO terms found!");
 			} else {
-				var hpoOption = data["hpoOption"];
-				highlight(terms);
-				updateTable(terms);
-				var t = $(window).scrollTop();
-				$('body,html').animate({
-					'scrollTop' : t + 1000
-				}, 200)
-				$("#phenolyzer").show();
+				if(terms == 'ERROR'){
+					alert("ERROR: Something wrong with metamap engine. Please check the configuration on server end and make sure metamap server is running.");
+				}else{
+					highlight(terms);
+					updateTable(terms);
+					var t = $(window).scrollTop();
+					$('body,html').animate({
+						'scrollTop' : t + 1000
+					}, 200)
+					$("#phenolyzer").show();
+				}
 			}
 
 		},
@@ -71,10 +77,13 @@ function parseACT(note) {
 		'note' : note,
 	};
 	$.blockUI({
-		message : '<h3><img src="./img/squares.gif" /> Term Parsing...</h3>',
-		css : {
-			border : '1px solid khaki'
-		}
+		message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">Loading...It may take up to few minutes.</div><p></p><p></p><p></p><p></p></div></div>',
+		css: { 
+            border: 'none',
+            '-webkit-border-radius': '40px', 
+            '-moz-border-radius': '40px', 
+            opacity: .5, 
+        },
 	});
 	$.ajax({
 		headers : {
@@ -87,12 +96,17 @@ function parseACT(note) {
 		dataType : "json",
 		success : function(data) {
 			var parsingJson = data["hmName2Id"];
-			parsingJson = longestParsingJson(parsingJson);
-			if (jQuery.isEmptyObject(parsingJson)) {
-				alert("No HPO terms found by parser!");
-			} else {
-				highlight(parsingJson);
-				updateTable(parsingJson);
+			var terms = longestParsingJson(parsingJson);
+			if(terms == 'ERROR'){
+				alert("ERROR: Something wrong with act engine. Please check the configuration on server end.");
+			}else{
+				highlight(terms);
+				updateTable(terms);
+				var t = $(window).scrollTop();
+				$('body,html').animate({
+					'scrollTop' : t + 1000
+				}, 200)
+				$("#phenolyzer").show();
 			}
 
 		},
@@ -115,10 +129,13 @@ function parseNcbo(note) {
 		}
 	};
 	$.blockUI({
-		message : '<h3><img src="./img/squares.gif" /> Term Parsing...</h3>',
-		css : {
-			border : '1px solid khaki'
-		}
+		message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">Loading...It may take up to few minutes.</div><p></p><p></p><p></p><p></p></div></div>',
+		css: { 
+            border: 'none',
+            '-webkit-border-radius': '40px', 
+            '-moz-border-radius': '40px', 
+            opacity: .5, 
+        },
 	});
 	$.ajax({
 		headers : {
@@ -134,14 +151,17 @@ function parseNcbo(note) {
 			if (jQuery.isEmptyObject(terms)) {
 				alert("No UMLS or HPO terms found!");
 			} else {
-				var hpoOption = data["hpoOption"];
-				highlight(terms);
-				updateTable(terms);
-				var t = $(window).scrollTop();
-				$('body,html').animate({
-					'scrollTop' : t + 1000
-				}, 200)
-				$("#phenolyzer").show();
+				if(terms == 'ERROR'){
+					alert("ERROR: Something wrong with ncbo engine. Please check the configuration on server end.");
+				}else{
+					highlight(terms);
+					updateTable(terms);
+					var t = $(window).scrollTop();
+					$('body,html').animate({
+						'scrollTop' : t + 1000
+					}, 200)
+					$("#phenolyzer").show();
+				}
 			}
 			return terms
 
