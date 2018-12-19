@@ -1,5 +1,4 @@
 function parse() {
-	var basePath = $('#basePath').val();
 	var note = $("#note").val();
 	note = formatText(note);
 
@@ -17,7 +16,6 @@ function parse() {
 }
 
 function parseMetamap(note) {
-	var basePath = $('input[id=basePath]').val();
 	var all_acros_abbrs = $('#all_acros_abbrs').is(':checked');
 	var allow_concept_gaps = $('#allow_concept_gaps').is(':checked');
 	var ignore_word_order = $('#ignore_word_order').is(':checked');
@@ -31,10 +29,8 @@ function parseMetamap(note) {
 			"isp" : ignore_stop_phrases,
 		},
 	};
-	console.log("formData before post: " + JSON.stringify(formData));
 	$.blockUI({
-		message : '<h3><img src="' + basePath
-				+ '/img/squares.gif" /> Term Parsing...</h3>',
+		message : '<h3><img src="./img/squares.gif" /> Term Parsing...</h3>',
 		css : {
 			border : '1px solid khaki'
 		}
@@ -45,16 +41,14 @@ function parseMetamap(note) {
 			'Content-Type' : 'application/json'
 		},
 		type : 'POST',
-		url : basePath + "/parse/metamap",
+		url :  "/doc2hpo/parse/metamap",
 		data : JSON.stringify(formData),
 		dataType : "json",
 		success : function(data) {
-			console.log("parse succuss.\n");
 			var terms = data["hmName2Id"];
 			if (jQuery.isEmptyObject(terms)) {
 				alert("No UMLS or HPO terms found!");
 			} else {
-				console.log(terms);
 				var hpoOption = data["hpoOption"];
 				highlight(terms);
 				updateTable(terms);
@@ -73,13 +67,11 @@ function parseMetamap(note) {
 }
 
 function parseACT(note) {
-	var basePath = $('input[id=basePath]').val();
 	var formData = {
 		'note' : note,
 	};
 	$.blockUI({
-		message : '<h3><img src="' + basePath
-				+ '/img/squares.gif" /> Term Parsing...</h3>',
+		message : '<h3><img src="./img/squares.gif" /> Term Parsing...</h3>',
 		css : {
 			border : '1px solid khaki'
 		}
@@ -90,7 +82,7 @@ function parseACT(note) {
 			'Content-Type' : 'application/json'
 		},
 		type : 'POST',
-		url : basePath + "/parse/acdat",
+		url : "/doc2hpo/parse/acdat",
 		data : JSON.stringify(formData),
 		dataType : "json",
 		success : function(data) {
@@ -111,7 +103,6 @@ function parseACT(note) {
 }
 
 function parseNcbo(note) {
-	var basePath = $('input[id=basePath]').val();
 	var longest_only = $('#longest_only').is(':checked');
 	var whole_word_only = $('#whole_word_only').is(':checked');
 	var exclude_numbers = $('#exclude_numbers').is(':checked');
@@ -124,8 +115,7 @@ function parseNcbo(note) {
 		}
 	};
 	$.blockUI({
-		message : '<h3><img src="' + basePath
-				+ '/img/squares.gif" /> Term Parsing...</h3>',
+		message : '<h3><img src="./img/squares.gif" /> Term Parsing...</h3>',
 		css : {
 			border : '1px solid khaki'
 		}
@@ -136,16 +126,14 @@ function parseNcbo(note) {
 			'Content-Type' : 'application/json'
 		},
 		type : 'POST',
-		url : basePath + "/parse/ncbo",
+		url : "/doc2hpo/parse/ncbo",
 		data : JSON.stringify(formData),
 		dataType : "json",
 		success : function(data) {
-			console.log("parse succuss.\n");
 			var terms = data["hmName2Id"];
 			if (jQuery.isEmptyObject(terms)) {
 				alert("No UMLS or HPO terms found!");
 			} else {
-				console.log(terms);
 				var hpoOption = data["hpoOption"];
 				highlight(terms);
 				updateTable(terms);
@@ -165,12 +153,10 @@ function parseNcbo(note) {
 }
 
 function testController() {
-	var basePath = $('#basePath').val();
 	var search = {
 		pName : "bhanu",
 		lName : "prasad"
 	}
-	console.log(JSON.stringify(search));
 	$.ajax({
 		type : "POST",
 		headers : {
@@ -179,7 +165,7 @@ function testController() {
 		},
 
 		dataType : 'json',
-		url : basePath + "/test/test1",
+		url : "/doc2hpo/test/test1",
 		data : JSON.stringify(search), // Note it is important
 		success : function(result) {
 			// do what ever you want with data

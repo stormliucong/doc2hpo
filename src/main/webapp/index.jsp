@@ -27,8 +27,8 @@
 	href="https://cdn.datatables.net/1.10.19/css/dataTables.semanticui.min.css">
 <link rel="stylesheet" type="text/css"
 	href="	https://cdn.datatables.net/buttons/1.5.2/css/buttons.semanticui.min.css">
-<link rel="stylesheet" href="<%=basePath%>/css/styles.css">
-<link rel="stylesheet" href="<%=basePath%>/css/ent-display.css">
+<link rel="stylesheet" href="./css/styles.css">
+<link rel="stylesheet" href="./css/ent-display.css">
 
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
@@ -73,7 +73,7 @@
 <body>
 	<div class="ui fixed menu">
 		<div class="header item">
-			<img class="logo" src="<%=basePath%>/img/doc2hpo2.png"
+			<img class="logo" src="./img/doc2hpo2.png"
 				style="width: 120px; height: 50px;"> A webservice to extract
 			human phenotype ontology terms from clinical notes
 		</div>
@@ -280,16 +280,16 @@
 	</div>
 	<!-- /.hidden for js only -->
 	<input style="display: none;" id="basePath" name="basePath"
-		value="<%=basePath%>">
+		value=".">
 
 </body>
 
-<script type="text/javascript" src="<%=basePath%>/js/helper.js"></script>
-<script type="text/javascript" src="<%=basePath%>/js/parsing.js"></script>
-<script type="text/javascript" src="<%=basePath%>/js/shoppingCart.js"></script>
-<script type="text/javascript" src="<%=basePath%>/js/highlight.js"></script>
-<script type="text/javascript" src="<%=basePath%>/js/hpo-search.js"></script>
-<script type="text/javascript" src="<%=basePath%>/js/script.js"></script>
-<script type="text/javascript" src="<%=basePath%>/js/updateSession.js"></script>
+<script type="text/javascript" src="./js/helper.js"></script>
+<script type="text/javascript" src="./js/parsing.js"></script>
+<script type="text/javascript" src="./js/shoppingCart.js"></script>
+<script type="text/javascript" src="./js/highlight.js"></script>
+<script type="text/javascript" src="./js/hpo-search.js"></script>
+<script type="text/javascript" src="./js/script.js"></script>
+<script type="text/javascript" src="./js/updateSession.js"></script>
 
 </html>

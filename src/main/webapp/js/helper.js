@@ -29,7 +29,6 @@ function longestParsingJson(parsingJson){
 	parsingJson = parsingJson.sort(function(a, b) {
 	    return a.start - b.start;
 	});
-	console.log(parsingJson);
 	// Create an empty stack of intervals 
     var s = []; 
     
@@ -56,6 +55,5 @@ function longestParsingJson(parsingJson){
         	}
         } 
 	}
-	console.log(s);
 	return s;
 }

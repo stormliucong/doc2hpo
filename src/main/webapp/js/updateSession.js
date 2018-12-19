@@ -1,5 +1,4 @@
 function updateTermsInSession(start, length, hpo_id, hpo_term) {
-	var basePath = $('input[id=basePath]').val();
 	start = parseInt(start);
 	length = parseInt(length);
 	var formData = {
@@ -8,10 +7,8 @@ function updateTermsInSession(start, length, hpo_id, hpo_term) {
 		'hpoId' : hpo_id,
 		'hpoName' : hpo_term
 	};
-	console.log("formData before post: " + JSON.stringify(formData));
 	$.blockUI({
-		message : '<h3><img src="' + basePath
-				+ '/img/squares.gif" /> Session Updating...</h3>',
+		message : '<h3><img src="./img/squares.gif" /> Session Updating...</h3>',
 		css : {
 			border : '1px solid khaki'
 		}
@@ -24,16 +21,14 @@ function updateTermsInSession(start, length, hpo_id, hpo_term) {
 			'Content-Type' : 'application/json'
 		},
 		type : 'POST',
-		url : basePath + "/session/updateTerms",
+		url : "/doc2hpo/session/updateTerms",
 		data : JSON.stringify(formData),
 		dataType : "json",
 		success : function(data) {
-			console.log("session updated.\n");
 			var terms = data["hmName2Id"];
 			if (jQuery.isEmptyObject(terms)) {
 				alert("No UMLS or HPO terms found!");
 			} else {
-				console.log(terms);
 				highlight(terms);
 				updateTable(terms);
 				$('body,html').animate({
@@ -51,7 +46,6 @@ function updateTermsInSession(start, length, hpo_id, hpo_term) {
 }
 
 function deleteTermsInSession(start, length, hpo_id, hpo_term) {
-	var basePath = $('input[id=basePath]').val();
 	start = parseInt(start);
 	length = parseInt(length);
 	var formData = {
@@ -61,8 +55,7 @@ function deleteTermsInSession(start, length, hpo_id, hpo_term) {
 		'hpoName' : hpo_term
 	};
 	$.blockUI({
-		message : '<h3><img src="' + basePath
-				+ '/img/squares.gif" /> Term Parsing...</h3>',
+		message : '<h3><img src="./img/squares.gif" /> Term Parsing...</h3>',
 		css : {
 			border : '1px solid khaki'
 		}
@@ -76,16 +69,14 @@ function deleteTermsInSession(start, length, hpo_id, hpo_term) {
 			'Content-Type' : 'application/json'
 		},
 		type : 'POST',
-		url : basePath + "/session/deleteTerms",
+		url : "/doc2hpo/session/deleteTerms",
 		data : JSON.stringify(formData),
 		dataType : "json",
 		success : function(data) {
-			console.log("session deleted.\n");
 			var terms = data["hmName2Id"];
 			if (jQuery.isEmptyObject(terms)) {
 				alert("No UMLS or HPO terms found!");
 			} else {
-				console.log(terms);
 				highlight(terms);
 				updateTable(terms);
 				$('body,html').animate({
@@ -105,7 +96,6 @@ function deleteTermsInSession(start, length, hpo_id, hpo_term) {
 }
 
 function addTermsInSession(start, length, hpo_id, hpo_term) {
-	var basePath = $('input[id=basePath]').val();
 	start = parseInt(start);
 	length = parseInt(length);
 	var formData = {
@@ -115,8 +105,7 @@ function addTermsInSession(start, length, hpo_id, hpo_term) {
 		'hpoName' : hpo_term
 	};
 	$.blockUI({
-		message : '<h3><img src="' + basePath
-				+ '/img/squares.gif" /> Term Parsing...</h3>',
+		message : '<h3><img src="./img/squares.gif" /> Term Parsing...</h3>',
 		css : {
 			border : '1px solid khaki'
 		}
@@ -129,16 +118,14 @@ function addTermsInSession(start, length, hpo_id, hpo_term) {
 			'Content-Type' : 'application/json'
 		},
 		type : 'POST',
-		url : basePath + "/session/addTerms",
+		url : "/doc2hpo/session/addTerms",
 		data : JSON.stringify(formData),
 		dataType : "json",
 		success : function(data) {
-			console.log("session added.\n");
 			var terms = data["hmName2Id"];
 			if (jQuery.isEmptyObject(terms)) {
 				alert("No UMLS or HPO terms found!");
 			} else {
-				console.log(terms);
 				highlight(terms);
 				updateTable(terms);
 				$('body,html').animate({
@@ -158,7 +145,6 @@ function addTermsInSession(start, length, hpo_id, hpo_term) {
 }
 
 function addTermsInSessionWithHighlight(start, length, hpo_id, hpo_term) {
-	var basePath = $('input[id=basePath]').val();
 	start = parseInt(start);
 	length = parseInt(length);
 	var formData = {
@@ -168,8 +154,7 @@ function addTermsInSessionWithHighlight(start, length, hpo_id, hpo_term) {
 		'hpoName' : hpo_term
 	};
 	$.blockUI({
-		message : '<h3><img src="' + basePath
-				+ '/img/squares.gif" /> Term Parsing...</h3>',
+		message : '<h3><img src="./img/squares.gif" /> Term Parsing...</h3>',
 		css : {
 			border : '1px solid khaki'
 		}
@@ -183,16 +168,14 @@ function addTermsInSessionWithHighlight(start, length, hpo_id, hpo_term) {
 			'Content-Type' : 'application/json'
 		},
 		type : 'POST',
-		url : basePath + "/session/addTerms",
+		url : "/doc2hpo/session/addTerms",
 		data : JSON.stringify(formData),
 		dataType : "json",
 		success : function(data) {
-			console.log("session added.\n");
 			var terms = data["hmName2Id"];
 			if (jQuery.isEmptyObject(terms)) {
 				alert("No UMLS or HPO terms found!");
 			} else {
-				console.log(terms);
 				highlight(terms);
 				updateTable(terms);
 				$('body,html').animate({
