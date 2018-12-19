@@ -15,9 +15,7 @@ public class DicPrepare {
 		String voca=FileUtil.Readfile("/Users/cy2465/Downloads/hp.obo.txt");
 		//System.out.println("voca="+voca);
 		String[] terms=voca.split("\\[Term\\]");
-		List<String> conceptlist=new ArrayList<String>();
 		StringBuffer sb=new StringBuffer();
-		String laststr="";
 		List<HPOTerm> hpotlist=new ArrayList<HPOTerm>();
 		for(String t:terms){
 			String[] lines=t.split("\n");

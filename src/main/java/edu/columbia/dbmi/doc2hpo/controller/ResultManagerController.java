@@ -26,6 +26,7 @@ public class ResultManagerController {
 		String hpoId = pr.getHpoId();
 		String hpoName = pr.getHpoName();
 
+		@SuppressWarnings("unchecked")
 		List<ParsingResults> hmName2Id = (List<ParsingResults>) httpSession.getAttribute("hmName2Id");
 		
 		ParsingResults prIn = new ParsingResults();
@@ -46,6 +47,7 @@ public class ResultManagerController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		
+		@SuppressWarnings("unchecked")
 		List<ParsingResults> hmName2Id = (List<ParsingResults>) httpSession.getAttribute("hmName2Id");
 		Iterator<ParsingResults> it = hmName2Id.iterator();
 		while(it.hasNext()) {
@@ -67,6 +69,7 @@ public class ResultManagerController {
 		String hpoId = pr.getHpoId();
 		String hpoName = pr.getHpoName();
 
+		@SuppressWarnings("unchecked")
 		List<ParsingResults> hmName2Id = (List<ParsingResults>) httpSession.getAttribute("hmName2Id");
 		for (ParsingResults prIn : hmName2Id) {
 			System.out.println(prIn.getHpoId());

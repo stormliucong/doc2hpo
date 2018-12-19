@@ -7,12 +7,10 @@ import java.util.regex.Pattern;
 import org.springframework.util.ResourceUtils;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.*;
 
 public class NegUtil {
-	ArrayList rules = new ArrayList();
+	ArrayList<String> rules = new ArrayList<String>();
 
 	public NegUtil() throws FileNotFoundException {
 		// String content =
@@ -69,14 +67,12 @@ public class NegUtil {
 	public String negCheck(String sentenceString, String phraseString, boolean negatePossible) {
 		try{
 		Sorter s = new Sorter();
-		String sToReturn = "";
 		String sScope = "";
-		String sentencePortion = "";
-		ArrayList sortedRules = new ArrayList();
+		ArrayList<String> sortedRules = new ArrayList<String>();
 		
 		String filler = "_";
 		boolean negPoss = negatePossible;
-		boolean negationScope = true;
+		
 
 		// Sort the rules by length in descending order.
 		// Rules need to be sorted so the longest rule is always tried to match
@@ -116,7 +112,7 @@ public class NegUtil {
 			sentence = mph.replaceAll(" [PHRASE]" + mph.group().trim().replaceAll(" ", filler) + "[PHRASE]");
 		}
 
-		Iterator iRule = sortedRules.iterator();
+		Iterator<String> iRule = sortedRules.iterator();
 		while (iRule.hasNext()) {
 			String rule = (String) iRule.next();
 			Pattern p = Pattern.compile("[\\t]+"); // Working.

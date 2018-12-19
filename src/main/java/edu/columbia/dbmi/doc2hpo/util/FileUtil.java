@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
 public class FileUtil {
 
@@ -19,8 +18,6 @@ public class FileUtil {
 
 			StringBuffer readsb = new StringBuffer();
 			InputStream in = new FileInputStream(new File(path));
-			ArrayList<String> alist = new ArrayList<String>();
-
 			int count;
 			byte[] b = new byte[1024 * 1024];
 			while ((count = in.read(b)) != -1) {

@@ -7,17 +7,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.python.antlr.PythonParser.print_stmt_return;
 import org.springframework.util.ResourceUtils;
 
-import com.jayway.jsonpath.internal.Path;
-
-import jnr.ffi.Struct.id_t;
-import jnr.ffi.Struct.in_addr_t;
 
 public class Obo {
 	public static void main (String[] args) throws IOException {

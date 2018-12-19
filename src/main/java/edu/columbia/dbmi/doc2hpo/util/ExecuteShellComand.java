@@ -3,8 +3,6 @@ package edu.columbia.dbmi.doc2hpo.util;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ExecuteShellComand {
@@ -18,16 +16,16 @@ public class ExecuteShellComand {
 //		String out = esc.executeCommand2(cmd,theDir);		
 //		List<String> cmd = new ArrayList<String>(Arrays.asList(command.split(" ")));
 		
-		File theDir = new File("/Users/congliu/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/doc2hpo/WEB-INF/work/asdfghjkl/");
-		File phenolyzerDir = new File("/Users/congliu/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/doc2hpo/WEB-INF/scripts/");
-
-		String perl = "perl ";
-		String toJsonBin = phenolyzerDir + "/transform_to_json.pl";
-		String command = perl + toJsonBin;
-		List<String> cmd = new ArrayList<String>(Arrays.asList(command.split(" ")));
-		ExecuteShellComand esc = new ExecuteShellComand();
-		System.out.println(command);
-		String out = esc.executeCommand2(cmd,theDir);
+//		File theDir = new File("/Users/congliu/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/doc2hpo/WEB-INF/work/asdfghjkl/");
+//		File phenolyzerDir = new File("/Users/congliu/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/doc2hpo/WEB-INF/scripts/");
+//
+//		String perl = "perl ";
+//		String toJsonBin = phenolyzerDir + "/transform_to_json.pl";
+//		String command = perl + toJsonBin;
+//		List<String> cmd = new ArrayList<String>(Arrays.asList(command.split(" ")));
+//		ExecuteShellComand esc = new ExecuteShellComand();
+//		System.out.println(command);
+//		String out = esc.executeCommand2(cmd,theDir);
 
 //		String command = phenolyzerBin + input + parameters + output;
 //		String command = "ls";
@@ -42,7 +40,7 @@ public class ExecuteShellComand {
 //		String cmd = obj.executeCommand(command);
 //		String cmd = obj.executeCommand2(command, dir);
 //
-		System.out.println(cmd);
+//		System.out.println(cmd);
 
 	}
 

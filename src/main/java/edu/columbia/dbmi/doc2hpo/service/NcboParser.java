@@ -218,37 +218,37 @@ public class NcboParser {
 	public static void main(String[] args) throws Exception {
 //        String urlParameters;
 //        urlParameters = "ontology=HP";
-		JsonNode annotations;
+//		JsonNode annotations;
 //        
-		NcboParser ncboparser = new NcboParser("98c881c1-1cdb-4fd2-ad1c-41f446e15f73","");
-		String input = "Individual II-1 is a 10 year old boy. He was born at term with normal birth parameters and good APGAR scores (9/10/10). The neonatal period was uneventful, and he had normal motor development during early childhood: he began to look up at 3 months, sit by himself at 5 months, stand up at 11 months, walk at 13 months, and speak at 17 months. He attended a regular kindergarten, without any signs of difference in intelligence, compared to his peers. Starting at age 6, the parents observed ever increasing behavioral disturbance for the boy, manifesting in multiple aspects of life. For example, he can no longer wear clothes by himself, cannot obey instruction from parents/teachers, can no longer hold subjects tightly in hand, which were all things that he could do before 6 years of age. In addition, he no longer liked to play with others; instead, he just preferred to stay by himself, and he sometimes fell down when he walked on the stairs, which had rarely happened at age 5. The proband continued to deteriorate: at age 9, he could not say a single word and had no action or response to any instruction given in clinical exams. Additionally, rough facial features were noted with a flat nasal bridge, a synophrys (unibrow), a long and smooth philtrum, thick lips and an enlarged mouth. He also had rib edge eversion, and it was also discovered that he was profoundly deaf and had completely lost the ability to speak. He also had loss of bladder control. The diagnosis of severe intellectual disability was made, based on Wechsler Intelligence Scale examination. Brain MRI demonstrated cortical atrophy with enlargement of the subarachnoid spaces and ventricular dilatation (Figure 2). Brainstem evoked potentials showed moderate abnormalities. Electroencephalography (EEG) showed abnormal sleep EEG.";
-
-		String textToAnnotate = URLEncoder.encode(input, "ISO-8859-1");
-
-		// Get just annotations
+//		NcboParser ncboparser = new NcboParser("98c881c1-1cdb-4fd2-ad1c-41f446e15f73","");
+//		String input = "Individual II-1 is a 10 year old boy. He was born at term with normal birth parameters and good APGAR scores (9/10/10). The neonatal period was uneventful, and he had normal motor development during early childhood: he began to look up at 3 months, sit by himself at 5 months, stand up at 11 months, walk at 13 months, and speak at 17 months. He attended a regular kindergarten, without any signs of difference in intelligence, compared to his peers. Starting at age 6, the parents observed ever increasing behavioral disturbance for the boy, manifesting in multiple aspects of life. For example, he can no longer wear clothes by himself, cannot obey instruction from parents/teachers, can no longer hold subjects tightly in hand, which were all things that he could do before 6 years of age. In addition, he no longer liked to play with others; instead, he just preferred to stay by himself, and he sometimes fell down when he walked on the stairs, which had rarely happened at age 5. The proband continued to deteriorate: at age 9, he could not say a single word and had no action or response to any instruction given in clinical exams. Additionally, rough facial features were noted with a flat nasal bridge, a synophrys (unibrow), a long and smooth philtrum, thick lips and an enlarged mouth. He also had rib edge eversion, and it was also discovered that he was profoundly deaf and had completely lost the ability to speak. He also had loss of bladder control. The diagnosis of severe intellectual disability was made, based on Wechsler Intelligence Scale examination. Brain MRI demonstrated cortical atrophy with enlargement of the subarachnoid spaces and ventricular dilatation (Figure 2). Brainstem evoked potentials showed moderate abnormalities. Electroencephalography (EEG) showed abnormal sleep EEG.";
+//
+//		String textToAnnotate = URLEncoder.encode(input, "ISO-8859-1");
+//
+//		// Get just annotations
 //        urlParameters = "text=" + textToAnnotate;
 //        annotations = ncboparser.jsonToNode(ncboparser.get(REST_URL + "/annotator?" + urlParameters));
 //        ncboparser.printAnnotations(annotations);
-
-		// Annotations with hierarchy
+//
+//		// Annotations with hierarchy
 //        urlParameters = "max_level=3&text=" + textToAnnotate;
 //        annotations = ncboparser.jsonToNode(ncboparser.get(REST_URL + "/annotator?" + urlParameters));
 //        ncboparser.printAnnotations(annotations);
-
-		// Annotations using POST (necessary for long text)
+//
+//		// Annotations using POST (necessary for long text)
 //        urlParameters = "text=" + textToAnnotate + "&ontology=HP&longest_only=true";
-
+//
 //        annotations = ncboparser.jsonToNode(ncboparser.post(REST_URL + "/annotator", urlParameters));
 //        ncboparser.printAnnotations(annotations);
-		List<String> theOptions = new ArrayList<String>();
-		theOptions.add("exclude_numbers=true");
-		theOptions.add("whole_word_only=true");
-		theOptions.add("longest_only=false");
-		theOptions.add("ontologies=HP");
-
-		List<ParsingResults> hm = ncboparser.parse(input, theOptions);
-
-		// Get labels, synonyms, and definitions with returned annotations
+//		List<String> theOptions = new ArrayList<String>();
+//		theOptions.add("exclude_numbers=true");
+//		theOptions.add("whole_word_only=true");
+//		theOptions.add("longest_only=false");
+//		theOptions.add("ontologies=HP");
+//
+//		List<ParsingResults> hm = ncboparser.parse(input, theOptions);
+//
+//		// Get labels, synonyms, and definitions with returned annotations
 //        urlParameters = "include=prefLabel,synonym,definition&text=" + textToAnnotate;
 //        annotations = ncboparser.jsonToNode(ncboparser.get(REST_URL + "/annotator?" + urlParameters));
 //        for (JsonNode annotation : annotations) {
