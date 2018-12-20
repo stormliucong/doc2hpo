@@ -46,6 +46,10 @@ function updateTable(parsingJson) {
 			$(this).addClass('selected');
 		}
 	});
+	
+	$('.buttons-excel').attr('data-tooltip','Download above table as an excel file');
+	$('.buttons-pdf').attr('data-tooltip','Download above table as a pdf file')
+
 
 }
 

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.columbia.dbmi.doc2hpo.pojo.ParsingResults;
@@ -18,24 +19,14 @@ import edu.columbia.dbmi.doc2hpo.pojo.ParsingResults;
 @RequestMapping("/session")
 public class ResultManagerController {
 
-	@RequestMapping("/addTerms")
+	@RequestMapping(value="/getTerms",method = RequestMethod.GET)
 	@ResponseBody
-	public Map<String, Object> addTerms(HttpSession httpSession, @RequestBody ParsingResults pr) throws Exception {
+	public Map<String, Object> addTerms(HttpSession httpSession) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		String hpoId = pr.getHpoId();
-		String hpoName = pr.getHpoName();
 
 		@SuppressWarnings("unchecked")
 		List<ParsingResults> hmName2Id = (List<ParsingResults>) httpSession.getAttribute("hmName2Id");
-		
-		ParsingResults prIn = new ParsingResults();
-		prIn.setHpoName(hpoName.toLowerCase());
-		prIn.setHpoId(hpoId.replaceAll("_", ":"));
-		prIn.setStart(pr.getStart());
-		prIn.setLength(pr.getLength());
-		hmName2Id.add(prIn);
-
 		httpSession.setAttribute("hmName2Id", hmName2Id);
 		map.put("hmName2Id", hmName2Id);
 		return map;

@@ -25,7 +25,7 @@ function showPhiAgreement() {
 					{
 						closable : false,
 						onDeny : function() {
-//							$('#phiAgreementWarning').modal('show');
+							// $('#phiAgreementWarning').modal('show');
 							alert('Without accepting this terms & conditions you can\'t use public Doc2Hpo.');
 							return false;
 						},
@@ -46,6 +46,7 @@ function semantiUIInit() {
 			}
 		}
 	});
+	$('.tooltip').popup();
 }
 
 function formControl() {
@@ -58,22 +59,22 @@ function formControl() {
 					});
 
 	$("#parsingEngine").on("change", function() {
-
-		if (this.value == 'act') {
+		if ($("#parsingEngine").dropdown('get value') == 'act') {
 			$("#ncboOptions").hide();
 			$("#mmpOptions").hide();
 		}
 
-		if (this.value == 'mmp') {
+		if ($("#parsingEngine").dropdown('get value') == 'mmp') {
 			$("#ncboOptions").hide();
 			$("#mmpOptions").show();
 		}
 
-		if (this.value == 'ncbo') {
+		if ($("#parsingEngine").dropdown('get value') == 'ncbo') {
 			$("#ncboOptions").show();
 			$("#mmpOptions").hide();
 		}
 	});
+
 
 	$("#parsingButton").on("click", function() {
 		if ($('#inputForm').form('is valid')) {
@@ -81,11 +82,31 @@ function formControl() {
 		}
 	});
 
-	$("#phenolyzerButton").on("click", function() {
-		window.open('http://phenolyzer.wglab.org/', '_blank');
-	});
+	$("#phenolyzerButton")
+			.on(
+					"click",
+					function() {
+						alert('you will be directed to Phenolyzer page. You could paste the copied terms to the Disease/Phenotype box!')
+						window.open('http://phenolyzer.wglab.org/', '_blank');
+					});
 
 	$("#copyColumnButton").on("click", function() {
 		copyColumn();
-	})
+	});
+
+	$("#jsonDownloadButton").on(
+			"click",
+			function() {
+				var res = getTermsInSession();
+				var json = res["hmName2Id"];
+				$(
+						"<a />",
+						{
+							"download" : "data.json",
+							"href" : "data:application/json,"
+									+ encodeURIComponent(JSON.stringify(json))
+						}).appendTo("body").click(function() {
+					$(this).remove()
+				})[0].click()
+			});
 }

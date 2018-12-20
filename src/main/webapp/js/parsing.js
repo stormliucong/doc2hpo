@@ -1,8 +1,14 @@
 function parse() {
 	var note = $("#note").val();
 	note = formatText(note);
-
-	var value = $("#parsingEngine").val();
+	var value = "";
+	// default engine is act.
+	if($("#parsingEngine").dropdown('get value') == ""){
+		value = "act";
+	}else{
+		value = $("#parsingEngine").dropdown('get value');
+		console.log(value);
+	}
 	
 	if (value == "act") {
 		parseACT(note);

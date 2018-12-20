@@ -72,10 +72,10 @@
 
 <body>
 	<div class="ui fixed menu">
-		<div class="header item">
+		<div class="ui header item">
 			<img class="logo" src="./img/doc2hpo2.png"
 				style="width: 120px; height: 50px;"> A webservice to extract
-			human phenotype ontology terms from clinical notes
+			human phenotype ontology terms from clinical notes or literatures.
 		</div>
 	</div>
 	<div class="html ui top attached segment" style="margin: 100px auto 0;">
@@ -96,12 +96,38 @@
 					<i class="icon dropdown"></i> Configurations
 				</div>
 				<div class="content field">
-					<label class="transition hidden">Select a parsing engine:</label> <select
-						class="ui fluid dropdown" id="parsingEngine">
+					<label class="transition hidden">Select a parsing engine:</label>
+					<!-- <select
+						class="ui fluid dropdown selection" id="parsingEngine">
 						<option value="act">Fast string match</option>
 						<option value="mmp">Metamap</option>
 						<option value="ncbo">Ncbo annotator</option>
-					</select>
+					</select> -->
+					<div class="ui selection dropdown" id="parsingEngine">
+						<input type="hidden" name="parsingEngine"> <i
+							class="dropdown icon"></i>
+						<div class="default text">Select a parsing engine</div>
+						<div class="ui menu">
+							<div class="item" data-value="act">
+								<span class="text">String Search (default) </span> <span
+									class="description">a string-based method leveraging the
+									Aho–Corasick algorithm </span>
+							</div>
+							<div class="item" data-value="mmp">
+								<span class="text">Metamap </span> <span class="description">using
+									a local metamap java API to extract UMLS CUI terms and then
+									mapped to HPO terms </span>
+							</div>
+							<div class="item" data-value="ncbo">
+								<span class="text">NCBO Annotator </span><span
+									class="description">call online or local NCBO annotator
+									api</span>
+							</div>
+
+						</div>
+
+					</div>
+
 				</div>
 				<!-- option for Metamap -->
 				<div class="ui celled relaxed list" style="display: none"
@@ -231,18 +257,23 @@
 					</div>
 					<div class="row" style="padding-bottom: 20px">
 						<div class="ui buttons" id="buttonGroups">
+							<div class="ui button" id="jsonDownloadButton"
+								data-tooltip="Download the full annotation with position information as a json file">
+								JSON</i>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="ui buttons" id="buttonGroups">
 
 							<button class="ui button" id="copyColumnButton"
 								data-tooltip="Copy the first column as Phenolyzer Input">Copy
 								terms</button>
-							<div class="or"></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="ui blue labeled icon button" id="phenolyzerButton"
-							data-tooltip="Redirect to Phenolyzer interface"
-							data-position="right center">
-							Next <i class="right arrow icon"></i>
+							<div class="ui blue labeled icon button" id="phenolyzerButton"
+								data-tooltip="Redirect to Phenolyzer interface">
+								Next <i class="right arrow icon"></i>
+							</div>
 						</div>
 
 					</div>
@@ -279,8 +310,7 @@
 			All Rights Reserved</div>
 	</div>
 	<!-- /.hidden for js only -->
-	<input style="display: none;" id="basePath" name="basePath"
-		value=".">
+	<input style="display: none;" id="basePath" name="basePath" value=".">
 
 </body>
 
