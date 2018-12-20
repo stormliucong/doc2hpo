@@ -19,14 +19,36 @@ import edu.columbia.dbmi.doc2hpo.pojo.ParsingResults;
 @RequestMapping("/session")
 public class ResultManagerController {
 
-	@RequestMapping(value="/getTerms",method = RequestMethod.GET)
+	@RequestMapping(value = "/getTerms", method = RequestMethod.GET)
 	@ResponseBody
-	public Map<String, Object> addTerms(HttpSession httpSession) throws Exception {
+	public Map<String, Object> getTerms(HttpSession httpSession) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
-
 
 		@SuppressWarnings("unchecked")
 		List<ParsingResults> hmName2Id = (List<ParsingResults>) httpSession.getAttribute("hmName2Id");
+		httpSession.setAttribute("hmName2Id", hmName2Id);
+		map.put("hmName2Id", hmName2Id);
+		return map;
+	}
+
+	@RequestMapping("/addTerms")
+	@ResponseBody
+	public Map<String, Object> addTerms(HttpSession httpSession, @RequestBody ParsingResults pr) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		String hpoId = pr.getHpoId();
+		String hpoName = pr.getHpoName();
+
+		@SuppressWarnings("unchecked")
+		List<ParsingResults> hmName2Id = (List<ParsingResults>) httpSession.getAttribute("hmName2Id");
+
+		ParsingResults prIn = new ParsingResults();
+		prIn.setHpoName(hpoName.toLowerCase());
+		prIn.setHpoId(hpoId.replaceAll("_", ":"));
+		prIn.setStart(pr.getStart());
+		prIn.setLength(pr.getLength());
+		hmName2Id.add(prIn);
+
 		httpSession.setAttribute("hmName2Id", hmName2Id);
 		map.put("hmName2Id", hmName2Id);
 		return map;
@@ -36,12 +58,11 @@ public class ResultManagerController {
 	@ResponseBody
 	public Map<String, Object> deleteTerms(HttpSession httpSession, @RequestBody ParsingResults pr) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
-		
-		
+
 		@SuppressWarnings("unchecked")
 		List<ParsingResults> hmName2Id = (List<ParsingResults>) httpSession.getAttribute("hmName2Id");
 		Iterator<ParsingResults> it = hmName2Id.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			ParsingResults prIn = it.next();
 			if (prIn.getStart() == pr.getStart() && prIn.getLength() == pr.getLength()) {
 				it.remove();
