@@ -259,7 +259,7 @@
 						<div class="ui buttons" id="buttonGroups">
 							<div class="ui button" id="jsonDownloadButton"
 								data-tooltip="Download the full annotation with position information as a json file">
-								JSON</i>
+								JSON
 							</div>
 						</div>
 					</div>
