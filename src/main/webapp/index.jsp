@@ -58,8 +58,7 @@
 
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.js"></script>
-<script type="text/javascript"
-	src="http://malsup.github.io/min/jquery.blockUI.min.js"></script>
+<script type="text/javascript" src="./js/jquery.blockUI.min.js"></script>
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/6.0.1/jquery.mark.es6.min.js"></script>
 <script type="text/javascript"
@@ -259,8 +258,7 @@
 						<div class="ui buttons" id="buttonGroups">
 							<div class="ui button" id="jsonDownloadButton"
 								data-tooltip="Download the full annotation with position information as a json file">
-								JSON
-							</div>
+								JSON</div>
 						</div>
 					</div>
 
@@ -291,8 +289,13 @@
 			<p>1. Only de-identified notes could be uploaded</p>
 			<p>2. Doc2Hpo don't take any responsibility for protecting PHI
 				data</p>
+			<p>3. This website uses cookies as well as similar tools and
+				technologies to understand visitors' experiences. By continuing to
+				use this website, you consent to Columbia University's usage of
+				cookies and similar technologies, in accordance with the <a href="https://cuit.columbia.edu/content/columbia-university-website-cookie-notice"> Columbia
+				University Website Cookie Notice.</a></p>
 			<p>
-				3. If you want to install your internal Doc2Hpo please visit the <a
+				4. If you want to install your internal Doc2Hpo please visit the <a
 					href="https://github.com/stormliucong/doc2hpo"> source </a>
 			</p>
 
@@ -306,8 +309,8 @@
 	</div>
 
 	<div class="ui inverted vertical footer segment form-page">
-		<div class="ui center aligned container">Chunhua Weng Lab 2018.
-			All Rights Reserved</div>
+		<div class="ui center aligned container">Columbia University &copy
+			2018. All Rights Reserved</div>
 	</div>
 	<!-- /.hidden for js only -->
 	<input style="display: none;" id="basePath" name="basePath" value=".">
