@@ -3,6 +3,8 @@ README.md
 .DS_Store
 /target/
 /logs/
+/target/
+/src/lib/*
 /src/test/
 /src/main/webapp/WEB-INF/lib/
 /src/main/java/metamap-api-2.0.jar
