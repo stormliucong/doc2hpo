@@ -1,93 +1,83 @@
 # doc2hpo
-
 doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO for phenolyzer analysis.
-
-## Installation
- ### Step 0 : download everything you need
-  #### 0. install java if you don't have one
-  `sudo add-apt-repository ppa:webupd8team/java`
-
-  `sudo apt-get update`
-
-  `sudo apt-get install oracle-java8-installer`
-
-  `javac -version`
+ ## Installation
+  ### Step 0 : download everything you need
+   #### 0. install java if you don't have one
+  
+   ```
+   sudo add-apt-repository ppa:webupd8team/java
+   sudo apt-get update
+   sudo apt-get install oracle-java8-installer
+   javac -version
+   ```
+  
    #### 1. download apache tomcat if you don't have one
-   `wget http://ftp.naz.com/apache/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.tar.gz`
+   ```
+   wget http://ftp.naz.com/apache/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.tar.gz
+   ```
    #### 2. download apache maven if you don't have one
-   `wget https://www-us.apache.org/dist/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz`
+   ```
+   wget https://www-us.apache.org/dist/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz
+   ```
    #### 3. download MetaMap and MetaMap Java API if you don't have one (Optional, only if you want to use MetaMap parsing engine)
    please visit https://metamap.nlm.nih.gov/ to download _MetaMap 2016v2 Linux Version_ and _MetaMap Java API Release for Linux_
    #### 4. git clone this repository 
-   `git clone https://github.com/stormliucong/doc2hpo.git`
-   #### 5. please put everything in one directory (Let's call it `myproject` for now)
-   you should have `apache-maven-3.6.0-bin.tar.gz`, `public_mm_linux_javaapi_2016v2.tar.bz2`, `apache-tomcat-8.5.35.tar.gz`, `doc2hpo/` now under `myproject`
+   ```
+   git clone https://github.com/stormliucong/doc2hpo.git
+   ```
+   #### 5. please put everything in one directory (Let's call it `__myproject__` for now)
+   you should have __apache-maven-3.6.0-bin.tar.gz__, __public_mm_linux_javaapi_2016v2.tar.bz2__, __apache-tomcat-8.5.35.tar.gz__, __doc2hpo/__ now under __myproject__
 
   ### Step 1: Installation of everything you need
-  `cd myproject`
-    #### 1. install tomcat
-    `tar -xvf apache-tomcat-8.5.35.tar.gz`  
-    #### 2.install maven
-    `tar -xzvf apache-maven-3.6.0-bin.tar.gz`
-    #### 3.install MetaMap
-    `bunzip2 -c public_mm_linux_main_2016v2.tar.bz2 | tar xvf -` 
-
-    `cd public_mm/`
-
-    `./bin/install.sh` (prese ender to use default settings)
-    #### 4.install MetaMap Java API
-    `cd ../`
-
-    `bzip2 -dc public_mm_linux_javaapi_2016v2.tar.bz2 | tar xvf -`
-
-    `cd public_mm/`
-
-    `./bin/install.sh` (prese ender to use default settings)
-
-    `./bin/testapi.sh breast cancer` (test java api)
-
+  ```
+  cd myproject
+  #### 1. install tomcat
+  tar -xvf apache-tomcat-8.5.35.tar.gz
+  #### 2.install maven
+  tar -xzvf apache-maven-3.6.0-bin.tar.gz
+  #### 3.install MetaMap
+  bunzip2 -c public_mm_linux_main_2016v2.tar.bz2 | tar xvf -
+  cd public_mm/
+  ./bin/install.sh` 
+  # prese ender to use default settings #
+  #### 4.install MetaMap Java API
+  cd ../
+  bzip2 -dc public_mm_linux_javaapi_2016v2.tar.bz2 | tar xvf -
+  cd public_mm/
+  ./bin/install.sh
+  # prese ender to use default settings #
+  # test java api #
+  ./bin/testapi.sh breast cancer
+  ```
   ### Step 2: Configuration of Doc2Hpo
-    #### 1. copy mmp java api to lib
-    `cd myproject`
-
-    `mkdir ./doc2hpo/src/main/webapp/WEB-INF/lib`
-
-    `cp ./public_mm/src/javaapi/target/metamap-api-2.0.jar ./doc2hpo/src/main/webapp/WEB-INF/lib`
-
-    `cp ./public_mm/src/javaapi/dist/prologbeans.jar ./doc2hpo/src/main/webapp/WEB-INF/lib`
-
-    `cp ./public_mm/src/javaapi/dist/MetaMapApi.jar ./doc2hpo/src/main/webapp/WEB-INF/lib`
-
-    #### 2. change config file (if necessary)
-    `cd ./doc2hpo/src/main/webapp/WEB-INF`
-
-    `vi config.properties`
-
+  ```
+  cd myproject
+  #### 1. copy mmp java api to lib
+  mkdir ./doc2hpo/src/main/webapp/WEB-INF/lib
+  cp ./public_mm/src/javaapi/target/metamap-api-2.0.jar ./doc2hpo/src/main/webapp/WEB-INF/lib
+  cp ./public_mm/src/javaapi/dist/prologbeans.jar ./doc2hpo/src/main/webapp/WEB-INF/lib
+  cp ./public_mm/src/javaapi/dist/MetaMapApi.jar ./doc2hpo/src/main/webapp/WEB-INF/lib
+  #### 2. change config file (if necessary)
+  cd ./doc2hpo/src/main/webapp/WEB-INF
+  vi config.properties
+  ```
   ### Step 3: Deploy of Doc2Hpo
-    #### 1. maven compile
-    `cd myproject`
-
-    `cd doc2hpo/`
-
-    `../apache-maven-3.6.0/bin/mvn clean validate install`
-
-    `cp ./target/doc2hpo.war ./apache-tomcat-8.5.35/webapps/`
-
-    #### 2. start MetaMap server (optional)
-    `cd myproject`
-
-    `./public_mm/bin/skrmedpostctl start`
-
-    `./public_mm/bin/wsdserverctl start`
-
-    `nohup ./public_mm/bin/mmserver16 &`
-
-    #### 3. start tomcat
-    `cd myproject`
-  
-    `./apache-tomcat-8.5.35/bin/startup.sh`
-
-    #### Step 4: visit Doc2Hpo at `localhost:8080/doc2hpo`, and you are all set!
+  ```
+  cd myproject
+  #### 1. maven compile
+  cd doc2hpo/
+  ../apache-maven-3.6.0/bin/mvn clean validate install
+  cp ./target/doc2hpo.war ./apache-tomcat-8.5.35/webapps/
+  #### 2. start MetaMap server (optional)
+  cd myproject
+  ./public_mm/bin/skrmedpostctl start
+  ./public_mm/bin/wsdserverctl start
+  nohup ./public_mm/bin/mmserver16 &
+  #### 3. start tomcat
+  cd myproject
+  ./apache-tomcat-8.5.35/bin/startup.sh
+  ```
+  ### Step 4: visit Doc2Hpo at *localhost:8080/doc2hpo*, and you are all set!
 
 
 ## References
