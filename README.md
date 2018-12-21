@@ -21,7 +21,7 @@ doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO
    you should have __apache-maven-3.6.0-bin.tar.gz__, __public_mm_linux_javaapi_2016v2.tar.bz2__, __apache-tomcat-8.5.35.tar.gz__, __doc2hpo/__ now under __myproject__
  
   ### Step 1: Installation of everything you need
-  ```
+  ```bash
   cd myproject
   #### 1. install tomcat
   tar -xvf apache-tomcat-8.5.35.tar.gz
@@ -42,7 +42,7 @@ doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO
   ./bin/testapi.sh breast cancer
   ```
   ### Step 2: Configuration of Doc2Hpo
-  ```
+  ```bash
   cd myproject
   #### 1. copy mmp java api to lib
   mkdir ./doc2hpo/src/main/webapp/WEB-INF/lib
@@ -54,7 +54,7 @@ doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO
   vi config.properties
   ```
   ### Step 3: Deploy of Doc2Hpo
-  ```
+  ```bash
   cd myproject
   #### 1. maven compile
   cd doc2hpo/
