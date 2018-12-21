@@ -2,18 +2,112 @@
 
 doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO for phenolyzer analysis.
 
-## Getting Started
+## Installation
+### Step 0 : download everything you need
+#### Install java if you don't have one
+ `sudo add-apt-repository ppa:webupd8team/java`
 
-### Prerequisites
+ `sudo apt-get update`
+
+ `sudo apt-get install oracle-java8-installer`
+
+ `javac -version`
+#### 1. download apache tomcat if you don't have one
+`wget http://ftp.naz.com/apache/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.tar.gz`
+#### 2. download apache maven if you don't have one
+`wget https://www-us.apache.org/dist/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz`
+#### 3. download MetaMap and MetaMap Java API if you don't have one (Optional, only if you want to use MetaMap parsing engine)
+please visit https://metamap.nlm.nih.gov/ to download _MetaMap 2016v2 Linux Version_ and _MetaMap Java API Release for Linux_
+#### 4. git clone this repository 
+`git clone https://github.com/stormliucong/doc2hpo.git`
+#### 5. please put everything in one directory (Let's call it `myproject` for now)
+you should have `apache-maven-3.6.0-bin.tar.gz`, `public_mm_linux_javaapi_2016v2.tar.bz2`, `apache-tomcat-8.5.35.tar.gz`, `doc2hpo/` now under `myproject`
+
+### Step 1: Installation of everything you need
+`cd myproject`
+#### 1. install tomcat
+`tar -xvf apache-tomcat-8.5.35.tar.gz`
+#### 2.install maven
+`tar -xzvf apache-maven-3.6.0-bin.tar.gz`
+#### 3.install MetaMap
+`bunzip2 -c public_mm_linux_main_2016v2.tar.bz2 | tar xvf -` 
+
+`cd public_mm/`
+
+`./bin/install.sh` (prese ender to use default settings)
+#### 4.install MetaMap Java API
+`cd ../`
+
+`bzip2 -dc public_mm_linux_javaapi_2016v2.tar.bz2 | tar xvf -`
+
+`cd public_mm/`
+
+`./bin/install.sh` (prese ender to use default settings)
+
+`./bin/testapi.sh breast cancer` (test java api)
+
+### Step 2: Configuration of Doc2Hpo
+#### 1. copy mmp java api to lib
+`cd myproject`
+
+`mkdir ./doc2hpo/src/main/webapp/WEB-INF/lib`
+
+`cp ./public_mm/src/javaapi/target/metamap-api-2.0.jar ./doc2hpo/src/main/webapp/WEB-INF/lib`
+
+`cp ./public_mm/src/javaapi/dist/prologbeans.jar ./doc2hpo/src/main/webapp/WEB-INF/lib`
+
+`cp ./public_mm/src/javaapi/dist/MetaMapApi.jar ./doc2hpo/src/main/webapp/WEB-INF/lib`
+
+#### 2. change config file (if necessary)
+`cd ./doc2hpo/src/main/webapp/WEB-INF`
+
+`vi config.properties`
+
+### Step 3: Deploy of Doc2Hpo
+#### 1. maven compile
+`cd myproject`
+
+`cd doc2hpo/`
+
+`../apache-maven-3.6.0/bin/mvn clean validate install`
+
+`cp ./target/doc2hpo.war ./apache-tomcat-8.5.35/webapps/`
+
+#### 2. start MetaMap server (optional)
+`cd myproject`
+
+`./public_mm/bin/skrmedpostctl start`
+
+`./public_mm/bin/wsdserverctl start`
+
+`nohup ./public_mm/bin/mmserver16 &`
+
+#### 3. start tomcat
+`cd myproject`
+`./apache-tomcat-8.5.35/bin/startup.sh`
+
+#### Step 4: visit Doc2Hpo at `localhost:8080/doc2hpo`, and you are all set!
+
+
+
+
+
+
+
+
+
+
+
+## References
+### Download link
 - java version 1.8.0_191 (https://www.java.com/en/download/)
 - apache-tomcat version 8.5.35 (https://tomcat.apache.org/download-90.cgi)
 - apache-maven-3.6.0 (https://maven.apache.org/install.html)
-- metamap-api-2.0.jar (Optional) (https://metamap.nlm.nih.gov/MainDownload.shtml)
+- metamap-api-2.0.jar (https://metamap.nlm.nih.gov/MainDownload.shtml)
 - MetaMap 2016v2 Linux Version (https://metamap.nlm.nih.gov/MainDownload.shtml)
 - ncbo bioportal (https://github.com/stormliucong/docker-compose-bioportal)
 - Api key for ncbo annotator (http://data.bioontology.org/documentation)
-
-### Configuration
+### Documentation
 - Install metamap and metamap java api (https://metamap.nlm.nih.gov/Installation.shtml and https://metamap.nlm.nih.gov/Docs/README_javaapi.shtml#Downloading,%20Extracting%20and%20Installing%20the%20API%20distribution)
   * You have to get a free UMLS license to install the software
 - Starting supporting servers and running the MetaMap server
@@ -37,7 +131,7 @@ doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO
   * You could check version requirement by calling api at `servername:8080/doc2hpo/version`
 
 ## Versioning
-0.17.3
+0.18.4
 
 ## New features under development
 - Test across multiple browser and platforms
