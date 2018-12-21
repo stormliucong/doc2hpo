@@ -12,13 +12,14 @@ doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO
   wget http://ftp.naz.com/apache/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.tar.gz
   #### 2. download apache maven if you don't have one
   wget https://www-us.apache.org/dist/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz
-  #### 3. download MetaMap and MetaMap Java API if you don't have one (Optional, only if you want to use MetaMap parsing engine)
-   please visit https://metamap.nlm.nih.gov/ to download _MetaMap 2016v2 Linux Version_ and _MetaMap Java API Release for Linux_
-  #### 4. git clone this repository 
+  #### 3. git clone this repository 
   git clone https://github.com/stormliucong/doc2hpo.git
+  ```
+  #### 4. download MetaMap and MetaMap Java API if you don't have one (Optional, only if you want to use MetaMap parsing engine)
+   please visit https://metamap.nlm.nih.gov/ to download _MetaMap 2016v2 Linux Version_ and _MetaMap Java API Release for Linux_
   #### 5. please put everything in one directory (Let's call it `__myproject__` for now)
    you should have __apache-maven-3.6.0-bin.tar.gz__, __public_mm_linux_javaapi_2016v2.tar.bz2__, __apache-tomcat-8.5.35.tar.gz__, __doc2hpo/__ now under __myproject__
-  ```
+ 
   ### Step 1: Installation of everything you need
   ```
   cd myproject
