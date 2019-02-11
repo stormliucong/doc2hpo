@@ -66,7 +66,7 @@ function highlightMouseSelected() {
 							}
 							length = end - start + 1;
 							addTermsInSessionWithHighlight(start, length,
-									'ADD', 'ADD');
+									'click to search HPOs...', 'click to search HPOs...');
 						}
 
 					});

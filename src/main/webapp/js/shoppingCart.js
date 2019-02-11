@@ -76,7 +76,7 @@ function termCounting(listOfTerms) {
 		if (listOfTerms.hasOwnProperty(key)) {
 			var val = listOfTerms[key];
 			var hpoName = val['hpoName'];
-			if(hpoName != "add"){
+			if(hpoName != "click to search HPOs..."){
 				var hpoId = val['hpoId'];
 				if (!(hpoId in countTerms)) {
 					var countObj = {
