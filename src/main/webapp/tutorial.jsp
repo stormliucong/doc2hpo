@@ -162,8 +162,6 @@
 					</div>
 				</div>
 			</div>
-
-		</div>
 		<div class="ui vertical segments">
 			<div class="ui segment">
 				<p>
