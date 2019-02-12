@@ -124,9 +124,4 @@ Cong Liu, Chi Yuan, Kai Wang, Chunhua Weng
 stormliucong@gmail.com
 
 ## TBD
-1. Contexture properties
-2. Search length limit
-3. Fading out add button if no hpo term found
-4. Tuturial add 'Home'
-5. Search engine details
-
+1. Contexture Properties
