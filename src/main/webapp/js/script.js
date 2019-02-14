@@ -93,6 +93,9 @@ function formControl() {
 	$("#copyColumnButton").on("click", function() {
 		copyColumn();
 	});
+	$("#copyColumnButton2").on("click", function() {
+		copyColumn2();
+	});
 
 	$("#jsonDownloadButton").on(
 			"click",

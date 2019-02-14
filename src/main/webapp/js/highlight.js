@@ -118,6 +118,7 @@ function highlight(parsingJson) {
 	instance.markRanges(rangeArray, options);
 	// instance.mark('Individual');
 	$("#parsingResultsPanel").show();
+	$("#outputPanel").show();
 
 }
 

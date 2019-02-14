@@ -94,8 +94,9 @@
 					from free-text based clinical notes or literatures. </span>
 				<div class="ui hidden divider"></div>
 
-				<a href="./tutorial.jsp" class="ui large red button">Get started <i
-					class="right chevron icon"></i></a>
+				<a href="./tutorial.jsp" class="ui large red button">How to use
+					it ?<i class="right chevron icon"></i>
+				</a>
 			</div>
 		</div>
 		<div class="ui container">
@@ -211,129 +212,171 @@
 			<div class="html ui top attached segment" id="parsingResultsPanel"
 				style="display: none">
 				<div class="ui top attached label">Parsing Results</div>
-
-				<div class="row">
-					<div class="ui two column very relaxed stackable divided grid">
-						<div class="eleven wide column">
-							<div class="ui three top attached steps">
-								<div class="step">
-									<i class="mouse pointer icon"></i>
-									<div class="content">
-										<div class="title">Highlight</div>
-										<div class="description">Hold keyboard letter 'Q' and use mouse to select
-											the text</div>
-									</div>
-								</div>
-								<div class="step">
-									<i class="hand pointer outline icon"></i>
-									<div class="content">
-										<div class="title">Cancel</div>
-										<div class="description">double click to cancel the
-											highlighted text</div>
-									</div>
-								</div>
-								<div class="step">
-									<i class="plus square outline icon"></i>
-									<div class="content">
-										<div class="title">Search</div>
-										<div class="description">click dark green box to search
-											desired HPO terms</div>
-									</div>
-								</div>
-							</div>
-							<div class="ui segment">
-								<p id="parsingResults" style="white-space: pre-wrap">Pellentesque
-									habitant morbi tristique senectus et netus et malesuada fames
-									ac turpis egestas. Vestibulum tortor quam, feugiat vitae,
-									ultricies eget, tempor sit amet, ante. Donec eu libero sit amet
-									quam egestas semper. Aenean ultricies mi vitae est. Mauris
-									placerat eleifend leo.</p>
+				<div class="ui segment">
+					<div class="ui three top attached steps">
+						<div class="step">
+							<i class="mouse pointer icon"></i>
+							<div class="content">
+								<div class="title">Highlight</div>
+								<div class="description">Hold keyboard letter 'Q' and use
+									mouse to select the text</div>
 							</div>
 						</div>
-
-						<!--  POP UP -->
-						<div class="ui custom popup top left transition flowing hidden "
-							id="searchPopup">
-							<div style="display: none" id="HpoNameEntity"></div>
-							<div class="ui fluid search" id='hpoSearch'>
-								<input class="prompt" type="text" placeholder="Search HPO...">
-								<span><i class="large plus square outline icon"
-									id="addHpoTerm"></i> <i
-									class="large red window close link icon" id="closeAddHpoTerm"></i></span>
-								<div style="display: none" id="selectedResult"></div>
-
+						<div class="step">
+							<i class="hand pointer outline icon"></i>
+							<div class="content">
+								<div class="title">Cancel</div>
+								<div class="description">double click to cancel the
+									highlighted text</div>
 							</div>
 						</div>
-						<div class="five wide column">
-							<div class="container" style="padding-bottom: 20px">
-								<table class="ui very basic collapsing celled table"
-									id="shoppingCart" style="width: 100%">
-									<thead>
-										<tr>
-											<th>Term</th>
-											<th>Id</th>
-											<th>Count</th>
-										</tr>
-									</thead>
-								</table>
+						<div class="step">
+							<i class="plus square outline icon"></i>
+							<div class="content">
+								<div class="title">Search</div>
+								<div class="description">click dark green box to search
+									desired HPO terms</div>
 							</div>
-							<div class="row" style="padding-bottom: 20px">
-								<div class="ui buttons" id="buttonGroups">
-									<div class="ui button" id="jsonDownloadButton"
-										data-tooltip="Download the full annotation with position information as a json file">
-										JSON</div>
-								</div>
-							</div>
-
-							<div class="row">
-								<div class="ui buttons" id="buttonGroups">
-
-									<button class="ui button" id="copyColumnButton"
-										data-tooltip="Copy the first column as Phenolyzer Input">Copy
-										terms</button>
-									<div class="ui blue labeled icon button" id="phenolyzerButton"
-										data-tooltip="Redirect to Phenolyzer interface">
-										Next <i class="right arrow icon"></i>
-									</div>
-								</div>
-
-							</div>
-
-
 						</div>
+					</div>
+				</div>
+
+				<div class="ui segment">
+					<p id="parsingResults" style="white-space: pre-wrap">Pellentesque
+						habitant morbi tristique senectus et netus et malesuada fames ac
+						turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies
+						eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas
+						semper. Aenean ultricies mi vitae est. Mauris placerat eleifend
+						leo.</p>
+				</div>
+				<!--  POP UP -->
+				<div class="ui custom popup top left transition flowing hidden "
+					id="searchPopup">
+					<div style="display: none" id="HpoNameEntity"></div>
+					<div class="ui fluid search" id='hpoSearch'>
+						<input class="prompt" type="text" placeholder="Search HPO...">
+						<span><i class="large plus square outline icon"
+							id="addHpoTerm"></i> <i class="large red window close link icon"
+							id="closeAddHpoTerm"></i></span>
+						<div style="display: none" id="selectedResult"></div>
+
 					</div>
 				</div>
 			</div>
-			<!-- agreement  -->
+			
+			<div class="html ui top attached segment" id="outputPanel" style="display: none">
+				<div class="ui top attached label">Output</div>
+				<table class="ui table" id="shoppingCart">
+					<thead>
+						<tr>
+							<th>Term</th>
+							<th>Id</th>
+							<th>Count</th>
+						</tr>
+					</thead>
+				</table>
 
-			<div class="ui modal" id="phiAgreement">
-				<div class="header">Doc2Hpo Agreement</div>
-				<div class="content">
-					<p>1. Only de-identified notes could be uploaded</p>
-					<p>2. Doc2Hpo don't take any responsibility for protecting PHI
-						data</p>
-					<p>
-						3. This website uses cookies as well as similar tools and
-						technologies to understand visitors' experiences. By continuing to
-						use this website, you consent to Columbia University's usage of
-						cookies and similar technologies, in accordance with the <a
-							href="https://cuit.columbia.edu/content/columbia-university-website-cookie-notice">
-							Columbia University Website Cookie Notice.</a>
-					</p>
-					<p>
-						4. If you want to install your internal Doc2Hpo please visit the <a
-							href="https://github.com/stormliucong/doc2hpo"> source </a>
-					</p>
+				<div class="ui cards three stackable">
 
-				</div>
-				<div class="actions">
-					<div class="ui black deny button" id="rejectAgreement">Reject</div>
-					<div class="ui positive right labeled icon button">
-						Accept<i class="checkmark icon"></i>
+					<div class="card">
+						<div class="content">
+
+							<div class="header">Physicians</div>
+							<div class="meta">Automated EHR-driven gene analysis</div>
+							<div class="description">By clicking ‘Phenolyzer’, a
+								Phenolyzer-compatible phenotype list will be generated in the
+								clipboard and the users will be directed to Phenolyzer page</div>
+						</div>
+						<div class="extra content">
+							<div class="ui list">
+								<div class="item" id="copyColumnButton">
+									<a href="http://phenolyzer.wglab.org/" target="_blank">
+										Phenolyzer</a>
+								</div>
+								<div class="item" id="copyColumnButton">
+									<a href="http://compbio.charite.de/phenomizer/" target="_blank">
+										Phenomizer</a>
+								</div>
+								<div class="item" id="copyColumnButton2">
+									<a href="http://compbio.charite.de/PhenIX/" target="_blank">
+										PhenIX</a>
+								</div>
+								<div class="item" id="copyColumnButton">
+									<a href="http://weatherby.genetics.utah.edu/phevor2/index.html"
+										target="_blank"> Phevor 2</a>
+								</div>
+								<div class="item" id="copyColumnButton">
+									<a
+										href="https://monarch-exomiser-web-dev.monarchinitiative.org/exomiser/submit?"
+										target="_blank"> Exomizer</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="content">
+							<div class="header">Data Managers</div>
+							<div class="meta">Standardized phenotypes collection</div>
+							<div class="description">You could download the
+								document-level collection of standardized phenotypes</div>
+						</div>
+						<div class="extra content">
+							<div class="ui basic button" id="jsonDownloadButton"
+								data-tooltip="Download the full annotation with position information as a json file">
+								JSON</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="content">
+							<div class="header">Annotators</div>
+							<div class="meta">NLP-Assisted Textual Annotation</div>
+							<div class="description">You could download a standard-off
+								annotation file identifies the start and end position of the
+								text it applies to with concrete standardized HPO concepts
+								recognized.</div>
+						</div>
+						<div class="extra content">
+							<div class="ui buttons" id="buttonGroups"></div>
+						</div>
 					</div>
 				</div>
+
+
+			</div>
+
+		</div>
+	</div>
+	<!-- agreement  -->
+
+	<div class="ui modal" id="phiAgreement">
+		<div class="header">Doc2Hpo Agreement</div>
+		<div class="content">
+			<p>1. Only de-identified notes could be uploaded</p>
+			<p>2. Doc2Hpo don't take any responsibility for protecting PHI
+				data</p>
+			<p>
+				3. This website uses cookies as well as similar tools and
+				technologies to understand visitors' experiences. By continuing to
+				use this website, you consent to Columbia University's usage of
+				cookies and similar technologies, in accordance with the <a
+					href="https://cuit.columbia.edu/content/columbia-university-website-cookie-notice">
+					Columbia University Website Cookie Notice.</a>
+			</p>
+			<p>
+				4. If you want to install your internal Doc2Hpo please visit the <a
+					href="https://github.com/stormliucong/doc2hpo"> source </a>
+			</p>
+
+		</div>
+		<div class="actions">
+			<div class="ui black deny button" id="rejectAgreement">Reject</div>
+			<div class="ui positive right labeled icon button">
+				Accept<i class="checkmark icon"></i>
 			</div>
 		</div>
+	</div>
+	</div>
+	</div>
 	</div>
 	</div>
 

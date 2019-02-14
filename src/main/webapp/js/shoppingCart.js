@@ -27,7 +27,8 @@ function updateTable(parsingJson) {
 								},
 
 						],
-						lengthChange: false,
+						responsive: true,
+						lengthChange: true,
 				        buttons: ['excel', 'pdf'],
 						searching : false,
 						paging : false,
@@ -48,8 +49,8 @@ function updateTable(parsingJson) {
 	});
 	
 	$('.buttons-excel').attr('data-tooltip','Download above table as an excel file');
-	$('.buttons-pdf').attr('data-tooltip','Download above table as a pdf file')
-
+	$('.buttons-pdf').attr('data-tooltip','Download above table as a pdf file');
+	$('#shoppingCart').removeAttr( 'style' );
 
 }
 
@@ -57,6 +58,14 @@ function copyColumn(){
 	var table = $('#shoppingCart').DataTable();
 	var data = table.column( 0 ).data();
 	var copyString = data.join(";");
+	console.log(copyString);
+	copyToClipboard(copyString);
+}
+
+function copyColumn2(){
+	var table = $('#shoppingCart').DataTable();
+	var data = table.column( 1 ).data();
+	var copyString = data.join(",");
 	console.log(copyString);
 	copyToClipboard(copyString);
 }
@@ -76,7 +85,8 @@ function termCounting(listOfTerms) {
 		if (listOfTerms.hasOwnProperty(key)) {
 			var val = listOfTerms[key];
 			var hpoName = val['hpoName'];
-			if(hpoName != "click to search HPOs..."){
+			console.log(hpoName);
+			if(hpoName != "click to search hpos..."){
 				var hpoId = val['hpoId'];
 				if (!(hpoId in countTerms)) {
 					var countObj = {
