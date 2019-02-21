@@ -263,8 +263,9 @@
 					</div>
 				</div>
 			</div>
-			
-			<div class="html ui top attached segment" id="outputPanel" style="display: none">
+
+			<div class="html ui top attached segment" id="outputPanel"
+				style="display: none">
 				<div class="ui top attached label">Output</div>
 				<table class="ui table" id="shoppingCart">
 					<thead>
@@ -321,9 +322,7 @@
 								document-level collection of standardized phenotypes</div>
 						</div>
 						<div class="extra content">
-							<div class="ui basic button" id="jsonDownloadButton"
-								data-tooltip="Download the full annotation with position information as a json file">
-								JSON</div>
+							<div class="ui buttons" id="buttonGroups"></div>
 						</div>
 					</div>
 					<div class="card">
@@ -336,8 +335,11 @@
 								recognized.</div>
 						</div>
 						<div class="extra content">
-							<div class="ui buttons" id="buttonGroups"></div>
+							<div class="ui basic button" id="jsonDownloadButton"
+								data-tooltip="Download the full annotation with position information as a json file">
+								JSON</div>
 						</div>
+
 					</div>
 				</div>
 
