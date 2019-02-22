@@ -65,8 +65,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.es6.min.js"></script>
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
-<!-- Add IntroJs styles -->
-<link href="./css/introjs.css" rel="stylesheet">
+
 
 </head>
 
@@ -87,86 +86,90 @@
 	</div>
 
 
-	<div class='pusher' style="padding: 100px">
-		<div class="full height">
-			<div class="ui container">
-				<h1 class="ui header">
-					<span class="library"> Doc2Hpo </span>
+	<div class="full height">
+		<div class="ui container" style="padding-top: 100px;">
+			<h1 class="ui header">
+				<span class="library"> Doc2Hpo </span>
 
-				</h1>
-				<span> A webservice to extract human phenotype ontology terms
-					from free-text based clinical notes or literatures. </span>
-				<div class="ui hidden divider"></div>
-			</div>
+			</h1>
+			<span> A webservice to extract human phenotype ontology terms
+				from free-text based clinical notes or literatures. </span>
+			<div class="ui hidden divider"></div>
 		</div>
-		<div class="ui container">
-			<div class="ui vertical segments">
-				<div class="ui segment">
-					<p>
-						<img src="./img/step1.gif">
-					</p>
-				</div>
-				<div class="ui segment">
-					<div class="completed step">
+	</div>
 
-						<div class="content">
-							<div class="title">
-								<i class="info icon"></i>STEP 1: Click "Example" to load
-								examples. You can also type in free-text.
-							</div>
-							<div class="description"></div>
-						</div>
-					</div>
+	<div class="ui container">
+		<h3 class="ui header">Viedo Tutorial</h3>
 
-				</div>
+		<div class="ui embed" id="youtubevideo" data-source="youtube"
+			data-id="CfH9sZEqj-Q"></div>
+	</div>
+	<div class="ui hidden divider"></div>
+	<div class="ui container">
+		<h3 class="ui header">Step by step gif</h3>
 
-			</div>
-			<div class="ui vertical segments">
-				<div class="ui segment">
-					<p>
-						<img src="./img/step2.gif">
-					</p>
-				</div>
-				<div class="ui segment">
-					<div class="completed step">
-
-						<div class="content">
-							<div class="title">
-								<i class="info icon"></i>STEP 2: Select and configure the
-								parsing engines. (read details from publication...)
-							</div>
-							<div class="description"></div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-			<div class="ui vertical segments">
-				<div class="ui segment">
-					<p>
-						<img src="./img/step3.gif">
-					</p>
-				</div>
-				<div class="ui segment">
-					<div class="completed step">
-
-						<div class="content">
-							<div class="title">
-								<i class="info icon"></i>STEP 3: Hold keyboard button <img
-									src="./img/letter-q-key-keyboard-512.png"
-									style="height: 1.5em; width: auto"> and use mouse to
-								select text you want to annotate.
-							</div>
-							<div class="description"></div>
-						</div>
-					</div>
-				</div>
-			</div>
 		<div class="ui vertical segments">
 			<div class="ui segment">
-				<p>
-					<img src="./img/step4.gif">
-				</p>
+
+				<img class="ui image" src="./img/step1.gif">
+			</div>
+			<div class="ui segment">
+				<div class="completed step">
+
+					<div class="content">
+						<div class="title">
+							<i class="ui info icon"></i>STEP 1: Click "Example" to load
+							examples. You can also type in free-text.
+						</div>
+						<div class="description"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="ui vertical segments">
+			<div class="ui segment">
+
+				<img class="ui image" src="./img/step2.gif">
+			</div>
+			<div class="ui segment">
+				<div class="completed step">
+
+					<div class="content">
+						<div class="title">
+							<i class="ui info icon"></i>STEP 2: Select and configure the
+							parsing engines. (read details from publication...)
+						</div>
+						<div class="description"></div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="ui vertical segments">
+			<div class="ui segment">
+				<img class="ui image" src="./img/step3.gif">
+			</div>
+			<div class="ui segment">
+				<div class="completed step">
+
+					<div class="content">
+						<div class="title">
+							<i class="info icon"></i>STEP 3: Hold keyboard button <img
+								src="./img/letter-q-key-keyboard-512.png"
+								style="height: 1.5em; width: auto"> and use mouse to
+							select text you want to annotate.
+						</div>
+						<div class="description"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="ui vertical segments">
+			<div class="ui segment">
+
+				<img class="ui image" src="./img/step4.gif">
+
 			</div>
 			<div class="ui segment">
 				<div class="completed step">
@@ -183,9 +186,9 @@
 		</div>
 		<div class="ui vertical segments">
 			<div class="ui segment">
-				<p>
-					<img src="./img/step5.gif">
-				</p>
+
+				<img class="ui image" src="./img/step5.gif">
+
 			</div>
 			<div class="ui segment">
 				<div class="completed step">
@@ -202,9 +205,9 @@
 		</div>
 		<div class="ui vertical segments">
 			<div class="ui segment">
-				<p>
-					<img src="./img/step6.gif">
-				</p>
+
+				<img class="ui image" src="./img/step6.gif">
+
 			</div>
 			<div class="ui segment">
 				<div class="completed step">
@@ -219,71 +222,21 @@
 			</div>
 
 		</div>
-		<div class="ui vertical segments">
-			<div class="ui segment">
-				<p>
-					<img src="./img/step7.gif">
-				</p>
-			</div>
-			<div class="ui segment">
-				<div class="completed step">
-					<div class="content">
-						<div class="title">
-							<i class="info icon"></i>STEP 7: Save sentence level annotation
-							as JSON output, which includes start and end for each tag.
-						</div>
-						<div class="description"></div>
-					</div>
-				</div>
-			</div>
 
-		</div>
-		<div class="ui vertical segments">
-			<div class="ui segment">
-				<p>
-					<img src="./img/step8.gif">
-				</p>
-			</div>
-			<div class="ui segment">
-				<div class="completed step">
-					<div class="content">
-						<div class="title">
-							<i class="info icon"></i>STEP 8: Save document level extraction
-							as excel or pdf.
-						</div>
-						<div class="description"></div>
-					</div>
-				</div>
-			</div>
-
-		</div>
-		<div class="ui vertical segments">
-			<div class="ui segment">
-
-				<p>
-					<img src="./img/step9.gif">
-				</p>
-			</div>
-			<div class="ui segment">
-				<div class="completed step">
-					<div class="content">
-						<div class="title">
-							<i class="info icon"></i>STEP 9: Copy terms and paste them into
-							Phenolyzer.
-						</div>
-						<div class="description"></div>
-					</div>
-				</div>
-			</div>
-
-		</div>
 	</div>
-
+	<div class="ui divider"></div>
+	
 	<div class="ui inverted vertical footer segment form-page">
 		<div class="ui center aligned container">Columbia University
 			&copy 2018. All Rights Reserved</div>
 	</div>
 	<!-- /.hidden for js only -->
 	<input style="display: none;" id="basePath" name="basePath" value=".">
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#youtubevideo').embed();
+		});
+	</script>
 </body>
+
 </html>
