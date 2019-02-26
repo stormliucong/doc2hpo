@@ -311,7 +311,7 @@
 				</div>
 				<div class="card">
 					<div class="content">
-						<div class="header">Data Managers</div>
+						<div class="header">Data Curators</div>
 						<div class="meta">Standardized phenotypes collection</div>
 						<div class="description">You could download the
 							document-level collection of standardized phenotypes</div>
