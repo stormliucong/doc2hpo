@@ -8,6 +8,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import edu.columbia.dbmi.doc2hpo.pojo.ParsingResults;
+import edu.columbia.dbmi.doc2hpo.pojo.SplittedSentence;
+import edu.columbia.dbmi.doc2hpo.tool.CoreNLP;
 import edu.columbia.dbmi.doc2hpo.util.Obo;
 import edu.columbia.dbmi.doc2hpo.util.RunBashCommand;
 //import edu.columbia.dbmi.io.FileHelper;
@@ -29,6 +31,7 @@ public class MetaMapParser {
 	String metamapBinPath;
 	private Obo o;
 	private HpoCleaner cleaner;
+	CoreNLP corenlp;
 
 	public static void main(String[] args) {
 //		try {
@@ -87,14 +90,83 @@ public class MetaMapParser {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-////		String metamapBinPath
-//		MetaMapParser mmp = new MetaMapParser();
-//		String content = "Individual II-1 is a 10 year old boy. He was born at term with normal birth parameters and good APGAR scores (9/10/10). The neonatal period was uneventful, and he had normal motor development during early childhood: he began to look up at 3 months, sit by himself at 5 months, stand up at 11 months, walk at 13 months, and speak at 17 months. He attended a regular kindergarten, without any signs of difference in intelligence, compared to his peers. Starting at age 6, the parents observed ever increasing behavioral disturbance for the boy, manifesting in multiple aspects of life. For example, he can no longer wear clothes by himself, cannot obey instruction from parents/teachers, can no longer hold subjects tightly in hand, which were all things that he could do before 6 years of age. In addition, he no longer liked to play with others; instead, he just preferred to stay by himself, and he sometimes fell down when he walked on the stairs, which had rarely happened at age 5. The proband continued to deteriorate: at age 9, he could not say a single word and had no action or response to any instruction given in clinical exams. Additionally, rough facial features were noted with a flat nasal bridge, a synophrys (unibrow), a long and smooth philtrum, thick lips and an enlarged mouth. He also had rib edge eversion, and it was also discovered that he was profoundly deaf and had completely lost the ability to speak. He also had loss of bladder control. The diagnosis of severe intellectual disability was made, based on Wechsler Intelligence Scale examination. Brain MRI demonstrated cortical atrophy with enlargement of the subarachnoid spaces and ventricular dilatation (Figure 2). Brainstem evoked potentials showed moderate abnormalities. Electroencephalography (EEG) showed abnormal slee";
-//		List<String> theOptions = new ArrayList<String>();
-//		theOptions.add("-y");
-//		List<ParsingResults> pr = mmp.parse(content, theOptions);
+		CoreNLP corenlp = new CoreNLP();
+		MetaMapParser mmp = new MetaMapParser(corenlp);
+		String content = "Individual II-1 is a 10 year old boy. He was born at term with normal birth parameters and good APGAR scores (9/10/10). The neonatal period was uneventful, and he had normal motor development during early childhood: he began to look up at 3 months, sit by himself at 5 months, stand up at 11 months, walk at 13 months, and speak at 17 months. He attended a regular kindergarten, without any signs of difference in intelligence, compared to his peers. Starting at age 6, the parents observed ever increasing behavioral disturbance for the boy, manifesting in multiple aspects of life. For example, he can no longer wear clothes by himself, cannot obey instruction from parents/teachers, can no longer hold subjects tightly in hand, which were all things that he could do before 6 years of age. In addition, he no longer liked to play with others; instead, he just preferred to stay by himself, and he sometimes fell down when he walked on the stairs, which had rarely happened at age 5. The proband continued to deteriorate: at age 9, he could not say a single word and had no action or response to any instruction given in clinical exams. Additionally, rough facial features were noted with a flat nasal bridge, a synophrys (unibrow), a long and smooth philtrum, thick lips and an enlarged mouth. He also had rib edge eversion, and it was also discovered that he was profoundly deaf and had completely lost the ability to speak. He also had loss of bladder control. The diagnosis of severe intellectual disability was made, based on Wechsler Intelligence Scale examination. Brain MRI demonstrated cortical atrophy with enlargement of the subarachnoid spaces and ventricular dilatation (Figure 2). Brainstem evoked potentials showed moderate abnormalities. Electroencephalography (EEG) showed abnormal sleep EEG.";
+		List<String> theOptions = new ArrayList<String>();
+		theOptions.add("-y");
+		List<ParsingResults> pr = mmp.parse(content, theOptions);
+		pr = mmp.parseBySentence(corenlp, content, theOptions);
 	}
 
+	public List<ParsingResults> parseBySentence(CoreNLP corenlp, String content, List<String> theOptions) {
+		// TODO Auto-generated method stub
+		List<SplittedSentence> ss = corenlp.splitInputSimple(content);
+		MetaMapApi api = new MetaMapApiImpl(0);
+		if (theOptions.size() > 0) {
+			api.resetOptions();
+			api.setOptions(theOptions);
+		}
+		List<ParsingResults> pResults = new ArrayList<ParsingResults>();
+
+		for(SplittedSentence s : ss) {
+
+			// TODO Auto-generated method stub
+			List<Result> resultList = api.processCitationsFromString(s.getSetence());
+			Result result = resultList.get(0);
+			try {
+				for (Utterance utterance : result.getUtteranceList()) {
+					for (PCM pcm : utterance.getPCMList()) {
+						for (Mapping map : pcm.getMappingList()) {
+							for (Ev mapEv : map.getEvList()) {
+								String[] cuiname = new String[4];
+								cuiname[0] = mapEv.getConceptName();
+								cuiname[1] = mapEv.getConceptId();
+								cuiname[2] = mapEv.getSemanticTypes().toString();
+								cuiname[3] = mapEv.getSources().toString();
+								//
+								if (o.hmCui2Hpo.containsKey(cuiname[1])) {
+									ParsingResults pr = new ParsingResults();
+									String Id = o.hmCui2Hpo.get(cuiname[1]);
+									if (Id.contains("|")) {
+										Id = Id.split("\\|")[0];
+									}
+									String name = o.hmHpo2Name.get(Id);
+									pr.setHpoId(Id);
+									pr.setHpoName(name);
+									List<Position> position = mapEv.getPositionalInfo();
+									int[] pos = getLongestPosition(position);
+									System.out.println(utterance);
+									System.out.println(name);
+									System.out.println(pos[0] + "\t" + s.getStart());
+									System.out.println(pos[1] + "\t" + s.getStart());
+
+									pr.setStart(pos[0] + s.getStart());
+									pr.setLength(pos[1]);
+									pResults.add(pr);
+								}
+							}
+						}
+					}
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		pResults = cleaner.getPhenotypeOnly(pResults);
+		return pResults;
+	}
+
+	public MetaMapParser(CoreNLP corenlp) {
+//		System.out.println(mmpBin);
+//		this.metamapBinPath = mmpBin;
+		o = new Obo();
+		cleaner = new HpoCleaner();
+		this.corenlp = corenlp;
+	}
+	
 	public MetaMapParser() {
 //		System.out.println(mmpBin);
 //		this.metamapBinPath = mmpBin;
@@ -424,13 +496,13 @@ public class MetaMapParser {
 							if (o.hmCui2Hpo.containsKey(cuiname[1])) {
 								ParsingResults pr = new ParsingResults();
 
-//								System.out.println("Utterance:");
-//								System.out.println(" Id: " + utterance.getId());
-//								System.out.println(" Utterance text: " + utterance.getString());
-//								System.out.println(" Position: " + utterance.getPosition());
-//								System.out.println("Phrase:");
-//								System.out.println(" text: " + pcm.getPhrase().getPhraseText());
-//								System.out.println("Mappings:");
+								System.out.println("Utterance:");
+								System.out.println(" Id: " + utterance.getId());
+								System.out.println(" Utterance text: " + utterance.getString());
+								System.out.println(" Position: " + utterance.getPosition());
+								System.out.println("Phrase:");
+								System.out.println(" text: " + pcm.getPhrase().getPhraseText());
+								System.out.println("Mappings:");
 								String Id = o.hmCui2Hpo.get(cuiname[1]);
 								if (Id.contains("|")) {
 									Id = Id.split("\\|")[0];

@@ -61,6 +61,11 @@ public class HpoCleaner {
 		acryn.add("bo");
 		acryn.add("gist");
 		acryn.add("tia");
+		acryn.add("tic");
+		acryn.add("CP");
+		acryn.add("AML");
+		acryn.add("CIU");
+		acryn.add("acrania");
 
 		for(ParsingResults result : pResults) {
 			String hpoName = result.getHpoName();

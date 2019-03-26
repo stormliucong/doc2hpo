@@ -10,14 +10,19 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
 import org.springframework.util.ResourceUtils;
+
+import edu.columbia.dbmi.doc2hpo.controller.ParseController;
 
 
 public class Obo {
+	private static Logger logger = Logger.getLogger(Obo.class);
+
 	public static void main (String[] args) throws IOException {
 		Obo o = new Obo();
 		HashMap<String, String> hmCui2Hpo = o.hmCui2Hpo;
-		System.out.println(hmCui2Hpo);
+//		System.out.println(hmCui2Hpo);
 
 
 	}
@@ -105,7 +110,7 @@ public class Obo {
 				}else {
 					hpo = test + "|" + hpo;
 					hmCui2Hpo.put(cui, hpo);
-					System.out.println("WARNING: " + cui + " occurred more than once!");
+					logger.info("[WARNING][ncboUrl]["+cui+"occurred more than once!]");
 				}
 			}
 			newLine = br.readLine();

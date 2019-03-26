@@ -261,6 +261,17 @@
 			<artifactId>opennlp-tools</artifactId>
 			<version>1.8.4</version>
 		</dependency>
+		<dependency>
+			<groupId>edu.stanford.nlp</groupId>
+			<artifactId>stanford-corenlp</artifactId>
+			<version>3.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>edu.stanford.nlp</groupId>
+			<artifactId>stanford-corenlp</artifactId>
+			<version>3.9.2</version>
+			<classifier>models</classifier>
+		</dependency>
 		<!--metamap java api -->
 		<dependency>
 			<groupId>metamap-api-2.0</groupId>
@@ -269,13 +280,9 @@
 			<version>1.0</version>
 			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/metamap-api-2.0.jar</systemPath>
 		</dependency>
-		<!-- <dependency>
-			<groupId>MetaMapApi.jar</groupId>
-			<artifactId>MetaMapApi.jar</artifactId>
-			<scope>system</scope>
-			<version>1.0</version>
-			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/MetaMapApi.jar</systemPath>
-		</dependency> -->
+		<!-- <dependency> <groupId>MetaMapApi.jar</groupId> <artifactId>MetaMapApi.jar</artifactId> 
+			<scope>system</scope> <version>1.0</version> <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/MetaMapApi.jar</systemPath> 
+			</dependency> -->
 		<dependency>
 			<groupId>prologbeans.jar</groupId>
 			<artifactId>prologbeans.jar</artifactId>

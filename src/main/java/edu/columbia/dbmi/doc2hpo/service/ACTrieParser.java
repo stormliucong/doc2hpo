@@ -11,12 +11,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
 import com.hankcs.algorithm.AhoCorasickDoubleArrayTrie;
 import com.hankcs.algorithm.AhoCorasickDoubleArrayTrie.Hit;
 
+import edu.columbia.dbmi.doc2hpo.controller.ParseController;
 import edu.columbia.dbmi.doc2hpo.pojo.ParsingResults;
 import edu.columbia.dbmi.doc2hpo.util.FileUtil;
 import edu.columbia.dbmi.doc2hpo.util.NegUtil;
@@ -26,6 +28,8 @@ import opennlp.tools.sentdetect.SentenceModel;
 
 @Service("acdatService")
 public class ACTrieParser {
+	private static Logger logger = Logger.getLogger(ParseController.class);
+
 	AhoCorasickDoubleArrayTrie<String> acdat = new AhoCorasickDoubleArrayTrie<String>();
 	HashMap<String,String> hpodic=new HashMap<String,String>();
 	private HpoCleaner cleaner;
@@ -45,7 +49,7 @@ public class ACTrieParser {
 			acdat.build(map);
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.err.println(e);
+			logger.info("[Exception]["+e+"]");
 		}
 		cleaner = new HpoCleaner();
 

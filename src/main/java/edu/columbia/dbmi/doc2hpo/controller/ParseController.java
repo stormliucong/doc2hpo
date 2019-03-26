@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,11 +20,13 @@ import edu.columbia.dbmi.doc2hpo.pojo.ParsingResults;
 import edu.columbia.dbmi.doc2hpo.service.ACTrieParser;
 import edu.columbia.dbmi.doc2hpo.service.MetaMapParser;
 import edu.columbia.dbmi.doc2hpo.service.NcboParser;
+import edu.columbia.dbmi.doc2hpo.tool.CoreNLP;
 
 @Controller
 @RequestMapping("/parse")
 public class ParseController {
-
+	private static Logger logger = Logger.getLogger(ParseController.class);
+	private CoreNLP corenlp;
 	private MetaMapParser mmp;
 	private NcboParser ncbo;
 	private ACTrieParser actp;
@@ -45,12 +48,13 @@ public class ParseController {
 
 	@PostConstruct
 	public void init() {
-		this.mmp = new MetaMapParser();
+		this.corenlp = new CoreNLP();
+		this.mmp = new MetaMapParser(corenlp);
 		this.actp = new ACTrieParser();
 		if(this.ncboUrl.trim().toLowerCase().equals("null")) {
 			this.ncboUrl = "http://data.bioontology.org"; // default using public ncbo api.
 		}
-		System.out.println(this.ncboUrl);
+		logger.info("[ncboUrl]["+this.ncboUrl+"]");
 		if(this.proxy.trim().toLowerCase().equals("null")) {
 			this.ncbo = new NcboParser(this.NcboApiKey,this.ncboUrl);
 		}else {
@@ -114,7 +118,7 @@ public class ParseController {
 			List<String> theOptions = pj.getOption();
 			String content = pj.getNote();
 			
-			hmName2Id = this.mmp.parse(content, theOptions);
+			hmName2Id = this.mmp.parseBySentence(this.corenlp, content, theOptions);
 			
 			httpSession.setAttribute("hmName2Id", hmName2Id);
 			map.put("hmName2Id", hmName2Id);

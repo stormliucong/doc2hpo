@@ -1,14 +1,13 @@
 doc2hpo.war
 README.md
 .DS_Store
-/target/
-/logs/
-/target/
+/target/*
+/logs/*
 /src/lib/*
-/src/test/
-/src/main/webapp/WEB-INF/lib/
+/src/test/*
+/src/main/webapp/WEB-INF/*
 /src/main/java/metamap-api-2.0.jar
-/public_mm/
-InstallBackupAndSync.bz2
-
+/public_mm/*
+/public_mm_lite/*
+public_mm_lite_3.6.2rc3_binaryonly.zip
 
