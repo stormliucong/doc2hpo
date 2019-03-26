@@ -5,7 +5,8 @@ README.md
 /logs/*
 /src/lib/*
 /src/test/*
-/src/main/webapp/WEB-INF/*
+/src/main/webapp/WEB-INF/config.properties
+/src/main/webapp/WEB-INF/lib/*
 /src/main/java/metamap-api-2.0.jar
 /public_mm/*
 /public_mm_lite/*

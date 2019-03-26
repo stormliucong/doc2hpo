@@ -1,0 +1,13 @@
+# setup the proxy you want to use. Put null if don't use
+Proxy=null
+# setup the proxy port you want to use. Put null if don't use
+Port=null
+# metamap and its java api path. Input your own for internal server
+MetamapBinPath=~/public_mm/bin
+# ncbo api url. use public one http://data.bioontology.org by default
+NcboUrl=null
+# ncbo api key. use Cong's api in the public demo server. Input your own for internal server.
+NcboApiKey=XXX
+
+
+
