@@ -15,10 +15,12 @@ doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO
   #### 3. git clone this repository 
   git clone https://github.com/stormliucong/doc2hpo.git
   ```
-  #### 4. download MetaMap and MetaMap Java API if you don't have one (Optional, only if you want to use MetaMap parsing engine)
+  #### 4. (Optional) download MetaMap and MetaMap Java API if you don't have one 
    please visit https://metamap.nlm.nih.gov/ to download _MetaMap 2016v2 Linux Version_ and _MetaMap Java API Release for Linux_
-  #### 5. please put everything in one directory (Let's call it `__myproject__` for now)
-   you should have __apache-maven-3.6.0-bin.tar.gz__, __public_mm_linux_javaapi_2016v2.tar.bz2__, __apache-tomcat-8.5.35.tar.gz__, __doc2hpo/__ now under __myproject__
+  #### 5. (Optional) download MetaMapLite if you don't have one
+   please visit https://metamap.nlm.nih.gov/MetaMapLite.shtml to download __MetaMapLite 2018 3.6.2rc3 with Category 0+4+9 (USAbase) 2018AA UMLS dataset__
+  #### 6. please put everything in one directory (Let's call it `__myproject__` for now)
+   you should have __apache-maven-3.6.0-bin.tar.gz__, __public_mm_linux_javaapi_2016v2.tar.bz2__, __public_mm_lite_3.6.2rc3.zip__, __apache-tomcat-8.5.35.tar.gz__, __doc2hpo/__ now under __myproject__
  
   ### Step 1: Installation of everything you need
   ```bash
@@ -40,6 +42,9 @@ doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO
   # prese ender to use default settings #
   # test java api #
   ./bin/testapi.sh breast cancer
+  #### 5.install MetaMapLite
+  cd ../
+  unzip public_mm_lite_3.6.2rc3.zip
   ```
   ### Step 2: Configuration of Doc2Hpo
   ```bash
@@ -49,9 +54,16 @@ doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO
   cp ./public_mm/src/javaapi/target/metamap-api-2.0.jar ./doc2hpo/src/main/webapp/WEB-INF/lib
   cp ./public_mm/src/javaapi/dist/prologbeans.jar ./doc2hpo/src/main/webapp/WEB-INF/lib
   cp ./public_mm/src/javaapi/dist/MetaMapApi.jar ./doc2hpo/src/main/webapp/WEB-INF/lib
-  #### 2. change config file (if necessary)
+  #### 2. copy mmlite jar to lib
+  cp ./public_mm_lite/target/metamaplite-3.6.2rc3.jar ./doc2hpo/src/main/webapp/WEB-INF/lib
+  cp ./public_mm_lite/lib/* ./doc2hpo/src/main/webapp/WEB-INF/lib
+  cp ./public_mm_lite/config/* ./doc2hpo/properties
+  #### 3. change config file (if necessary)
   cd ./doc2hpo/src/main/webapp/WEB-INF
   vi config.properties
+  cd ./doc2hpo/properties
+  # change metamaplite db path accordingly
+  vi metamaplite.properties
   ```
   ### Step 3: Deploy of Doc2Hpo
   ```bash
@@ -81,6 +93,7 @@ doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO
   - MetaMap 2016v2 Linux Version (https://metamap.nlm.nih.gov/MainDownload.shtml)
   - ncbo bioportal (https://github.com/stormliucong/docker-compose-bioportal)
   - Api key for ncbo annotator (http://data.bioontology.org/documentation)
+  - MetaMap Lite (https://metamap.nlm.nih.gov/MetaMapLite.shtml)
   ### Documentation
   - Install metamap and metamap java api (https://metamap.nlm.nih.gov/Installation.shtml and https://metamap.nlm.nih.gov/Docs/README_javaapi.shtml#Downloading,%20Extracting%20and%20Installing%20the%20API%20distribution)
   * You have to get a free UMLS license to install the software
@@ -105,7 +118,7 @@ doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO
   * You could check version requirement by calling api at `servername:8080/doc2hpo/version`
 
 ## Versioning
-1.2.2
+1.3.2
 
 ## New features under development
   - Test across multiple browser and platforms
