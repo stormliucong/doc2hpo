@@ -7,7 +7,6 @@ function parse() {
 		value = "act";
 	} else {
 		value = $("#parsingEngine").dropdown('get value');
-		console.log(value);
 	}
 
 	if (value == "act") {
@@ -67,8 +66,6 @@ function parseMetamap(note) {
 						if (!Array.isArray(terms) || !terms.length) {
 							alert("No HPO terms found!");
 						} else {
-
-							alert("===" + terms + "!!!");
 							highlight(terms);
 							updateTable(terms);
 							var t = $(window).scrollTop();
@@ -122,8 +119,6 @@ function parseACT(note) {
 						if (!Array.isArray(terms) || !terms.length) {
 							alert("No HPO terms found!");
 						} else {
-
-							alert("===" + terms + "!!!");
 							highlight(terms);
 							updateTable(terms);
 							var t = $(window).scrollTop();
@@ -144,8 +139,10 @@ function parseACT(note) {
 }
 
 function parseMetamaplite(note) {
+	var mmlp_negex = $('#mmlp_negex').is(':checked');
 	var formData = {
 		'note' : note,
+		'negex' : mmlp_negex
 	};
 	$
 			.blockUI({
@@ -177,8 +174,6 @@ function parseMetamaplite(note) {
 						if (!Array.isArray(terms) || !terms.length) {
 							alert("No HPO terms found!");
 						} else {
-
-							alert("===" + terms + "!!!");
 							highlight(terms);
 							updateTable(terms);
 							var t = $(window).scrollTop();
@@ -239,8 +234,6 @@ function parseNcbo(note) {
 						if (!Array.isArray(terms) || !terms.length) {
 							alert("No HPO terms found!");
 						} else {
-
-							alert("===" + terms + "!!!");
 							highlight(terms);
 							updateTable(terms);
 							var t = $(window).scrollTop();

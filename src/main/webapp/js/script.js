@@ -62,21 +62,27 @@ function formControl() {
 		if ($("#parsingEngine").dropdown('get value') == 'act') {
 			$("#ncboOptions").hide();
 			$("#mmpOptions").hide();
+			$("#mmlpOptions").hide();
+
 		}
 
 		if ($("#parsingEngine").dropdown('get value') == 'mmp') {
 			$("#ncboOptions").hide();
 			$("#mmpOptions").show();
+			$("#mmlpOptions").hide();
+
 		}
 
 		if ($("#parsingEngine").dropdown('get value') == 'ncbo') {
 			$("#ncboOptions").show();
 			$("#mmpOptions").hide();
+			$("#mmlpOptions").hide();
 		}
 		
 		if ($("#parsingEngine").dropdown('get value') == 'mmlp') {
 			$("#ncboOptions").hide();
 			$("#mmpOptions").hide();
+			$("#mmlpOptions").show();
 		}
 	});
 

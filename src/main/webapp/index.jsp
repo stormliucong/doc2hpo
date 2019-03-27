@@ -151,6 +151,17 @@
 						</div>
 
 					</div>
+					<!-- option for Metamap lite -->
+					<div class="ui celled relaxed list" style="display: none"
+						id="mmlpOptions">
+						<div class="inline field">
+							<div class="ui checkbox">
+								<input type="checkbox" id="mmlp_negex" checked> <label>negation
+									detection</label>
+							</div>
+						</div>
+					</div>
+
 					<!-- option for Metamap -->
 					<div class="ui celled relaxed list" style="display: none"
 						id="mmpOptions">
@@ -271,6 +282,7 @@
 					<tr>
 						<th>Term</th>
 						<th>Id</th>
+						<th>Is_negated</th>
 						<th>Count</th>
 					</tr>
 				</thead>

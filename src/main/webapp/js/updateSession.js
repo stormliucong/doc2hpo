@@ -1,11 +1,12 @@
-function updateTermsInSession(start, length, hpo_id, hpo_term) {
+function updateTermsInSession(start, length, hpo_id, hpo_term,is_negated) {
 	start = parseInt(start);
 	length = parseInt(length);
 	var formData = {
 		'start' : start,
 		'length' : length,
 		'hpoId' : hpo_id,
-		'hpoName' : hpo_term
+		'hpoName' : hpo_term,
+		'negated' : is_negated
 	};
 	$.blockUI({
 		message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">updating...</div><p></p><p></p><p></p><p></p></div></div>',
@@ -47,6 +48,7 @@ function updateTermsInSession(start, length, hpo_id, hpo_term) {
 
 
 }
+
 
 function deleteTermsInSession(start, length, hpo_id, hpo_term) {
 	start = parseInt(start);

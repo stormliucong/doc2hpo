@@ -1,11 +1,11 @@
 function updateTable(parsingJson) {
 	responseObj = termCounting(parsingJson);
-	console.log(responseObj);
 	var table = $('#shoppingCart')
 			.DataTable(
 					{
 						"data" : responseObj,
 						"columns" : [
+
 								{
 									"data" : "hponame"
 								},
@@ -23,90 +23,126 @@ function updateTable(parsingJson) {
 										return data;
 									}
 								}, {
+									"data" : "is_negated"
+								}, {
 									"data" : "count"
 								},
 
 						],
-						responsive: true,
-						lengthChange: true,
-				        buttons: ['excel', 'pdf'],
+						responsive : true,
+						lengthChange : true,
+						buttons : [ 'excel', 'pdf' ],
 						searching : false,
 						paging : false,
 						info : false,
 						"bDestroy" : true
 					});
-	
-	 table.buttons().container()
-     .appendTo($("#buttonGroups"));
-	 
-	$('#shoppingCart tbody').on('click', 'tr', function() {
-		if ($(this).hasClass('selected')) {
-			$(this).removeClass('selected');
-		} else {
-			$("#shoppingCart").DataTable().$('tr.selected').removeClass('selected');
-			$(this).addClass('selected');
-		}
-	});
-	
-	$('.buttons-excel').attr('data-tooltip','Download above table as an excel file');
-	$('.buttons-pdf').attr('data-tooltip','Download above table as a pdf file');
-	$('#shoppingCart').removeAttr( 'style' );
+
+	table.buttons().container().appendTo($("#buttonGroups"));
+
+	$('#shoppingCart tbody').on(
+			'click',
+			'tr',
+			function() {
+				if ($(this).hasClass('selected')) {
+					$(this).removeClass('selected');
+				} else {
+					$("#shoppingCart").DataTable().$('tr.selected')
+							.removeClass('selected');
+					$(this).addClass('selected');
+				}
+			});
+
+	$('.buttons-excel').attr('data-tooltip',
+			'Download above table as an excel file');
+	$('.buttons-pdf')
+			.attr('data-tooltip', 'Download above table as a pdf file');
+	$('#shoppingCart').removeAttr('style');
 
 }
 
-function copyColumn(){
+function copyColumn() {
 	var table = $('#shoppingCart').DataTable();
-	var data = table.column( 0 ).data();
+	var indexes = table.rows().eq( 0 ).filter( function (rowIdx) {
+	    return table.cell( rowIdx, 2 ).data() == "false" ? true : false;
+	} );
+	var data = table.cells(indexes,0).data();
 	var copyString = data.join(";");
 	console.log(copyString);
 	copyToClipboard(copyString);
 }
 
-function copyColumn2(){
+function copyColumn2() {
 	var table = $('#shoppingCart').DataTable();
-	var data = table.column( 1 ).data();
+	var indexes = table.rows().eq( 0 ).filter( function (rowIdx) {
+	    return table.cell( rowIdx, 2 ).data() == "false" ? true : false;
+	} );
+	var data = table.cells(indexes,1).data();
 	var copyString = data.join(",");
 	console.log(copyString);
 	copyToClipboard(copyString);
 }
 
-
 function addToTable() {
-//TBD
+	// TBD
 }
 
 function deleteRow() {
-//TBD
+	// TBD
 }
 
-function termCounting(listOfTerms) {
-	var countTerms = {}
-	for (key in listOfTerms) {
-		if (listOfTerms.hasOwnProperty(key)) {
-			var val = listOfTerms[key];
+function termCounting(parsingJson) {
+	var p_countTerms = {}
+	var n_countTerms = {}
+
+	for (key in parsingJson) {
+		if (parsingJson.hasOwnProperty(key)) {
+			var val = parsingJson[key];
 			var hpoName = val['hpoName'];
-			console.log(hpoName);
-			if(hpoName != "click to search hpos..."){
+			var is_negated = val['negated']
+
+			if (hpoName != "click to search hpos...") {
 				var hpoId = val['hpoId'];
-				if (!(hpoId in countTerms)) {
-					var countObj = {
-						'hpoName' : hpoName,
-						'count' : 1
+				if (is_negated == false) {
+					if (!(hpoId in p_countTerms)) {
+						var countObj = {
+							'hpoName' : hpoName,
+							'count' : 1
+						}
+						p_countTerms[hpoId] = countObj
+					} else {
+						p_countTerms[hpoId]['count'] += 1;
 					}
-					countTerms[hpoId] = countObj
 				} else {
-					countTerms[hpoId]['count'] += 1;
+					if (!(hpoId in n_countTerms)) {
+						var countObj = {
+							'hpoName' : hpoName,
+							'count' : 1
+						}
+						n_countTerms[hpoId] = countObj
+					} else {
+						n_countTerms[hpoId]['count'] += 1;
+					}
 				}
 			}
 		}
 	}
 	var result = [];
 
-	for ( var hpoId in countTerms) {
+	for ( var hpoId in p_countTerms) {
 		result.push({
 			"hpoid" : hpoId,
-			"hponame" : countTerms[hpoId]['hpoName'],
-			"count" : countTerms[hpoId]['count']
+			"hponame" : p_countTerms[hpoId]['hpoName'],
+			'is_negated' : 'false',
+			"count" : p_countTerms[hpoId]['count']
+		});
+	}
+	for ( var hpoId in n_countTerms) {
+		result.push({
+			"hpoid" : hpoId,
+			"hponame" : n_countTerms[hpoId]['hpoName'],
+			'is_negated' : 'true',
+			"count" : n_countTerms[hpoId]['count']
 		});
 	}
 	return result;

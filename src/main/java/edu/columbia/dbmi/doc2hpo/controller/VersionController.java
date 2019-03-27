@@ -17,12 +17,12 @@ public class VersionController {
 		// major version: new function backward incompatible;
 		// minor version: new function backward compatible;
 		// patch: bug corrected;
-		version.setDoc2hpo("0.18.4");
+		version.setDoc2hpo("1.21.0");
 		version.setJava("1.8.0_191");
 		version.setTomcat("8.5.35");
 		version.setMetamap("2016v2");
+		version.setMetamaplite("metamaplite-3.6.2rc3.jar");
 		version.setNcbo(null);
-
 		return version;
     }
 

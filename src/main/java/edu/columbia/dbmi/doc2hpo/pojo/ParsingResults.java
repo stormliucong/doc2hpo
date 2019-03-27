@@ -5,7 +5,14 @@ public class ParsingResults {
 	int length;
 	String hpoId;
 	String hpoName;
+	boolean negated;
 	
+	public boolean isNegated() {
+		return negated;
+	}
+	public void setNegated(boolean negated) {
+		this.negated = negated;
+	}
 	public int getStart() {
 		return start;
 	}

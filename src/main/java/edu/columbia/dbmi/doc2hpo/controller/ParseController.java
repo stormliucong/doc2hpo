@@ -147,8 +147,9 @@ public class ParseController {
 		try {
 			List<ParsingResults> hmName2Id = new ArrayList<ParsingResults>();
 			String content = pj.getNote();
+			boolean negex = pj.isNegex();
 			
-			hmName2Id = this.mmlp.parse(content);
+			hmName2Id = this.mmlp.parse(content,negex);
 			httpSession.setAttribute("hmName2Id", hmName2Id);
 			map.put("hmName2Id", hmName2Id);
 			map.put("hpoOption", false);

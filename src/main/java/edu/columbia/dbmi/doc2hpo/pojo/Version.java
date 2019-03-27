@@ -7,7 +7,15 @@ public class Version {
 	public String tomcat;
 	public String metamap;
 	public String ncbo;
+	public String metamaplite;
 	
+	
+	public String getMetamaplite() {
+		return metamaplite;
+	}
+	public void setMetamaplite(String metamaplite) {
+		this.metamaplite = metamaplite;
+	}
 	public String getDoc2hpo() {
 		return doc2hpo;
 	}

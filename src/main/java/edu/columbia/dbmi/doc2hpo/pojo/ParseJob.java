@@ -5,10 +5,18 @@ import java.util.List;
 
 public class ParseJob {
 	private String note;
+	private boolean negex;
 	private MmpGeneral mmpgeneral;
 	private NcboGeneral ncbogeneral;
 	private Semantic semantic;
-
+	
+	
+	public boolean isNegex() {
+		return negex;
+	}
+	public void setNegex(boolean negex) {
+		this.negex = negex;
+	}
 
 	public String getNote() {
 		return note;
@@ -16,7 +24,7 @@ public class ParseJob {
 
 
 
-
+	
 
 
 	public void setNote(String note) {

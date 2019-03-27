@@ -75,19 +75,21 @@ public class ResultManagerController {
 
 	@RequestMapping("/updateTerms")
 	@ResponseBody
-	public Map<String, Object> updateTerms(HttpSession httpSession, @RequestBody ParsingResults pr) throws Exception {
+	public Map<String, Object> updateTerms(HttpSession httpSession,@RequestBody ParsingResults pr) throws Exception {
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		String hpoId = pr.getHpoId();
 		String hpoName = pr.getHpoName();
+		boolean isNegated = pr.isNegated();
 
 		@SuppressWarnings("unchecked")
 		List<ParsingResults> hmName2Id = (List<ParsingResults>) httpSession.getAttribute("hmName2Id");
 		for (ParsingResults prIn : hmName2Id) {
-			System.out.println(prIn.getHpoId());
 			if (prIn.getStart() == pr.getStart() && prIn.getLength() == pr.getLength()) {
 				prIn.setHpoName(hpoName.toLowerCase());
 				prIn.setHpoId(hpoId.replaceAll("_", ":"));
+				prIn.setNegated(isNegated);
 			}
 		}
 		httpSession.setAttribute("hmName2Id", hmName2Id);
