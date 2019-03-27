@@ -3,18 +3,18 @@ function parse() {
 	note = formatText(note);
 	var value = "";
 	// default engine is act.
-	if($("#parsingEngine").dropdown('get value') == ""){
+	if ($("#parsingEngine").dropdown('get value') == "") {
 		value = "act";
-	}else{
+	} else {
 		value = $("#parsingEngine").dropdown('get value');
 		console.log(value);
 	}
-	
+
 	if (value == "act") {
 		parseACT(note);
 	}
 	if (value == "mmp") {
-		parsingJson = parseMetamap(note);
+		parseMetamap(note);
 	}
 	if (value == "ncbo") {
 		parseNcbo(note);
@@ -38,135 +38,164 @@ function parseMetamap(note) {
 			"isp" : ignore_stop_phrases,
 		},
 	};
-	$.blockUI({
-		message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">System is processing...It may take up to few minutes.</div><p></p><p></p><p></p><p></p></div></div>',
-		css: { 
-            border: 'none',
-            '-webkit-border-radius': '40px', 
-            '-moz-border-radius': '40px', 
-            opacity: .5, 
-        },
-	});
-	$.ajax({
-		headers : {
-			'Accept' : 'application/json',
-			'Content-Type' : 'application/json'
-		},
-		type : 'POST',
-		url :  "/doc2hpo/parse/metamap",
-		data : JSON.stringify(formData),
-		dataType : "json",
-		success : function(data) {
-			var terms = data["hmName2Id"];
-			if (jQuery.isEmptyObject(terms)) {
-				alert("No UMLS or HPO terms found!");
-			} else {
-				if(terms == 'ERROR'){
-					alert("ERROR: Something wrong with metamap engine. Please check the configuration on server end and make sure metamap server is running.");
-				}else{
-					highlight(terms);
-					updateTable(terms);
-					var t = $(window).scrollTop();
-					$('body,html').animate({
-						'scrollTop' : t + 1000
-					}, 200)
-					$("#phenolyzer").show();
-				}
-			}
+	$
+			.blockUI({
+				message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">System is processing...It may take up to few minutes.</div><p></p><p></p><p></p><p></p></div></div>',
+				css : {
+					border : 'none',
+					'-webkit-border-radius' : '40px',
+					'-moz-border-radius' : '40px',
+					opacity : .5,
+				},
+			});
+	$
+			.ajax({
+				headers : {
+					'Accept' : 'application/json',
+					'Content-Type' : 'application/json'
+				},
+				type : 'POST',
+				url : "/doc2hpo/parse/metamap",
+				data : JSON.stringify(formData),
+				dataType : "json",
+				success : function(data) {
+					var terms = data["hmName2Id"];
+					terms=terms.filter(Boolean)
+					if (terms == 'ERROR') {
+						alert("ERROR: Something wrong with act engine. Please check the configuration on server end.");
+					} else {
+						if (!Array.isArray(terms) || !terms.length) {
+							alert("No HPO terms found!");
+						} else {
 
-		},
-		error : function(XMLHttpRequest, textStatus, errorThrown) {
-			console.log(url);
-		}
-	});
+							alert("===" + terms + "!!!");
+							highlight(terms);
+							updateTable(terms);
+							var t = $(window).scrollTop();
+							$('body,html').animate({
+								'scrollTop' : t + 1000
+							}, 200)
+							$("#phenolyzer").show();
+
+						}
+
+					}
+
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					console.log(url);
+				}
+			});
 }
 
 function parseACT(note) {
 	var formData = {
 		'note' : note,
 	};
-	$.blockUI({
-		message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">System is processing...It may take up to few minutes.</div><p></p><p></p><p></p><p></p></div></div>',
-		css: { 
-            border: 'none',
-            '-webkit-border-radius': '40px', 
-            '-moz-border-radius': '40px', 
-            opacity: .5, 
-        },
-	});
-	$.ajax({
-		headers : {
-			'Accept' : 'application/json',
-			'Content-Type' : 'application/json'
-		},
-		type : 'POST',
-		url : "/doc2hpo/parse/acdat",
-		data : JSON.stringify(formData),
-		dataType : "json",
-		success : function(data) {
-			var parsingJson = data["hmName2Id"];
-			var terms = longestParsingJson(parsingJson);
-			if(terms == 'ERROR'){
-				alert("ERROR: Something wrong with act engine. Please check the configuration on server end.");
-			}else{
-				highlight(terms);
-				updateTable(terms);
-				var t = $(window).scrollTop();
-				$('body,html').animate({
-					'scrollTop' : t + 1000
-				}, 200)
-				$("#phenolyzer").show();
-			}
+	$
+			.blockUI({
+				message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">System is processing...It may take up to few minutes.</div><p></p><p></p><p></p><p></p></div></div>',
+				css : {
+					border : 'none',
+					'-webkit-border-radius' : '40px',
+					'-moz-border-radius' : '40px',
+					opacity : .5,
+				},
+			});
+	$
+			.ajax({
+				headers : {
+					'Accept' : 'application/json',
+					'Content-Type' : 'application/json'
+				},
+				type : 'POST',
+				url : "/doc2hpo/parse/acdat",
+				data : JSON.stringify(formData),
+				dataType : "json",
+				success : function(data) {
+					var parsingJson = data["hmName2Id"];
+					var terms = longestParsingJson(parsingJson);
+					terms=terms.filter(Boolean)
+					if (terms == 'ERROR') {
+						alert("ERROR: Something wrong with act engine. Please check the configuration on server end.");
+					} else {
+						if (!Array.isArray(terms) || !terms.length) {
+							alert("No HPO terms found!");
+						} else {
 
-		},
-		error : function(XMLHttpRequest, textStatus, errorThrown) {
-			console.log(url);
-		}
-	});
+							alert("===" + terms + "!!!");
+							highlight(terms);
+							updateTable(terms);
+							var t = $(window).scrollTop();
+							$('body,html').animate({
+								'scrollTop' : t + 1000
+							}, 200)
+							$("#phenolyzer").show();
+
+						}
+
+					}
+
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					console.log(url);
+				}
+			});
 }
 
 function parseMetamaplite(note) {
 	var formData = {
 		'note' : note,
 	};
-	$.blockUI({
-		message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">System is processing...It may take up to few minutes.</div><p></p><p></p><p></p><p></p></div></div>',
-		css: { 
-            border: 'none',
-            '-webkit-border-radius': '40px', 
-            '-moz-border-radius': '40px', 
-            opacity: .5, 
-        },
-	});
-	$.ajax({
-		headers : {
-			'Accept' : 'application/json',
-			'Content-Type' : 'application/json'
-		},
-		type : 'POST',
-		url : "/doc2hpo/parse/metamaplite",
-		data : JSON.stringify(formData),
-		dataType : "json",
-		success : function(data) {
-			var parsingJson = data["hmName2Id"];
-			var terms = longestParsingJson(parsingJson);
-			if(terms == 'ERROR'){
-				alert("ERROR: Something wrong with act engine. Please check the configuration on server end.");
-			}else{
-				highlight(terms);
-				updateTable(terms);
-				var t = $(window).scrollTop();
-				$('body,html').animate({
-					'scrollTop' : t + 1000
-				}, 200)
-				$("#phenolyzer").show();
-			}
+	$
+			.blockUI({
+				message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">System is processing...It may take up to few minutes.</div><p></p><p></p><p></p><p></p></div></div>',
+				css : {
+					border : 'none',
+					'-webkit-border-radius' : '40px',
+					'-moz-border-radius' : '40px',
+					opacity : .5,
+				},
+			});
+	$
+			.ajax({
+				headers : {
+					'Accept' : 'application/json',
+					'Content-Type' : 'application/json'
+				},
+				type : 'POST',
+				url : "/doc2hpo/parse/metamaplite",
+				data : JSON.stringify(formData),
+				dataType : "json",
+				success : function(data) {
+					var parsingJson = data["hmName2Id"];
+					var terms = longestParsingJson(parsingJson);
+					terms=terms.filter(Boolean)
+					if (terms == 'ERROR') {
+						alert("ERROR: Something wrong with act engine. Please check the configuration on server end.");
+					} else {
+						if (!Array.isArray(terms) || !terms.length) {
+							alert("No HPO terms found!");
+						} else {
 
-		},
-		error : function(XMLHttpRequest, textStatus, errorThrown) {
-			console.log(url);
-		}
-	});
+							alert("===" + terms + "!!!");
+							highlight(terms);
+							updateTable(terms);
+							var t = $(window).scrollTop();
+							$('body,html').animate({
+								'scrollTop' : t + 1000
+							}, 200)
+							$("#phenolyzer").show();
+
+						}
+
+					}
+
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					console.log(url);
+				}
+			});
 }
 
 function parseNcbo(note) {
@@ -181,48 +210,54 @@ function parseNcbo(note) {
 			'en' : exclude_numbers
 		}
 	};
-	$.blockUI({
-		message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">System is processing...It may take up to few minutes.</div><p></p><p></p><p></p><p></p></div></div>',
-		css: { 
-            border: 'none',
-            '-webkit-border-radius': '40px', 
-            '-moz-border-radius': '40px', 
-            opacity: .5, 
-        },
-	});
-	$.ajax({
-		headers : {
-			'Accept' : 'application/json',
-			'Content-Type' : 'application/json'
-		},
-		type : 'POST',
-		url : "/doc2hpo/parse/ncbo",
-		data : JSON.stringify(formData),
-		dataType : "json",
-		success : function(data) {
-			var terms = data["hmName2Id"];
-			if (jQuery.isEmptyObject(terms)) {
-				alert("No UMLS or HPO terms found!");
-			} else {
-				if(terms == 'ERROR'){
-					alert("ERROR: Something wrong with ncbo engine. Please check the configuration on server end.");
-				}else{
-					highlight(terms);
-					updateTable(terms);
-					var t = $(window).scrollTop();
-					$('body,html').animate({
-						'scrollTop' : t + 1000
-					}, 200)
-					$("#phenolyzer").show();
-				}
-			}
-			return terms
+	$
+			.blockUI({
+				message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">System is processing...It may take up to few minutes.</div><p></p><p></p><p></p><p></p></div></div>',
+				css : {
+					border : 'none',
+					'-webkit-border-radius' : '40px',
+					'-moz-border-radius' : '40px',
+					opacity : .5,
+				},
+			});
+	$
+			.ajax({
+				headers : {
+					'Accept' : 'application/json',
+					'Content-Type' : 'application/json'
+				},
+				type : 'POST',
+				url : "/doc2hpo/parse/ncbo",
+				data : JSON.stringify(formData),
+				dataType : "json",
+				success : function(data) {
+					var terms = data["hmName2Id"];
+					terms=terms.filter(Boolean)
+					if (terms == 'ERROR') {
+						alert("ERROR: Something wrong with act engine. Please check the configuration on server end.");
+					} else {
+						if (!Array.isArray(terms) || !terms.length) {
+							alert("No HPO terms found!");
+						} else {
 
-		},
-		error : function(XMLHttpRequest, textStatus, errorThrown) {
-			console.log(url);
-		}
-	});
+							alert("===" + terms + "!!!");
+							highlight(terms);
+							updateTable(terms);
+							var t = $(window).scrollTop();
+							$('body,html').animate({
+								'scrollTop' : t + 1000
+							}, 200)
+							$("#phenolyzer").show();
+
+						}
+
+					}
+
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					console.log(url);
+				}
+			});
 }
 
 function testController() {
