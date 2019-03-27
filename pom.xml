@@ -290,6 +290,41 @@
 			<version>1.0</version>
 			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/prologbeans.jar</systemPath>
 		</dependency>
+		<dependency>
+			<groupId>bioc</groupId>
+			<artifactId>bioc</artifactId>
+			<scope>system</scope>
+			<version>1.0.1</version>
+			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/bioc-1.0.1.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>metamaplite</groupId>
+			<artifactId>metamaplite</artifactId>
+			<scope>system</scope>
+			<version>1.0.1</version>
+			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/metamaplite-3.6.2rc3.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>nlp-2.4.C.jar</groupId>
+			<artifactId>nlp-2.4.C.jar</artifactId>
+			<scope>system</scope>
+			<version>2.4.C</version>
+			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/nlp-2.4.C.jar</systemPath>
+		</dependency>
+		
+        <!--log4j2 dependencies -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.1</version>
+        </dependency>
+		
+
 	</dependencies>
 	<build>
 		<finalName>doc2hpo</finalName>

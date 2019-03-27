@@ -1,5 +1,7 @@
 package edu.columbia.dbmi.doc2hpo.controller;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import edu.columbia.dbmi.doc2hpo.pojo.ParseJob;
 import edu.columbia.dbmi.doc2hpo.pojo.ParsingResults;
 import edu.columbia.dbmi.doc2hpo.service.ACTrieParser;
+import edu.columbia.dbmi.doc2hpo.service.MetaMapLiteParser;
 import edu.columbia.dbmi.doc2hpo.service.MetaMapParser;
 import edu.columbia.dbmi.doc2hpo.service.NcboParser;
 import edu.columbia.dbmi.doc2hpo.tool.CoreNLP;
@@ -30,6 +33,7 @@ public class ParseController {
 	private MetaMapParser mmp;
 	private NcboParser ncbo;
 	private ACTrieParser actp;
+	private MetaMapLiteParser mmlp;
 
 	@Value("#{configProperties['MetamapBinPath']}")
 	private String metamapBinPath;
@@ -45,11 +49,15 @@ public class ParseController {
 	
 	@Value("#{configProperties['NcboUrl']}")
 	private String ncboUrl;
+	
+	@Value("#{configProperties['metamapliteconfiger']}")
+	private String metamapliteconfiger;
 
 	@PostConstruct
-	public void init() {
+	public void init() throws FileNotFoundException, ClassNotFoundException, InstantiationException, NoSuchMethodException, IllegalAccessException, IOException {
 		this.corenlp = new CoreNLP();
 		this.mmp = new MetaMapParser(corenlp);
+		this.mmlp = new MetaMapLiteParser(metamapliteconfiger);
 		this.actp = new ACTrieParser();
 		if(this.ncboUrl.trim().toLowerCase().equals("null")) {
 			this.ncboUrl = "http://data.bioontology.org"; // default using public ncbo api.
@@ -111,7 +119,7 @@ public class ParseController {
 
 	@RequestMapping("/metamap")
 	@ResponseBody
-	public Map<String, Object> getTerm1(HttpSession httpSession, @RequestBody ParseJob pj) throws Exception {
+	public Map<String, Object> getTerm4(HttpSession httpSession, @RequestBody ParseJob pj) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			List<ParsingResults> hmName2Id = new ArrayList<ParsingResults>();
@@ -120,6 +128,27 @@ public class ParseController {
 			
 			hmName2Id = this.mmp.parseBySentence(this.corenlp, content, theOptions);
 			
+			httpSession.setAttribute("hmName2Id", hmName2Id);
+			map.put("hmName2Id", hmName2Id);
+			map.put("hpoOption", false);
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("hmName2Id", "ERROR");
+		}
+		return map;
+		
+	}
+	
+	@RequestMapping("/metamaplite")
+	@ResponseBody
+	public Map<String, Object> getTerm1(HttpSession httpSession, @RequestBody ParseJob pj) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			List<ParsingResults> hmName2Id = new ArrayList<ParsingResults>();
+			String content = pj.getNote();
+			
+			hmName2Id = this.mmlp.parse(content);
 			httpSession.setAttribute("hmName2Id", hmName2Id);
 			map.put("hmName2Id", hmName2Id);
 			map.put("hpoOption", false);

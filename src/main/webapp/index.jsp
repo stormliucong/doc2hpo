@@ -131,6 +131,10 @@
 										class="description">a string-based method leveraging
 										the Aho–Corasick algorithm </span>
 								</div>
+								<div class="item" data-value="mmlp">
+									<span class="text">MetaMap Lite </span> <span
+										class="description">a fast version of MetaMap </span>
+								</div>
 								<div class="item" data-value="mmp">
 									<span class="text">Metamap </span> <span class="description">using
 										a local metamap java API to extract UMLS CUI terms and then

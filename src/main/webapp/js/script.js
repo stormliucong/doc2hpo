@@ -73,6 +73,11 @@ function formControl() {
 			$("#ncboOptions").show();
 			$("#mmpOptions").hide();
 		}
+		
+		if ($("#parsingEngine").dropdown('get value') == 'mmlp') {
+			$("#ncboOptions").hide();
+			$("#mmpOptions").hide();
+		}
 	});
 
 

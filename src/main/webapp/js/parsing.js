@@ -19,6 +19,9 @@ function parse() {
 	if (value == "ncbo") {
 		parseNcbo(note);
 	}
+	if (value == "mmlp") {
+		parseMetamaplite(note);
+	}
 }
 
 function parseMetamap(note) {
@@ -36,7 +39,7 @@ function parseMetamap(note) {
 		},
 	};
 	$.blockUI({
-		message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">Loading...It may take up to few minutes.</div><p></p><p></p><p></p><p></p></div></div>',
+		message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">System is processing...It may take up to few minutes.</div><p></p><p></p><p></p><p></p></div></div>',
 		css: { 
             border: 'none',
             '-webkit-border-radius': '40px', 
@@ -83,7 +86,7 @@ function parseACT(note) {
 		'note' : note,
 	};
 	$.blockUI({
-		message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">Loading...It may take up to few minutes.</div><p></p><p></p><p></p><p></p></div></div>',
+		message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">System is processing...It may take up to few minutes.</div><p></p><p></p><p></p><p></p></div></div>',
 		css: { 
             border: 'none',
             '-webkit-border-radius': '40px', 
@@ -122,6 +125,50 @@ function parseACT(note) {
 	});
 }
 
+function parseMetamaplite(note) {
+	var formData = {
+		'note' : note,
+	};
+	$.blockUI({
+		message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">System is processing...It may take up to few minutes.</div><p></p><p></p><p></p><p></p></div></div>',
+		css: { 
+            border: 'none',
+            '-webkit-border-radius': '40px', 
+            '-moz-border-radius': '40px', 
+            opacity: .5, 
+        },
+	});
+	$.ajax({
+		headers : {
+			'Accept' : 'application/json',
+			'Content-Type' : 'application/json'
+		},
+		type : 'POST',
+		url : "/doc2hpo/parse/metamaplite",
+		data : JSON.stringify(formData),
+		dataType : "json",
+		success : function(data) {
+			var parsingJson = data["hmName2Id"];
+			var terms = longestParsingJson(parsingJson);
+			if(terms == 'ERROR'){
+				alert("ERROR: Something wrong with act engine. Please check the configuration on server end.");
+			}else{
+				highlight(terms);
+				updateTable(terms);
+				var t = $(window).scrollTop();
+				$('body,html').animate({
+					'scrollTop' : t + 1000
+				}, 200)
+				$("#phenolyzer").show();
+			}
+
+		},
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			console.log(url);
+		}
+	});
+}
+
 function parseNcbo(note) {
 	var longest_only = $('#longest_only').is(':checked');
 	var whole_word_only = $('#whole_word_only').is(':checked');
@@ -135,7 +182,7 @@ function parseNcbo(note) {
 		}
 	};
 	$.blockUI({
-		message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">Loading...It may take up to few minutes.</div><p></p><p></p><p></p><p></p></div></div>',
+		message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">System is processing...It may take up to few minutes.</div><p></p><p></p><p></p><p></p></div></div>',
 		css: { 
             border: 'none',
             '-webkit-border-radius': '40px', 
