@@ -17,8 +17,6 @@ function updateTermsInSession(start, length, hpo_id, hpo_term,is_negated) {
             opacity: .5, 
         },
 	});
-	var t = $(window).scrollTop();
-
 	$.ajax({
 		headers : {
 			'Accept' : 'application/json',
@@ -29,16 +27,21 @@ function updateTermsInSession(start, length, hpo_id, hpo_term,is_negated) {
 		data : JSON.stringify(formData),
 		dataType : "json",
 		success : function(data) {
-			var terms = data["hmName2Id"];
-			if (jQuery.isEmptyObject(terms)) {
-				alert("No UMLS or HPO terms found!");
+			var parsingJson = data["hmName2Id"];
+			var terms = longestParsingJson(parsingJson);
+			terms=terms.filter(Boolean)
+			if (terms == 'ERROR') {
+				alert("ERROR: Something wrong with act engine. Please check the configuration on server end.");
 			} else {
-				highlight(terms);
-				updateTable(terms);
-				$('body,html').animate({
-					'scrollTop' : t
-				}, 200)
+				if (!Array.isArray(terms) || !terms.length) {
+					alert("No HPO terms found!");
+				} else {
+					highlight(terms);
+					updateTable(terms);
+				}
+
 			}
+
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
 			console.log(url);
@@ -69,8 +72,6 @@ function deleteTermsInSession(start, length, hpo_id, hpo_term) {
         },
 	});
 	
-	var t = $(window).scrollTop();
-
 	$.ajax({
 		headers : {
 			'Accept' : 'application/json',
@@ -81,18 +82,20 @@ function deleteTermsInSession(start, length, hpo_id, hpo_term) {
 		data : JSON.stringify(formData),
 		dataType : "json",
 		success : function(data) {
-			var terms = data["hmName2Id"];
-			if (jQuery.isEmptyObject(terms)) {
-				alert("No UMLS or HPO terms found!");
+			var parsingJson = data["hmName2Id"];
+			var terms = longestParsingJson(parsingJson);
+			terms=terms.filter(Boolean)
+			if (terms == 'ERROR') {
+				alert("ERROR: Something wrong with act engine. Please check the configuration on server end.");
 			} else {
-				highlight(terms);
-				updateTable(terms);
-				$('body,html').animate({
-					'scrollTop' : t
-				}, 200)
-				$("#phenolyzer").show();
+				if (!Array.isArray(terms) || !terms.length) {
+					alert("No HPO terms found!");
+				} else {
+					highlight(terms);
+					updateTable(terms);
+				}
+
 			}
-			return terms
 
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -121,7 +124,6 @@ function addTermsInSession(start, length, hpo_id, hpo_term) {
             opacity: .5, 
         },
 	});
-	var t = $(window).scrollTop();
 
 	$.ajax({
 		headers : {
@@ -133,18 +135,21 @@ function addTermsInSession(start, length, hpo_id, hpo_term) {
 		data : JSON.stringify(formData),
 		dataType : "json",
 		success : function(data) {
-			var terms = data["hmName2Id"];
-			if (jQuery.isEmptyObject(terms)) {
-				alert("No UMLS or HPO terms found!");
+			var parsingJson = data["hmName2Id"];
+			var terms = longestParsingJson(parsingJson);
+			terms=terms.filter(Boolean)
+			if (terms == 'ERROR') {
+				alert("ERROR: Something wrong with act engine. Please check the configuration on server end.");
 			} else {
-				highlight(terms);
-				updateTable(terms);
-				$('body,html').animate({
-					'scrollTop' : t
-				}, 200)
-				$("#phenolyzer").show();
+				if (!Array.isArray(terms) || !terms.length) {
+					alert("No HPO terms found!");
+				} else {
+					highlight(terms);
+					updateTable(terms);
+
+				}
+
 			}
-			return terms
 
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -174,8 +179,6 @@ function addTermsInSessionWithHighlight(start, length, hpo_id, hpo_term) {
         },
 	});
 	
-	var t = $(window).scrollTop();
-
 	$.ajax({
 		headers : {
 			'Accept' : 'application/json',
@@ -186,18 +189,20 @@ function addTermsInSessionWithHighlight(start, length, hpo_id, hpo_term) {
 		data : JSON.stringify(formData),
 		dataType : "json",
 		success : function(data) {
-			var terms = data["hmName2Id"];
-			if (jQuery.isEmptyObject(terms)) {
-				alert("No UMLS or HPO terms found!");
+			var parsingJson = data["hmName2Id"];
+			var terms = longestParsingJson(parsingJson);
+			terms=terms.filter(Boolean)
+			if (terms == 'ERROR') {
+				alert("ERROR: Something wrong with act engine. Please check the configuration on server end.");
 			} else {
-				highlight(terms);
-				updateTable(terms);
-				$('body,html').animate({
-					'scrollTop' : t
-				}, 200)
-				$("#phenolyzer").show();
+				if (!Array.isArray(terms) || !terms.length) {
+					alert("No HPO terms found!");
+				} else {
+					highlight(terms);
+					updateTable(terms);
+				}
+
 			}
-			return terms
 
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -218,7 +223,6 @@ function getTermsInSession() {
             opacity: .5, 
         },
 	});
-	var t = $(window).scrollTop();
 	sessionTerms = $.ajax({
 		headers : {
 			'Accept' : 'application/json',
@@ -229,11 +233,21 @@ function getTermsInSession() {
 		dataType : "json",
 		async: false, // to avoid null repsonse.
 		success : function(data) {
-			terms = data["hmName2Id"];
-			if (jQuery.isEmptyObject(terms)) {
-				alert("No UMLS or HPO terms found!");
+			var parsingJson = data["hmName2Id"];
+			var terms = longestParsingJson(parsingJson);
+			terms=terms.filter(Boolean)
+			if (terms == 'ERROR') {
+				alert("ERROR: Something wrong with act engine. Please check the configuration on server end.");
+			} else {
+				if (!Array.isArray(terms) || !terms.length) {
+					alert("No HPO terms found!");
+				} else {
+					highlight(terms);
+					updateTable(terms);
+				}
+
 			}
-			return terms
+
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
 			console.log(url);

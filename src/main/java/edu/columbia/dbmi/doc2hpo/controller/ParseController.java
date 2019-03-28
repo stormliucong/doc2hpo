@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.collections.ListUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -154,6 +155,43 @@ public class ParseController {
 			boolean negex = pj.isNegex();
 			
 			hmName2Id = this.mmlp.parse(content,negex);
+			httpSession.setAttribute("hmName2Id", hmName2Id);
+			map.put("hmName2Id", hmName2Id);
+			map.put("hpoOption", false);
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("hmName2Id", "ERROR");
+		}
+		return map;
+		
+	}
+	
+	@RequestMapping("/ensemble")
+	@ResponseBody
+	public Map<String, Object> getTerm5(HttpSession httpSession, @RequestBody ParseJob pj) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			List<ParsingResults> hmName2Id1 = new ArrayList<ParsingResults>();
+			List<ParsingResults> hmName2Id2 = new ArrayList<ParsingResults>();
+			List<ParsingResults> hmName2Id3 = new ArrayList<ParsingResults>();
+			List<String> mmpOptions = new ArrayList<String>();
+			mmpOptions.add("-y");
+			mmpOptions.add("-a");
+			mmpOptions.add("-g");
+			mmpOptions.add("-K");
+			mmpOptions.add("-i");
+
+			String content = pj.getNote();
+			boolean negex = pj.isNegex();
+			
+			hmName2Id1 = this.mmlp.parse(content,negex);
+			hmName2Id2 = this.actp.parse(this.actp, content, negex, true);
+			hmName2Id3 = this.mmp.parseBySentence(this.corenlp, content, mmpOptions, negex);
+
+			
+			List<ParsingResults> hmName2Id = ListUtils.union(ListUtils.union(hmName2Id1, hmName2Id2),hmName2Id3);
+			
 			httpSession.setAttribute("hmName2Id", hmName2Id);
 			map.put("hmName2Id", hmName2Id);
 			map.put("hpoOption", false);

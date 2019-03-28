@@ -21,6 +21,9 @@ function parse() {
 	if (value == "mmlp") {
 		parseMetamaplite(note);
 	}
+	if (value == "esmb") {
+		parseEnsemble(note);
+	}
 }
 
 function parseMetamap(note) {
@@ -169,6 +172,61 @@ function parseMetamaplite(note) {
 				},
 				type : 'POST',
 				url : "/doc2hpo/parse/metamaplite",
+				data : JSON.stringify(formData),
+				dataType : "json",
+				success : function(data) {
+					var parsingJson = data["hmName2Id"];
+					var terms = longestParsingJson(parsingJson);
+					terms=terms.filter(Boolean)
+					if (terms == 'ERROR') {
+						alert("ERROR: Something wrong with act engine. Please check the configuration on server end.");
+					} else {
+						if (!Array.isArray(terms) || !terms.length) {
+							alert("No HPO terms found!");
+						} else {
+							highlight(terms);
+							updateTable(terms);
+							var t = $(window).scrollTop();
+							$('body,html').animate({
+								'scrollTop' : t + 1000
+							}, 200)
+							$("#phenolyzer").show();
+
+						}
+
+					}
+
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					console.log(url);
+				}
+			});
+}
+
+function parseEnsemble(note) {
+	var esmb_negex = $('#esmb_negex').is(':checked');
+	var formData = {
+		'note' : note,
+		'negex' : esmb_negex
+	};
+	$
+			.blockUI({
+				message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">System is processing...It may take up to few minutes.</div><p></p><p></p><p></p><p></p></div></div>',
+				css : {
+					border : 'none',
+					'-webkit-border-radius' : '40px',
+					'-moz-border-radius' : '40px',
+					opacity : .5,
+				},
+			});
+	$
+			.ajax({
+				headers : {
+					'Accept' : 'application/json',
+					'Content-Type' : 'application/json'
+				},
+				type : 'POST',
+				url : "/doc2hpo/parse/ensemble",
 				data : JSON.stringify(formData),
 				dataType : "json",
 				success : function(data) {

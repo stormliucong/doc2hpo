@@ -61,6 +61,16 @@ function formControl() {
 	$("#parsingEngine").on("change", function() {
 		if ($("#parsingEngine").dropdown('get value') == 'act') {
 			$("#actpOptions").show();
+			$("#esmbOptions").hide();
+			$("#ncboOptions").hide();
+			$("#mmpOptions").hide();
+			$("#mmlpOptions").hide();
+
+		}
+		
+		if ($("#parsingEngine").dropdown('get value') == 'esmb') {
+			$("#actpOptions").hide();
+			$("#esmbOptions").show();
 			$("#ncboOptions").hide();
 			$("#mmpOptions").hide();
 			$("#mmlpOptions").hide();
@@ -69,6 +79,7 @@ function formControl() {
 
 		if ($("#parsingEngine").dropdown('get value') == 'mmp') {
 			$("#actpOptions").hide();
+			$("#esmbOptions").hide();
 			$("#ncboOptions").hide();
 			$("#mmpOptions").show();
 			$("#mmlpOptions").hide();
@@ -77,6 +88,7 @@ function formControl() {
 
 		if ($("#parsingEngine").dropdown('get value') == 'ncbo') {
 			$("#actpOptions").hide();
+			$("#esmbOptions").hide();
 			$("#ncboOptions").show();
 			$("#mmpOptions").hide();
 			$("#mmlpOptions").hide();
@@ -84,6 +96,7 @@ function formControl() {
 		
 		if ($("#parsingEngine").dropdown('get value') == 'mmlp') {
 			$("#actpOptions").hide();
+			$("#esmbOptions").hide();
 			$("#ncboOptions").hide();
 			$("#mmpOptions").hide();
 			$("#mmlpOptions").show();

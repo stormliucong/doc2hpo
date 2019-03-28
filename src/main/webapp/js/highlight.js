@@ -154,6 +154,7 @@ function processEachTag(node, range, parsingJson) {
 								+ hpo_term + "</span>")
 				$(node).find('.hpo-entity').attr('hpo_term', hpo_term);
 				$(node).find('.hpo-entity').attr('hpo_id', hpo_id);
+				$(node).find('.hpo-entity').attr('is_negated', is_negated);
 
 				// delete annotation.
 				$(node).on(
@@ -189,6 +190,9 @@ function processEachTag(node, range, parsingJson) {
 							// detach events.
 							$('#selectedResult').val(
 									'NORESULTS' + ';;;' + 'NORESULTS');
+							var matched_text = $(node).clone().children()
+									.remove().end().text();
+							$('.prompt').val(matched_text);
 							$(this).popup({
 								popup : $('#searchPopup'),
 								on : 'click',
@@ -211,13 +215,17 @@ function processEachTag(node, range, parsingJson) {
 									'hpo_id');
 							var hpo_term = $(node).find('.hpo-entity').attr(
 									'hpo_term');
+							var is_negated = $(node).find('.hpo-entity').attr(
+									'is_negated');
 							if ($(this).hasClass('negative')) {
-								is_negated = false; // change the negation status.
+								is_negated = false; // change the negation
+								// status.
 								updateTermsInSession(start, length, hpo_id,
 										hpo_term, is_negated);
 
 							} else {
-								is_negated = true; // change the negation status.
+								is_negated = true; // change the negation
+								// status.
 								updateTermsInSession(start, length, hpo_id,
 										hpo_term, is_negated);
 							}

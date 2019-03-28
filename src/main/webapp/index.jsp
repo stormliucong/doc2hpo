@@ -131,6 +131,10 @@
 										class="description">a string-based method leveraging
 										the Aho–Corasick algorithm </span>
 								</div>
+								<div class="item" data-value="esmb">
+									<span class="text">Ensemble by Union</span> <span class="description">MataMap + MetaMapLite
+										+ String-search </span>
+								</div>
 								<div class="item" data-value="mmlp">
 									<span class="text">MetaMap Lite </span> <span
 										class="description">a fast version of MetaMap </span>
@@ -164,6 +168,17 @@
 							<div class="ui checkbox">
 								<input type="checkbox" id="actp_allow_partial"> <label>allow
 									partial match</label>
+							</div>
+						</div>
+					</div>
+
+					<!-- option for Ensemble -->
+					<div class="ui celled relaxed list" style="display: none"
+						id="esmbOptions">
+						<div class="inline field">
+							<div class="ui checkbox">
+								<input type="checkbox" id="esmb_negex" checked> <label>negation
+									detection</label>
 							</div>
 						</div>
 					</div>
@@ -304,7 +319,7 @@
 				<div class="ui fluid search" id='hpoSearch'>
 					<input class="prompt" type="text" placeholder="Search HPO...">
 					<span><i class="large plus square outline icon"
-						id="addHpoTerm"></i> <i class="large red window close link icon"
+						id="addHpoTerm" style="display: none"></i> <i class="large red window close link icon"
 						id="closeAddHpoTerm"></i></span>
 					<div style="display: none" id="selectedResult"></div>
 
@@ -380,7 +395,9 @@
 						<div class="meta">NLP-Assisted Textual Annotation</div>
 						<div class="description">You could download a standard-off
 							annotation file identifies the start and end position of the text
-							it applies to with concrete standardized HPO concepts recognized.</div>
+							it applies to with concrete standardized HPO concepts recognized.
+							JSON annotations may contained the overlapped and repeated annotations,
+							which have been merged in the annotation interface</div>
 					</div>
 					<div class="extra content">
 						<div class="ui basic button" id="jsonDownloadButton"
@@ -414,6 +431,10 @@
 			<p>
 				4. If you want to install your internal Doc2Hpo please visit the <a
 					href="https://github.com/stormliucong/doc2hpo"> source </a>
+			</p>
+			<p>
+				5. Please leave your comment and report bug  <a
+					href="https://github.com/stormliucong/doc2hpo/issues"> here </a>
 			</p>
 
 		</div>
