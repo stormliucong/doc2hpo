@@ -24,12 +24,14 @@ function parse() {
 }
 
 function parseMetamap(note) {
+	var mmp_negex = $('#mmp_negex').is(':checked');
 	var all_acros_abbrs = $('#all_acros_abbrs').is(':checked');
 	var allow_concept_gaps = $('#allow_concept_gaps').is(':checked');
 	var ignore_word_order = $('#ignore_word_order').is(':checked');
 	var ignore_stop_phrases = $('#ignore_stop_phrases').is(':checked');
 	var formData = {
 		'note' : note,
+		'negex' : mmp_negex,
 		'mmpgeneral' : {
 			'aaa' : all_acros_abbrs,
 			'acg' : allow_concept_gaps,
@@ -86,8 +88,13 @@ function parseMetamap(note) {
 }
 
 function parseACT(note) {
+	var actp_negex = $('#actp_negex').is(':checked');
+	var actp_allow_partial = $('#actp_allow_partial').is(':checked');
+
 	var formData = {
 		'note' : note,
+		'allowPartial' : actp_allow_partial,
+		'negex' : actp_negex
 	};
 	$
 			.blockUI({
@@ -197,8 +204,10 @@ function parseNcbo(note) {
 	var longest_only = $('#longest_only').is(':checked');
 	var whole_word_only = $('#whole_word_only').is(':checked');
 	var exclude_numbers = $('#exclude_numbers').is(':checked');
+	var ncbo_negex = $('#ncbo_negex').is(':checked');
 	var formData = {
 		'note' : note,
+		'negex' : ncbo_negex,
 		'ncbogeneral' : {
 			'lo' : longest_only,
 			'wwo' : whole_word_only,

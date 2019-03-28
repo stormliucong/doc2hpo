@@ -142,11 +142,11 @@ function processEachTag(node, range, parsingJson) {
 				if (is_negated) {
 					$(node)
 							.prepend(
-									"<button class='ui toggle button mini negative negation-button'>N</button>");
+									"<button class='ui toggle button mini negative negation-button' style='font-size: 0.45rem;'>N</button>");
 				} else {
 					$(node)
 							.prepend(
-									"<button class='ui toggle button mini positive negation-button'>N</button>");
+									"<button class='ui toggle button mini positive negation-button' style='font-size: 0.45rem;'>N</button>");
 				}
 
 				$(node).append(

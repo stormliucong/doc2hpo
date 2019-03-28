@@ -6,11 +6,17 @@ import java.util.List;
 public class ParseJob {
 	private String note;
 	private boolean negex;
+	private boolean allowPartial;
 	private MmpGeneral mmpgeneral;
 	private NcboGeneral ncbogeneral;
 	private Semantic semantic;
 	
-	
+	public boolean isAllowPartial() {
+		return allowPartial;
+	}
+	public void setAllowPartial(boolean allowPartial) {
+		this.allowPartial = allowPartial;
+	}
 	public boolean isNegex() {
 		return negex;
 	}

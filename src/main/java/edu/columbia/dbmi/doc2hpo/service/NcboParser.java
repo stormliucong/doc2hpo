@@ -2,6 +2,7 @@ package edu.columbia.dbmi.doc2hpo.service;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -18,6 +19,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.columbia.dbmi.doc2hpo.pojo.ParsingResults;
+import edu.columbia.dbmi.doc2hpo.util.NegUtil;
 
 public class NcboParser {
 	public String REST_URL = "";
@@ -26,11 +28,18 @@ public class NcboParser {
 	public String PORT;
 	public ObjectMapper mapper = new ObjectMapper();
 	private HpoCleaner cleaner;
+	private NegUtil nrt;
 
 	public NcboParser(String apikey, String ncbo_url) {
 		this.API_KEY = apikey;
 		this.cleaner = new HpoCleaner();
 		this.REST_URL = ncbo_url;
+		try {
+			this.nrt = new NegUtil();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public NcboParser(String apikey, String ncbo_url, String proxy, String port) {
@@ -39,6 +48,12 @@ public class NcboParser {
 		this.PORT = port;
 		this.cleaner = new HpoCleaner();
 		this.REST_URL = ncbo_url;
+		try {
+			this.nrt = new NegUtil();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private String get(String urlToGet) throws IOException {
@@ -162,7 +177,7 @@ public class NcboParser {
 		return root;
 	}
 
-	public List<ParsingResults> parse(String content, List<String> theOptions) throws IOException {
+	public List<ParsingResults> parse(String content, List<String> theOptions, boolean negex) throws IOException {
 		List<ParsingResults> pResults = new ArrayList<ParsingResults>();
 		String urlParameters = String.join("&", theOptions);
 		JsonNode annotations;
@@ -170,9 +185,8 @@ public class NcboParser {
 		textToAnnotate = URLEncoder.encode(content, "ISO-8859-1");
 		// String input = "he was profoundly deaf and had completely lost the ability to
 		// speak.";
-		urlParameters = "text=" + textToAnnotate + "&" + urlParameters;
+		urlParameters = "text=" + textToAnnotate + "&" + urlParameters + "&ontologies=HP";
 		// urlParameters = "text=" + textToAnnotate +
-		// "&ontologies=HP&longest_word=true";
 
 		annotations = this.jsonToNode(this.post(REST_URL + "/annotator", urlParameters));
 		for (JsonNode annotation : annotations) {
@@ -188,17 +202,29 @@ public class NcboParser {
 				start = start - 1;
 				int to = objNode.get("to").asInt();
 				int length = to - start;
+				String matchedText = content.substring(start,to);
+
 				ParsingResults pr = new ParsingResults();
 				pr.setHpoId(Id);
 				pr.setHpoName(name);
 				pr.setStart(start);
 				pr.setLength(length);
+				pr.setNegated(false);
+				String context = content.substring(Math.max(0, start-50), Math.min(content.length() - 1, start + length +50));
+				if(negex) {
+		    		String negationStatus = nrt.negCheck(context, matchedText, true);
+			    	if(negationStatus.equals("negated")) {
+				    	pr.setNegated(true);
+			    	}
+		    	}
 				pResults.add(pr);
 			}
 		}
 		pResults = cleaner.changeHpoIdComma(pResults);
 		pResults = cleaner.getPhenotypeOnly(pResults);
-
+//		for(ParsingResults pr : pResults) {
+//			System.out.println(pr.getHpoName() + "\t" + pr.getHpoId() + "\t" + pr.getStart() + "\t" + pr.getLength() + "\t" + pr.isNegated());
+//		}
 		return pResults;
 
 	}

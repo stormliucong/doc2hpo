@@ -78,8 +78,9 @@ public class ParseController {
 		try {
 			List<ParsingResults> hmName2Id = new ArrayList<ParsingResults>();
 			String content = pj.getNote();
-			
-			hmName2Id = this.actp.parse(this.actp, content);
+			boolean negex = pj.isNegex();
+			boolean partial = pj.isAllowPartial();
+			hmName2Id = this.actp.parse(this.actp, content, negex, partial);
 			
 			httpSession.setAttribute("hmName2Id", hmName2Id);
 			map.put("hmName2Id", hmName2Id);
@@ -103,8 +104,9 @@ public class ParseController {
 			List<ParsingResults> hmName2Id = new ArrayList<ParsingResults>();
 			List<String> theOptions = pj.getOption();
 			String content = pj.getNote();
+			boolean negex = pj.isNegex();
 			
-			hmName2Id = this.ncbo.parse(content, theOptions);
+			hmName2Id = this.ncbo.parse(content, theOptions,negex);
 			
 			httpSession.setAttribute("hmName2Id", hmName2Id);
 			map.put("hmName2Id", hmName2Id);
@@ -125,8 +127,10 @@ public class ParseController {
 			List<ParsingResults> hmName2Id = new ArrayList<ParsingResults>();
 			List<String> theOptions = pj.getOption();
 			String content = pj.getNote();
+			boolean negex = pj.isNegex();
+
 			
-			hmName2Id = this.mmp.parseBySentence(this.corenlp, content, theOptions);
+			hmName2Id = this.mmp.parseBySentence(this.corenlp, content, theOptions, negex);
 			
 			httpSession.setAttribute("hmName2Id", hmName2Id);
 			map.put("hmName2Id", hmName2Id);

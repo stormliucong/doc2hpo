@@ -151,6 +151,23 @@
 						</div>
 
 					</div>
+					<!-- option for actp -->
+					<div class="ui celled relaxed list" style="display: none"
+						id="actpOptions">
+						<div class="inline field">
+							<div class="ui checkbox">
+								<input type="checkbox" id="actp_negex" checked> <label>negation
+									detection</label>
+							</div>
+						</div>
+						<div class="inline field">
+							<div class="ui checkbox">
+								<input type="checkbox" id="actp_allow_partial"> <label>allow
+									partial match</label>
+							</div>
+						</div>
+					</div>
+
 					<!-- option for Metamap lite -->
 					<div class="ui celled relaxed list" style="display: none"
 						id="mmlpOptions">
@@ -165,6 +182,12 @@
 					<!-- option for Metamap -->
 					<div class="ui celled relaxed list" style="display: none"
 						id="mmpOptions">
+						<div class="inline field">
+							<div class="ui checkbox">
+								<input type="checkbox" id="mmp_negex" checked> <label>negation
+									detection</label>
+							</div>
+						</div>
 						<div class="inline field">
 							<div class="ui checkbox">
 								<input type="checkbox" id="all_acros_abbrs" checked> <label>allow
@@ -196,6 +219,12 @@
 						id="ncboOptions">
 						<div class="inline field">
 							<div class="ui checkbox">
+								<input type="checkbox" id="ncbo_negex" checked> <label>negation
+									detection</label>
+							</div>
+						</div>
+						<div class="inline field">
+							<div class="ui checkbox">
 								<input type="checkbox" id="longest_only" checked> <label>Match
 									longest only</label>
 							</div>
@@ -222,10 +251,10 @@
 		<div class="html ui top attached segment" id="parsingResultsPanel"
 			style="display: none">
 			<div class="ui top attached label">Parsing Results</div>
-			<div class="ui segment">
-				<div class="ui three top attached steps">
+			<div class="ui basic segment">
+				<div class="ui four top attached steps">
 					<div class="step">
-						<i class="mouse pointer icon"></i>
+						<i class="mouse pointer icon link"></i>
 						<div class="content">
 							<div class="title">Highlight</div>
 							<div class="description">Hold keyboard letter 'Q' and use
@@ -233,7 +262,7 @@
 						</div>
 					</div>
 					<div class="step">
-						<i class="hand pointer outline icon"></i>
+						<i class="hand pointer outline icon link"></i>
 						<div class="content">
 							<div class="title">Cancel</div>
 							<div class="description">double click to cancel the
@@ -241,17 +270,26 @@
 						</div>
 					</div>
 					<div class="step">
-						<i class="plus square outline icon"></i>
+						<i class="plus square outline icon link"></i>
 						<div class="content">
 							<div class="title">Search</div>
 							<div class="description">click dark green box to search
 								desired HPO terms</div>
 						</div>
 					</div>
+					<div class="step">
+						<i class="ui button small negative"
+							style="margin: 0em 1em 0em 0em;">N</i>
+						<div class="content">
+							<div class="title">Negation</div>
+							<div class="description">click the button 'N' to change the
+								negation status</div>
+						</div>
+					</div>
 				</div>
 			</div>
 
-			<div class="ui segment">
+			<div class="ui basic segment">
 				<p id="parsingResults" style="white-space: pre-wrap">Pellentesque
 					habitant morbi tristique senectus et netus et malesuada fames ac
 					turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies
