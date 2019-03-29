@@ -77,6 +77,8 @@
 			<a href='./index.jsp' class='header item'><i class="home icon"></i>
 				Home </a> <a href='./tutorial.jsp' class='header item'> <i
 				class="info icon"> </i>Tutorial
+			</a> <a href='./faq.jsp' class='header item'> <i
+				class="question circle icon"> </i>F&Q
 			</a> <a href='https://github.com/stormliucong/doc2hpo' target="_blank"
 				class='header item'><i class="github icon"></i> GitHub </a> <a
 				href='http://people.dbmi.columbia.edu/~chw7007/' target="_blank"
@@ -132,8 +134,9 @@
 										the Aho–Corasick algorithm </span>
 								</div>
 								<div class="item" data-value="esmb">
-									<span class="text">Ensemble by Union</span> <span class="description">MataMap + MetaMapLite
-										+ String-search </span>
+									<span class="text">Ensemble by Union</span> <span
+										class="description">MataMap + MetaMapLite +
+										String-search </span>
 								</div>
 								<div class="item" data-value="mmlp">
 									<span class="text">MetaMap Lite </span> <span
@@ -319,8 +322,8 @@
 				<div class="ui fluid search" id='hpoSearch'>
 					<input class="prompt" type="text" placeholder="Search HPO...">
 					<span><i class="large plus square outline icon"
-						id="addHpoTerm" style="display: none"></i> <i class="large red window close link icon"
-						id="closeAddHpoTerm"></i></span>
+						id="addHpoTerm" style="display: none"></i> <i
+						class="large red window close link icon" id="closeAddHpoTerm"></i></span>
 					<div style="display: none" id="selectedResult"></div>
 
 				</div>
@@ -396,8 +399,8 @@
 						<div class="description">You could download a standard-off
 							annotation file identifies the start and end position of the text
 							it applies to with concrete standardized HPO concepts recognized.
-							JSON annotations may contained the overlapped and repeated annotations,
-							which have been merged in the annotation interface</div>
+							JSON annotations may contained the overlapped and repeated
+							annotations, which have been merged in the annotation interface</div>
 					</div>
 					<div class="extra content">
 						<div class="ui basic button" id="jsonDownloadButton"
@@ -433,7 +436,7 @@
 					href="https://github.com/stormliucong/doc2hpo"> source </a>
 			</p>
 			<p>
-				5. Please leave your comment and report bug  <a
+				5. Please leave your comment and report bug <a
 					href="https://github.com/stormliucong/doc2hpo/issues"> here </a>
 			</p>
 

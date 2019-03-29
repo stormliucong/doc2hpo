@@ -78,6 +78,8 @@
 			<a href='./index.jsp' class='header item'><i class="home icon"></i>
 				Home </a> <a href='./tutorial.jsp' class='header item'> <i
 				class="info icon"> </i>Tutorial
+			</a> <a href='./faq.jsp' class='header item'> <i
+				class="question circle icon"> </i>F&Q
 			</a> <a href='https://github.com/stormliucong/doc2hpo' target="_blank"
 				class='header item'><i class="github icon"></i> GitHub </a> <a
 				href='http://people.dbmi.columbia.edu/~chw7007/' target="_blank"
@@ -225,7 +227,7 @@
 
 	</div>
 	<div class="ui divider"></div>
-	
+
 	<div class="ui inverted vertical footer segment form-page">
 		<div class="ui center aligned container">Columbia University
 			&copy 2018. All Rights Reserved</div>
