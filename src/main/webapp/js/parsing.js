@@ -1,6 +1,7 @@
 function parse() {
 	var note = $("#note").val();
 	note = formatText(note);
+	textLimitCheck(note);
 	var value = "";
 	// default engine is act.
 	if ($("#parsingEngine").dropdown('get value') == "") {
@@ -44,7 +45,7 @@ function parseMetamap(note) {
 	};
 	$
 			.blockUI({
-				message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">System is processing...It may take up to few minutes.</div><p></p><p></p><p></p><p></p></div></div>',
+				message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">System is processing...It may take up to 5 minutes. Restart if no response returned after 5 minutes. You may want to cut the size of the input in that case.</div><p></p><p></p><p></p><p></p></div></div>',
 				css : {
 					border : 'none',
 					'-webkit-border-radius' : '40px',
@@ -101,7 +102,7 @@ function parseACT(note) {
 	};
 	$
 			.blockUI({
-				message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">System is processing...It may take up to few minutes.</div><p></p><p></p><p></p><p></p></div></div>',
+				message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">System is processing...It may take up to 5 minutes. Restart if no response returned after 5 minutes. You may want to cut the size of the input in that case.</div><p></p><p></p><p></p><p></p></div></div>',
 				css : {
 					border : 'none',
 					'-webkit-border-radius' : '40px',
@@ -156,7 +157,7 @@ function parseMetamaplite(note) {
 	};
 	$
 			.blockUI({
-				message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">System is processing...It may take up to few minutes.</div><p></p><p></p><p></p><p></p></div></div>',
+				message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">System is processing...It may take up to 5 minutes. Restart if no response returned after 5 minutes. You may want to cut the size of the input in that case.</div><p></p><p></p><p></p><p></p></div></div>',
 				css : {
 					border : 'none',
 					'-webkit-border-radius' : '40px',
@@ -211,7 +212,7 @@ function parseEnsemble(note) {
 	};
 	$
 			.blockUI({
-				message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">System is processing...It may take up to few minutes.</div><p></p><p></p><p></p><p></p></div></div>',
+				message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">System is processing...It may take up to 5 minutes. Restart if no response returned after 5 minutes. You may want to cut the size of the input in that case.</div><p></p><p></p><p></p><p></p></div></div>',
 				css : {
 					border : 'none',
 					'-webkit-border-radius' : '40px',
@@ -274,7 +275,7 @@ function parseNcbo(note) {
 	};
 	$
 			.blockUI({
-				message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">System is processing...It may take up to few minutes.</div><p></p><p></p><p></p><p></p></div></div>',
+				message : '<div class="ui segment"><div class="ui active dimmer"><div class="ui text loader">System is processing...It may take up to 5 minutes. Restart if no response returned after 5 minutes. You may want to cut the size of the input in that case.</div><p></p><p></p><p></p><p></p></div></div>',
 				css : {
 					border : 'none',
 					'-webkit-border-radius' : '40px',

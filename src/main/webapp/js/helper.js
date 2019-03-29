@@ -11,7 +11,7 @@ function normalizeSpace(s) {
 
 function textLimitCheck(s){
 	if(s.length > 10000){
-		alert('WARNING: System might be CRASHED if the length of the documents > 10,000 !. Please install a local copy if you want to analysis huge files. Otherwise try to submit seperately');
+		alert('WARNING: System might be CRASHED if the length of the documents > 10,000 !. Try to submit seperately');
 	}
 }
 
@@ -27,7 +27,6 @@ function copyToClipboard(text) {
 function formatText(s) {
 	s = removeNonAsc(s);
 	s = normalizeSpace(s);
-	textLimitCheck(s);
 	return s;
 }
 
