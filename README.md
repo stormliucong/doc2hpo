@@ -72,7 +72,7 @@ doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO
   #### 1. maven compile
   cd doc2hpo/
   ../apache-maven-3.6.0/bin/mvn clean validate install
-  cp ./target/doc2hpo.war ./apache-tomcat-8.5.35/webapps/
+  cp ./target/doc2hpo.war ../apache-tomcat-8.5.35/webapps/
   #### 2. start MetaMap server (optional)
   cd myproject
   ./public_mm/bin/skrmedpostctl start
