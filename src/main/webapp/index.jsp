@@ -78,7 +78,7 @@
 				Home </a> <a href='./tutorial.jsp' class='header item'> <i
 				class="info icon"> </i>Tutorial
 			</a> <a href='./faq.jsp' class='header item'> <i
-				class="question circle icon"> </i>F&Q
+				class="question circle icon"> </i>FAQ
 			</a> <a href='https://github.com/stormliucong/doc2hpo' target="_blank"
 				class='header item'><i class="github icon"></i> GitHub </a> <a
 				href='http://people.dbmi.columbia.edu/~chw7007/' target="_blank"
