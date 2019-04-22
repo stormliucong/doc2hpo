@@ -142,9 +142,9 @@ public class ACTrieParser {
 //		if(partialMatch==true) {
 //			pResults = cleaner.removeAcrny(pResults);
 //		}
-		for(ParsingResults pr : pResults) {
-			System.out.println(pr.getHpoName() + "\t" + pr.getHpoId() + "\t" + pr.getStart() + "\t" + pr.getLength() + "\t" + pr.isNegated());
-		}
+//		for(ParsingResults pr : pResults) {
+//			System.out.println(pr.getHpoName() + "\t" + pr.getHpoId() + "\t" + pr.getStart() + "\t" + pr.getLength() + "\t" + pr.isNegated());
+//		}
 		return pResults;
 	}
 

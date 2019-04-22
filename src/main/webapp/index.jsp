@@ -152,6 +152,10 @@
 										class="description">call online or local NCBO annotator
 										api</span>
 								</div>
+								<div class="item" data-value="noparsing">
+									<span class="text">Annotate from Scratch </span> <span
+										class="description">annotate your text without any NLP processing</span>
+								</div>
 
 							</div>
 

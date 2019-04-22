@@ -25,6 +25,9 @@ function parse() {
 	if (value == "esmb") {
 		parseEnsemble(note);
 	}
+	if (value == "noparsing"){
+		noParsing(note);
+	}
 }
 
 function parseMetamap(note) {
@@ -319,6 +322,13 @@ function parseNcbo(note) {
 					console.log(url);
 				}
 			});
+}
+
+function noParsing(note) {
+	alert("noParsing");
+	var terms = {};
+	highlight(terms);
+	updateTable(terms);								
 }
 
 function testController() {

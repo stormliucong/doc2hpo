@@ -1,5 +1,6 @@
 package edu.columbia.dbmi.doc2hpo.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -40,7 +41,11 @@ public class ResultManagerController {
 		String hpoName = pr.getHpoName();
 
 		@SuppressWarnings("unchecked")
-		List<ParsingResults> hmName2Id = (List<ParsingResults>) httpSession.getAttribute("hmName2Id");
+		List<ParsingResults> hmName2Id = new ArrayList<ParsingResults>();
+
+		if(null != httpSession.getAttribute("hmName2Id")) {
+			hmName2Id = (List<ParsingResults>) httpSession.getAttribute("hmName2Id");
+		}
 
 		ParsingResults prIn = new ParsingResults();
 		prIn.setHpoName(hpoName.toLowerCase());
