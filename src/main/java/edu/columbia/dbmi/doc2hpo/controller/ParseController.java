@@ -186,7 +186,7 @@ public class ParseController {
 			boolean negex = pj.isNegex();
 			
 			hmName2Id1 = this.mmlp.parse(content,negex);
-			hmName2Id2 = this.actp.parse(this.actp, content, negex, true);
+			hmName2Id2 = this.actp.parse(this.actp, content, negex, false);
 			hmName2Id3 = this.mmp.parseBySentence(this.corenlp, content, mmpOptions, negex);
 
 			
