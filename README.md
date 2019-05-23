@@ -136,6 +136,3 @@ https://doi.org/10.1093/nar/gkz386
 ## Authors
 Cong Liu, Chi Yuan, Kai Wang, Chunhua Weng
 stormliucong@gmail.com
-
-## TBD
-1. Contexture Properties
