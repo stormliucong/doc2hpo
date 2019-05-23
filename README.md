@@ -124,15 +124,15 @@ doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO
 ## New features under development
   - Test across multiple browser and platforms
   - Add context based annotation in backend
-  - Using different color to seperate the category (e.g. family, negation, education) in frontend
+  *Using different color to seperate the category (e.g. family, education) in frontend
   - Add more parsers
-  - metamap Lite https://metamap.nlm.nih.gov/MetaMapLite.shtml
-  - cTakes http://ctakes.apache.org/
-  - ClinPhen http://bejerano.stanford.edu/clinphen/
+  *cTakes http://ctakes.apache.org/
+  *ClinPhen http://bejerano.stanford.edu/clinphen/
+  * add pubcasefinder API
 
 ## Publications
-under preparation
-
+Cong Liu, Fabricio Sampaio Peres Kury, Ziran Li, Casey Ta, Kai Wang, Chunhua Weng, Doc2Hpo: a web application for efficient and accurate HPO concept curation, Nucleic Acids Research, , gkz386, 
+https://doi.org/10.1093/nar/gkz386
 ## Authors
 Cong Liu, Chi Yuan, Kai Wang, Chunhua Weng
 stormliucong@gmail.com
