@@ -1,6 +1,6 @@
 package edu.columbia.dbmi.doc2hpo.pojo;
 
-public class Version {
+public class VersionDoc2Hpo {
 	
 	public String doc2hpo;
 	public String java;

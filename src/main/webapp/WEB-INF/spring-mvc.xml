@@ -16,16 +16,16 @@
 	<context:component-scan base-package="edu.columbia.dbmi.doc2hpo.controller" />
 	<context:component-scan base-package="edu.columbia.dbmi.doc2hpo.pojo" />
 	<mvc:annotation-driven></mvc:annotation-driven>
-	
+
 	<!--避免IE执行AJAX时，返回JSON出现下载文件 -->
 	<bean id="mappingJacksonHttpMessageConverter"
-		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
 		<property name="supportedMediaTypes">
 			<list>
 				<value>text/html;charset=UTF-8</value>
 			</list>
 		</property>
-	</bean>
+	</bean> 
 
 
 	<!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射 -->

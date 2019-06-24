@@ -1,19 +1,21 @@
 package edu.columbia.dbmi.doc2hpo.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import edu.columbia.dbmi.doc2hpo.pojo.Version;
+import edu.columbia.dbmi.doc2hpo.pojo.VersionDoc2Hpo;
 
 
+@CrossOrigin
 @Controller
 public class VersionController {
 
 	@RequestMapping("/version")
 	@ResponseBody
-	public Version getVersion() {
-		Version version = new Version();
+	public VersionDoc2Hpo getVersion() {
+		VersionDoc2Hpo version = new VersionDoc2Hpo();
 		// major version: new function backward incompatible;
 		// minor version: new function backward compatible;
 		// patch: bug corrected;
