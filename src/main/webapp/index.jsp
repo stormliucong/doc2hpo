@@ -154,7 +154,8 @@
 								</div>
 								<div class="item" data-value="noparsing">
 									<span class="text">Annotate from Scratch </span> <span
-										class="description">annotate your text without any NLP processing</span>
+										class="description">annotate your text without any NLP
+										processing</span>
 								</div>
 
 							</div>
@@ -334,6 +335,7 @@
 			</div>
 		</div>
 
+
 		<div class="html ui top attached segment" id="outputPanel"
 			style="display: none">
 			<div class="ui top attached label">Output</div>
@@ -347,7 +349,28 @@
 					</tr>
 				</thead>
 			</table>
+			<div class="ui secondary submit button" id="geneButton">Get Genes</div>
+		</div>
 
+		<div class="html ui top attached segment" id="genePanel"
+			style="display: none">
+			<div class="ui top attached label">Output</div>
+			<table class="ui table" id="geneCart">
+				<thead>
+					<tr>
+						<th>Gene</th>
+						<th>Rank</th>
+						<th>Score</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+			</table>
+
+		</div>
+
+		<div class="html ui top attached segment" id="externalPanel"
+			style="display: none">
+			<div class="ui top attached label">External Links</div>
 			<div class="ui cards three stackable">
 
 				<div class="card">
@@ -464,6 +487,7 @@
 
 <script type="text/javascript" src="./js/helper.js"></script>
 <script type="text/javascript" src="./js/parsing.js"></script>
+<script type="text/javascript" src="./js/p2g.js"></script>
 <script type="text/javascript" src="./js/shoppingCart.js"></script>
 <script type="text/javascript" src="./js/highlight.js"></script>
 <script type="text/javascript" src="./js/hpo-search.js"></script>

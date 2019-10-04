@@ -67,7 +67,7 @@ function formControl() {
 			$("#mmlpOptions").hide();
 
 		}
-		
+
 		if ($("#parsingEngine").dropdown('get value') == 'esmb') {
 			$("#actpOptions").hide();
 			$("#esmbOptions").show();
@@ -93,7 +93,7 @@ function formControl() {
 			$("#mmpOptions").hide();
 			$("#mmlpOptions").hide();
 		}
-		
+
 		if ($("#parsingEngine").dropdown('get value') == 'mmlp') {
 			$("#actpOptions").hide();
 			$("#esmbOptions").hide();
@@ -103,12 +103,15 @@ function formControl() {
 		}
 	});
 
-
 	$("#parsingButton").on("click", function() {
 		if ($('#inputForm').form('is valid')) {
 			parse();
 		}
 	});
+	
+	$("#geneButton").on("click", function() {
+		p2g();
+	})
 
 	$("#phenolyzerButton")
 			.on(

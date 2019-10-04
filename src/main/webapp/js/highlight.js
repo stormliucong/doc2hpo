@@ -120,6 +120,8 @@ function highlight(parsingJson) {
 	// instance.mark('Individual');
 	$("#parsingResultsPanel").show();
 	$("#outputPanel").show();
+	$("#externalPanel").show();
+
 
 }
 
