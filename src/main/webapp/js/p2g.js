@@ -33,12 +33,17 @@ function p2g() {
 					tableData = data['results']
 					$('#geneCart').DataTable( {
 				        data: tableData,
+//				        dom: 'Bfrtip',
+//				        buttons: [
+//				            'copy', 'csv', 'excel', 'pdf', 'print'
+//				        ],
 				        "columns": [
 				            { "data": "Gene" },
 				            { "data": "Rank" },
 				            { "data": "Score" },
 				            { "data": "Status" }
-				        ]
+				        ],
+				        "bDestroy": true
 				    } );
 				}
 					

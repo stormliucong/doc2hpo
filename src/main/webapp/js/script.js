@@ -104,6 +104,10 @@ function formControl() {
 	});
 
 	$("#parsingButton").on("click", function() {
+		$("#parsingResultsPanel").hide();
+		$('#genePanel').hide();
+		$("#outputPanel").hide();
+		$("#externalPanel").hide();
 		if ($('#inputForm').form('is valid')) {
 			parse();
 		}

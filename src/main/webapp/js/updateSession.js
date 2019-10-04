@@ -35,7 +35,12 @@ function updateTermsInSession(start, length, hpo_id, hpo_term,is_negated) {
 			} else {
 				if (!Array.isArray(terms) || !terms.length) {
 					alert("No HPO terms found!");
+					$('#genePanel').hide();
+					$("#parsingResultsPanel").hide();
+					$("#outputPanel").hide();
+					$("#externalPanel").hide();
 				} else {
+					$('#genePanel').hide();
 					highlight(terms);
 					updateTable(terms);
 				}
@@ -90,7 +95,12 @@ function deleteTermsInSession(start, length, hpo_id, hpo_term) {
 			} else {
 				if (!Array.isArray(terms) || !terms.length) {
 					alert("No HPO terms found!");
+					$('#genePanel').hide();
+					$("#parsingResultsPanel").hide();
+					$("#outputPanel").hide();
+					$("#externalPanel").hide();
 				} else {
+					$('#genePanel').hide();
 					highlight(terms);
 					updateTable(terms);
 				}
@@ -143,7 +153,12 @@ function addTermsInSession(start, length, hpo_id, hpo_term) {
 			} else {
 				if (!Array.isArray(terms) || !terms.length) {
 					alert("No HPO terms found!");
+					$('#genePanel').hide();
+					$("#parsingResultsPanel").hide();
+					$("#outputPanel").hide();
+					$("#externalPanel").hide();
 				} else {
+					$('#genePanel').hide();
 					highlight(terms);
 					updateTable(terms);
 
@@ -197,7 +212,12 @@ function addTermsInSessionWithHighlight(start, length, hpo_id, hpo_term) {
 			} else {
 				if (!Array.isArray(terms) || !terms.length) {
 					alert("No HPO terms found!");
+					$('#genePanel').hide();
+					$("#parsingResultsPanel").hide();
+					$("#outputPanel").hide();
+					$("#externalPanel").hide();
 				} else {
+					$('#genePanel').hide();
 					highlight(terms);
 					updateTable(terms);
 				}
@@ -241,7 +261,12 @@ function getTermsInSession() {
 			} else {
 				if (!Array.isArray(terms) || !terms.length) {
 					alert("No HPO terms found!");
+					$('#genePanel').hide();
+					$("#parsingResultsPanel").hide();
+					$("#outputPanel").hide();
+					$("#externalPanel").hide();
 				} else {
+					$('#genePanel').hide();
 					highlight(terms);
 					updateTable(terms);
 				}
