@@ -121,9 +121,47 @@ function formControl() {
 			.on(
 					"click",
 					function() {
+						copyColumn2();
 						alert('you will be directed to Phenolyzer page. You could paste the copied terms to the Disease/Phenotype box!')
 						window.open('http://phenolyzer.wglab.org/', '_blank');
 					});
+	
+	$("#PubCaseFinderButton")
+	.on(
+			"click",
+			function() {
+				alert('you will be directed to PubCaseFinder page.')
+				var table = $('#shoppingCart').DataTable();
+				var indexes = table.rows().eq( 0 ).filter( function (rowIdx) {
+				    return table.cell( rowIdx, 2 ).data() == "false" ? true : false;
+				} );
+				var data = table.cells(indexes,1).data();
+				var copyString = data.join(",");
+				var pubcasefinder_href='https://pubcasefinder.dbcls.jp/search_disease/phenotype:' +
+				copyString
+				+'/gene:/page:1,1/size:10,10,omim'
+				window.open(pubcasefinder_href, '_blank');
+			});
+	
+	$('#ExomizerButton')
+	.on(
+			"click",
+			function() {
+				alert('you will be directed to Exomizer page. You could paste the copied terms to the Clinical phenotypes box!')
+				copyColumn();
+				window.open('https://monarch-exomiser-web-dev.monarchinitiative.org/exomiser/submit?', '_blank');
+			});
+	
+	$('#Phevor2Button')
+	.on(
+			"click",
+			function() {
+				alert('you will be directed to Phevor2 page. You could paste the copied terms to the Ontology Terms box!')
+				copyColumn();
+				window.open('http://weatherby.genetics.utah.edu/phevor2/index.html', '_blank');
+			});
+	
+	
 
 	$("#copyColumnButton").on("click", function() {
 		copyColumn();

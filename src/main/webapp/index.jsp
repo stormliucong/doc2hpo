@@ -10,7 +10,7 @@
 <html>
 
 <head>
-
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="keywords" content="Genetic Phenotype EHR doc2hpo">
 <meta name="author"
@@ -395,26 +395,29 @@
 					</div>
 					<div class="extra content">
 						<div class="ui list">
-							<div class="item" id="copyColumnButton">
-								<a href="http://phenolyzer.wglab.org/" target="_blank">
-									Phenolyzer</a>
+							<div class="item" id="phenolyzerButton">
+								<button>
+									Phenolyzer</button>
 							</div>
-							<div class="item" id="copyColumnButton">
-								<a href="http://compbio.charite.de/phenomizer/" target="_blank">
-									Phenomizer</a>
+							<div class="item" id="PubCaseFinderButton">
+								<button>PubCaseFinder</button>
 							</div>
-							<div class="item" id="copyColumnButton2">
-								<a href="http://compbio.charite.de/PhenIX/" target="_blank">
-									PhenIX</a>
+<!-- 							<div class="item" id="PhenomizerButton"> -->
+<!-- 								<button href="http://compbio.charite.de/phenomizer/" target="_blank"> -->
+<!-- 									Phenomizer</button> -->
+<!-- 							</div> -->
+<!-- 							<div class="item" id="PhenIXButton"> -->
+<!-- 								<button href="http://compbio.charite.de/PhenIX/" target="_blank"> -->
+<!-- 									PhenIX</button> -->
+<!-- 							</div> -->
+							<div class="item" id="Phevor2Button">
+								<button href="http://weatherby.genetics.utah.edu/phevor2/index.html"
+									target="_blank"> Phevor 2</button>
 							</div>
-							<div class="item" id="copyColumnButton">
-								<a href="http://weatherby.genetics.utah.edu/phevor2/index.html"
-									target="_blank"> Phevor 2</a>
-							</div>
-							<div class="item" id="copyColumnButton">
-								<a
+							<div class="item" id="ExomizerButton">
+								<button
 									href="https://monarch-exomiser-web-dev.monarchinitiative.org/exomiser/submit?"
-									target="_blank"> Exomizer</a>
+									target="_blank"> Exomizer</button>
 							</div>
 						</div>
 					</div>
