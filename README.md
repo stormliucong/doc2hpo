@@ -177,11 +177,13 @@ print(r.json())
 ## New features under development
   - Test across multiple browser and platforms
   - Add context based annotation in backend
-  *Using different color to seperate the category (e.g. family, education) in frontend
+  *Using different colors to seperate the category (e.g. family, education) in frontend
   - Add more parsers
   *cTakes http://ctakes.apache.org/
   *ClinPhen http://bejerano.stanford.edu/clinphen/
-  * add pubcasefinder API
+  *clinicalbert based parsing https://github.com/EmilyAlsentzer/clinicalBERT
+  - Add Phe2Gene correction
+  - Add FHIR supoort
 
 ## Publications
 Cong Liu, Fabricio Sampaio Peres Kury, Ziran Li, Casey Ta, Kai Wang, Chunhua Weng, Doc2Hpo: a web application for efficient and accurate HPO concept curation, Nucleic Acids Research, , gkz386, 
