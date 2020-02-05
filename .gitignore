@@ -14,3 +14,10 @@ README.md
 /public_mm_lite/*
 public_mm_lite_3.6.2rc3_binaryonly.zip
 
+
+.factorypath
+.settings/org.eclipse.jdt.apt.core.prefs
+.settings/org.eclipse.jdt.core.prefs
+.settings/org.eclipse.jdt.core.prefs
+.vscode/settings.json
+.settings/org.eclipse.jdt.core.prefs

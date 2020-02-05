@@ -21,12 +21,13 @@ function p2g() {
 			});
 	$
 			.ajax({
-				headers : {
-					'Accept' : 'application/json',
-					'Content-Type' : 'application/json'
-				},
+				// headers : {
+				// 	'Accept' : 'application/json',
+				// 	'Content-Type' : 'application/json'
+				// }, 
+				// Add hearders will cause CORS issue.
 				type : 'GET',
-				url : "http://phen2gene.wglab.org/api",
+				url : "https://phen2gene.wglab.org/api",
 				data : {'HPO_list': copyString},
 				dataType : "json",
 				success : function(data) {
