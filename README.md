@@ -32,8 +32,8 @@ doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO
   #### 3.install MetaMap
   bunzip2 -c public_mm_linux_main_2016v2.tar.bz2 | tar xvf -
   cd public_mm/
-  ./bin/install.sh` 
-  # prese ender to use default settings #
+  ./bin/install.sh
+  # press enter to use default settings #
   #### 4.install MetaMap Java API
   cd ../
   bzip2 -dc public_mm_linux_javaapi_2016v2.tar.bz2 | tar xvf -
@@ -59,11 +59,16 @@ doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO
   cp ./public_mm_lite/lib/* ./doc2hpo/src/main/webapp/WEB-INF/lib
   cp ./public_mm_lite/config/* ./doc2hpo/properties
   #### 3. change config file (if necessary)
+  ##### Important. Make sure you set everything correctly.
+  ##### Otherwise there is a 404 error.
   cd ./doc2hpo/src/main/webapp/WEB-INF
+  # change the name of config.properties_bak to config.properties
+  mv config.properties_bak config.properties
   vi config.properties
   cd myproject
   cd ./doc2hpo/properties
   # change metamaplite db path accordingly
+  # you don't have to change by default.
   vi metamaplite.properties
   ```
   ### Step 3: Deploy of Doc2Hpo
