@@ -191,7 +191,6 @@ print(r.json())
   *cTakes http://ctakes.apache.org/
   *ClinPhen http://bejerano.stanford.edu/clinphen/
   *clinicalbert based parsing https://github.com/EmilyAlsentzer/clinicalBERT
-  - Add Phe2Gene correction
   - Add FHIR supoort
 
 ## Publications
