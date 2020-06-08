@@ -63,7 +63,7 @@ function parseMetamap(note) {
 					'Content-Type' : 'application/json'
 				},
 				type : 'POST',
-				url : "/doc2hpo/parse/metamap",
+				url : "parse/metamap",
 				data : JSON.stringify(formData),
 				dataType : "json",
 				success : function(data) {
@@ -120,7 +120,7 @@ function parseACT(note) {
 					'Content-Type' : 'application/json'
 				},
 				type : 'POST',
-				url : "/doc2hpo/parse/acdat",
+				url : "parse/acdat",
 				data : JSON.stringify(formData),
 				dataType : "json",
 				success : function(data) {
@@ -175,7 +175,7 @@ function parseMetamaplite(note) {
 					'Content-Type' : 'application/json'
 				},
 				type : 'POST',
-				url : "/doc2hpo/parse/metamaplite",
+				url : "parse/metamaplite",
 				data : JSON.stringify(formData),
 				dataType : "json",
 				success : function(data) {
@@ -230,7 +230,7 @@ function parseEnsemble(note) {
 					'Content-Type' : 'application/json'
 				},
 				type : 'POST',
-				url : "/doc2hpo/parse/ensemble",
+				url : "parse/ensemble",
 				data : JSON.stringify(formData),
 				dataType : "json",
 				success : function(data) {
@@ -293,7 +293,7 @@ function parseNcbo(note) {
 					'Content-Type' : 'application/json'
 				},
 				type : 'POST',
-				url : "/doc2hpo/parse/ncbo",
+				url : "parse/ncbo",
 				data : JSON.stringify(formData),
 				dataType : "json",
 				success : function(data) {
@@ -344,7 +344,7 @@ function testController() {
 		},
 
 		dataType : 'json',
-		url : "/doc2hpo/test/test1",
+		url : "test/test1",
 		data : JSON.stringify(search), // Note it is important
 		success : function(result) {
 			// do what ever you want with data
