@@ -88,6 +88,10 @@ doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO
   ./apache-tomcat-8.5.35/bin/startup.sh
   ```
   ### Step 4: visit Doc2Hpo at *localhost:8080/doc2hpo*, and you are all set!
+  
+  ### Step 5: For IMPACT2 server only.
+  change the ajax url to /doc2hpo/parse/acdat for Apache deligation (a better solution is required).
+  
 
 
 ## References
