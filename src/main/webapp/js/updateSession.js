@@ -23,7 +23,7 @@ function updateTermsInSession(start, length, hpo_id, hpo_term,is_negated) {
 			'Content-Type' : 'application/json'
 		},
 		type : 'POST',
-		url : "/doc2hpo/session/updateTerms",
+		url : "session/updateTerms",
 		data : JSON.stringify(formData),
 		dataType : "json",
 		success : function(data) {
@@ -83,7 +83,7 @@ function deleteTermsInSession(start, length, hpo_id, hpo_term) {
 			'Content-Type' : 'application/json'
 		},
 		type : 'POST',
-		url : "/doc2hpo/session/deleteTerms",
+		url : "session/deleteTerms",
 		data : JSON.stringify(formData),
 		dataType : "json",
 		success : function(data) {
@@ -141,7 +141,7 @@ function addTermsInSession(start, length, hpo_id, hpo_term) {
 			'Content-Type' : 'application/json'
 		},
 		type : 'POST',
-		url : "/doc2hpo/session/addTerms",
+		url : "session/addTerms",
 		data : JSON.stringify(formData),
 		dataType : "json",
 		success : function(data) {
@@ -200,7 +200,7 @@ function addTermsInSessionWithHighlight(start, length, hpo_id, hpo_term) {
 			'Content-Type' : 'application/json'
 		},
 		type : 'POST',
-		url : "/doc2hpo/session/addTerms",
+		url : "session/addTerms",
 		data : JSON.stringify(formData),
 		dataType : "json",
 		success : function(data) {
@@ -249,7 +249,7 @@ function getTermsInSession() {
 			'Content-Type' : 'application/json'
 		},
 		type : 'GET',
-		url : "/doc2hpo/session/getTerms",
+		url : "session/getTerms",
 		dataType : "json",
 		async: false, // to avoid null repsonse.
 		success : function(data) {
