@@ -9,9 +9,9 @@ doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO
   sudo apt-get install oracle-java8-installer
   javac -version
   #### 1. download apache tomcat if you don't have one
-  wget http://ftp.naz.com/apache/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.tar.gz
+  wget https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.tar.gz
   #### 2. download apache maven if you don't have one
-  wget https://www-us.apache.org/dist/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz
+  wget https://archive.apache.org/dist/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz
   #### 3. git clone this repository 
   git clone https://github.com/stormliucong/doc2hpo.git
   ```
