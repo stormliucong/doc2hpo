@@ -57,10 +57,9 @@ doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO
   #### 2. copy mmlite jar to lib
   cp ./public_mm_lite/target/metamaplite-3.6.2rc3.jar ./doc2hpo/src/main/webapp/WEB-INF/lib
   cp ./public_mm_lite/lib/* ./doc2hpo/src/main/webapp/WEB-INF/lib
-  cp ./public_mm_lite/config/* ./doc2hpo/properties
   #### 3. change config file (if necessary)
   ##### Important. Make sure you set everything correctly.
-  ##### Otherwise there is a 404 error.
+  ##### Otherwise there is a 404 error and some engines in doc2hpo might not work properly
   cd ./doc2hpo/src/main/webapp/WEB-INF
   # change the name of config.properties_bak to config.properties
   mv config.properties_bak config.properties

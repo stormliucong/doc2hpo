@@ -1,5 +1,7 @@
 package edu.columbia.dbmi.doc2hpo.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,13 @@ public class VersionController {
 		version.setMetamaplite("metamaplite-3.6.2rc3.jar");
 		version.setNcbo(null);
 		return version;
+    }
+	
+	@RequestMapping("/ping")
+	@ResponseBody
+	public String ping(HttpSession httpSession) {
+		httpSession.setAttribute("live", 1);
+		return "OK";
     }
 
 }

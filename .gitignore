@@ -1,7 +1,6 @@
 /data/*
 /properties/*
 doc2hpo.war
-README.md
 .DS_Store
 /target/*
 /logs/*

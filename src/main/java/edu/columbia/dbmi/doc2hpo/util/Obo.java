@@ -13,15 +13,12 @@ import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 import org.springframework.util.ResourceUtils;
 
-import edu.columbia.dbmi.doc2hpo.controller.ParseController;
 
 
 public class Obo {
 	private static Logger logger = Logger.getLogger(Obo.class);
 
 	public static void main (String[] args) throws IOException {
-		Obo o = new Obo();
-		HashMap<String, String> hmCui2Hpo = o.hmCui2Hpo;
 //		System.out.println(hmCui2Hpo);
 
 

@@ -54,14 +54,14 @@ public class ParseController {
 	@Value("#{configProperties['NcboUrl']}")
 	private String ncboUrl;
 	
-	@Value("#{configProperties['metamapliteconfiger']}")
-	private String metamapliteconfiger;
+	@Value("#{configProperties['metamapliteDataRoot']}")
+	private String metamapliteDataRoot;
 
 	@PostConstruct
 	public void init() throws FileNotFoundException, ClassNotFoundException, InstantiationException, NoSuchMethodException, IllegalAccessException, IOException {
 		this.corenlp = new CoreNLP();
 		this.mmp = new MetaMapParser(corenlp);
-		this.mmlp = new MetaMapLiteParser(metamapliteconfiger);
+		this.mmlp = new MetaMapLiteParser(metamapliteDataRoot);
 		this.actp = new ACTrieParser();
 		if(this.ncboUrl.trim().toLowerCase().equals("null")) {
 			this.ncboUrl = "http://data.bioontology.org"; // default using public ncbo api.
