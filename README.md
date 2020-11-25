@@ -1,5 +1,7 @@
 # doc2hpo
 doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO for phenolyzer analysis.
+## Demo
+https://impact.dbmi.columbia.edu/doc2hpo/
  ## Installation
   ### Step 0 : download everything you need
   ```bash 
