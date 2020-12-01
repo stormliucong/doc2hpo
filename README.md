@@ -2,6 +2,59 @@
 doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO for phenolyzer analysis.
 ## Demo
 https://impact.dbmi.columbia.edu/doc2hpo/
+
+## RESTful API Example
+```
+import requests
+import json
+
+# for test purpose.
+url = "https://impact.dbmi.columbia.edu/doc2hpo/version"
+r = requests.post(url)
+print(r.json())
+# {u'ncbo': None, u'java': u'1.8.0_191', u'tomcat': u'8.5.35', u'doc2hpo': u'1.21.0', u'metamaplite': u'metamaplite-3.6.2rc3.jar', u'metamap': u'2016v2'}
+
+# for string-based match. faster. 
+url = "https://impact.dbmi.columbia.edu/doc2hpo/parse/acdat"
+json = {
+	"note": "He denies synophrys.",
+    "negex": True
+}
+# headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+r = requests.post(url,json = json)
+print(r.json())
+
+# with negation detection enabled.
+url = "https://impact.dbmi.columbia.edu/doc2hpo/parse/acdat"
+json = {
+	"note": "He denies synophrys.",
+    "negex": True
+}
+# headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+r = requests.post(url,json = json)
+print(r.json())
+
+# using metamap lite. Much faster than Original Metamap.
+url = "https://impact.dbmi.columbia.edu/doc2hpo/parse/metamaplite"
+json = {
+	"note": "He denies synophrys.",
+    "negex": True
+}
+# headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+r = requests.post(url,json = json)
+print(r.json())
+
+# using ncbo annotator - recommended if single file is large.
+url = "https://impact.dbmi.columbia.edu/doc2hpo/parse/ncbo"
+json = {
+	"note": "He denies synophrys.",
+    "negex": True
+}
+# headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+r = requests.post(url,json = json)
+print(r.json())
+
+```
  ## Installation
   ### Step 0 : download everything you need
   ```bash 
@@ -131,58 +184,7 @@ https://impact.dbmi.columbia.edu/doc2hpo/
 ## Versioning
 1.21.0
 
-## Using RESTful API
-```
-import requests
-import json
 
-# for test purpose.
-url = "https://impact2.dbmi.columbia.edu/doc2hpo/version"
-r = requests.post(url)
-print(r.json())
-# {u'ncbo': None, u'java': u'1.8.0_191', u'tomcat': u'8.5.35', u'doc2hpo': u'1.21.0', u'metamaplite': u'metamaplite-3.6.2rc3.jar', u'metamap': u'2016v2'}
-
-# for string-based match. faster. 
-url = "https://impact2.dbmi.columbia.edu/doc2hpo/parse/acdat"
-json = {
-	"note": "He denies synophrys.",
-    "negex": True
-}
-# headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-r = requests.post(url,json = json)
-print(r.json())
-
-# with negation detection enabled.
-url = "https://impact2.dbmi.columbia.edu/doc2hpo/parse/acdat"
-json = {
-	"note": "He denies synophrys.",
-    "negex": True
-}
-# headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-r = requests.post(url,json = json)
-print(r.json())
-
-# using metamap lite. Much faster than Original Metamap.
-url = "https://impact2.dbmi.columbia.edu/doc2hpo/parse/metamaplite"
-json = {
-	"note": "He denies synophrys.",
-    "negex": True
-}
-# headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-r = requests.post(url,json = json)
-print(r.json())
-
-# using ncbo annotator - recommended if single file is large.
-url = "https://impact2.dbmi.columbia.edu/doc2hpo/parse/ncbo"
-json = {
-	"note": "He denies synophrys.",
-    "negex": True
-}
-# headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-r = requests.post(url,json = json)
-print(r.json())
-
-```
 
 ## New features under development
   - Test across multiple browser and platforms
