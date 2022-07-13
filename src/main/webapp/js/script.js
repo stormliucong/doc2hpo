@@ -63,7 +63,6 @@ function formControl() {
 			$("#actpOptions").show();
 			$("#esmbOptions").hide();
 			$("#ncboOptions").hide();
-			$("#mmpOptions").hide();
 			$("#mmlpOptions").hide();
 
 		}
@@ -72,16 +71,6 @@ function formControl() {
 			$("#actpOptions").hide();
 			$("#esmbOptions").show();
 			$("#ncboOptions").hide();
-			$("#mmpOptions").hide();
-			$("#mmlpOptions").hide();
-
-		}
-
-		if ($("#parsingEngine").dropdown('get value') == 'mmp') {
-			$("#actpOptions").hide();
-			$("#esmbOptions").hide();
-			$("#ncboOptions").hide();
-			$("#mmpOptions").show();
 			$("#mmlpOptions").hide();
 
 		}
@@ -90,7 +79,6 @@ function formControl() {
 			$("#actpOptions").hide();
 			$("#esmbOptions").hide();
 			$("#ncboOptions").show();
-			$("#mmpOptions").hide();
 			$("#mmlpOptions").hide();
 		}
 
@@ -98,8 +86,14 @@ function formControl() {
 			$("#actpOptions").hide();
 			$("#esmbOptions").hide();
 			$("#ncboOptions").hide();
-			$("#mmpOptions").hide();
 			$("#mmlpOptions").show();
+		}
+
+		if ($("#parsingEngine").dropdown('get value') == 'noparsing') {
+			$("#actpOptions").hide();
+			$("#esmbOptions").hide();
+			$("#ncboOptions").hide();
+			$("#mmlpOptions").hide();
 		}
 	});
 

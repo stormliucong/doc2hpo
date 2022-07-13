@@ -136,17 +136,12 @@
 								</div>
 								<div class="item" data-value="esmb">
 									<span class="text">Ensemble by Union</span> <span
-										class="description">MataMap + MetaMapLite +
+										class="description">NCBO + MetaMapLite +
 										String-search </span>
 								</div>
 								<div class="item" data-value="mmlp">
 									<span class="text">MetaMap Lite </span> <span
 										class="description">a fast version of MetaMap </span>
-								</div>
-								<div class="item" data-value="mmp">
-									<span class="text">Metamap </span> <span class="description">using
-										a local metamap java API to extract UMLS CUI terms and then
-										mapped to HPO terms </span>
 								</div>
 								<div class="item" data-value="ncbo">
 									<span class="text">NCBO Annotator </span><span
@@ -199,41 +194,6 @@
 							<div class="ui checkbox">
 								<input type="checkbox" id="mmlp_negex" checked> <label>negation
 									detection</label>
-							</div>
-						</div>
-					</div>
-
-					<!-- option for Metamap -->
-					<div class="ui celled relaxed list" style="display: none"
-						id="mmpOptions">
-						<div class="inline field">
-							<div class="ui checkbox">
-								<input type="checkbox" id="mmp_negex" checked> <label>negation
-									detection</label>
-							</div>
-						</div>
-						<div class="inline field">
-							<div class="ui checkbox">
-								<input type="checkbox" id="all_acros_abbrs" checked> <label>allow
-									acronym variants</label>
-							</div>
-						</div>
-						<div class="inline field">
-							<div class="ui checkbox hidden">
-								<input type="checkbox" id="allow_concept_gaps" checked>
-								<label>allow concept gaps</label>
-							</div>
-						</div>
-						<div class="inline field">
-							<div class="ui checkbox">
-								<input type="checkbox" id="ignore_word_order" checked> <label>ignore
-									word order</label>
-							</div>
-						</div>
-						<div class="inline field">
-							<div class="ui checkbox">
-								<input type="checkbox" id="ignore_stop_phrases" checked>
-								<label>ignore stop phrases</label>
 							</div>
 						</div>
 					</div>
