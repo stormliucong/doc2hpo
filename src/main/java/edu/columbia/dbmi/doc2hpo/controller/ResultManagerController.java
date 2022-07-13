@@ -40,7 +40,6 @@ public class ResultManagerController {
 		String hpoId = pr.getHpoId();
 		String hpoName = pr.getHpoName();
 
-		@SuppressWarnings("unchecked")
 		List<ParsingResults> hmName2Id = new ArrayList<ParsingResults>();
 
 		if(null != httpSession.getAttribute("hmName2Id")) {

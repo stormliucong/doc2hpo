@@ -10,13 +10,11 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
 import org.springframework.util.ResourceUtils;
 
 
 
 public class Obo {
-	private static Logger logger = Logger.getLogger(Obo.class);
 
 	public static void main (String[] args) throws IOException {
 //		System.out.println(hmCui2Hpo);
@@ -37,10 +35,8 @@ public class Obo {
 			this.hmCui2Hpo = Cui2Hpo();
 			this.hmHpo2Name = Hpo2Name();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -107,7 +103,6 @@ public class Obo {
 				}else {
 					hpo = test + "|" + hpo;
 					hmCui2Hpo.put(cui, hpo);
-					logger.info("[WARNING][ncboUrl]["+cui+"occurred more than once!]");
 				}
 			}
 			newLine = br.readLine();

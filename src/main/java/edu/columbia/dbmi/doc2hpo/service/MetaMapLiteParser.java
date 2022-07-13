@@ -15,7 +15,6 @@ import java.util.Properties;
 import java.lang.reflect.InvocationTargetException;
 import java.io.IOException;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 
 /**
  * Example of using MetaMapLite from Java
@@ -37,7 +36,7 @@ public class MetaMapLiteParser {
 		myProperties.setProperty("opennlp.models.directory", dataRoot + "/models");
 		myProperties.setProperty("opennlp.en-pos.bin.path", dataRoot + "/models/en-pos-maxent.bin");
 		myProperties.setProperty("opennlp.en-sent.bin.path",dataRoot + "/models/en-sent.bin");
-		myProperties.setProperty("metamaplite.index.directory", dataRoot + "/ivf/2018AB/USAbase/strict");
+		myProperties.setProperty("metamaplite.index.directory", dataRoot + "/ivf/2020AA/Base");
 		myProperties.setProperty("metamaplite.excluded.termsfile", dataRoot + "/specialterms.txt");
 		myProperties.setProperty("metamaplite.excluded.termsfile", dataRoot + "/specialterms.txt");
 		myProperties.setProperty("metamaplite.negation.detector", "gov.nih.nlm.nls.metamap.lite.NegEx");
@@ -102,7 +101,7 @@ public class MetaMapLiteParser {
 
 	public static void main(String[] args) throws Exception, IOException, ClassNotFoundException,
 			InstantiationException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-		MetaMapLiteParser mmlp = new MetaMapLiteParser("/Users/cl3720/eclipse-workspace/public_mm_lite/data");
+		MetaMapLiteParser mmlp = new MetaMapLiteParser("/home/cl3720/public_mm_lite/data");
 		String content = "He denies behavioral disturbance. Individual II-1 is a 10 year old boy. He was born at term with normal birth parameters and good APGAR scores (9/10/10). The neonatal period was uneventful, and he had normal motor development during early childhood: he began to look up at 3 months, sit by himself at 5 months, stand up at 11 months, walk at 13 months, and speak at 17 months. He attended a regular kindergarten, without any signs of difference in intelligence, compared to his peers. Starting at age 6, the parents observed ever increasing behavioral disturbance for the boy, manifesting in multiple aspects of life. For example, he can no longer wear clothes by himself, cannot obey instruction from parents/teachers, can no longer hold subjects tightly in hand, which were all things that he could do before 6 years of age. In addition, he no longer liked to play with others; instead, he just preferred to stay by himself, and he sometimes fell down when he walked on the stairs, which had rarely happened at age 5. The proband continued to deteriorate: at age 9, he could not say a single word and had no action or response to any instruction given in clinical exams. Additionally, rough facial features were noted with a flat nasal bridge, a synophrys (unibrow), a long and smooth philtrum, thick lips and an enlarged mouth. He also had rib edge eversion, and it was also discovered that he was profoundly deaf and had completely lost the ability to speak. He also had loss of bladder control. The diagnosis of severe intellectual disability was made, based on Wechsler Intelligence Scale examination. Brain MRI demonstrated cortical atrophy with enlargement of the subarachnoid spaces and ventricular dilatation (Figure 2). Brainstem evoked potentials showed moderate abnormalities. Electroencephalography (EEG) showed abnormal sleep EEG.\n" + 
 				"";
 		mmlp.parse(content, true);

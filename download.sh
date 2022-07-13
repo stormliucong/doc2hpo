@@ -9,8 +9,8 @@ unzip public_mm_lite_3.6.2rc3_binaryonly.zip
 unzip public_mm_data_lite_usabase_2018ab_ascii.zip
 # apache maven/tomcat
 wget https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.tar.gz
-wget https://mirrors.koehn.com/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+wget https://mirrors.koehn.com/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.0-bin.tar.gz
 tar -xzf apache-tomcat-8.5.35.tar.gz
-tar -xzf apache-maven-3.6.3-bin.tar.gz
+tar -xzf apache-maven-3.6.0-bin.tar.gz
 # doc2hpo
 git clone https://github.com/stormliucong/doc2hpo.git

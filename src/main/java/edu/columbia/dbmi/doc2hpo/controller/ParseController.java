@@ -24,23 +24,17 @@ import edu.columbia.dbmi.doc2hpo.pojo.ParseJob;
 import edu.columbia.dbmi.doc2hpo.pojo.ParsingResults;
 import edu.columbia.dbmi.doc2hpo.service.ACTrieParser;
 import edu.columbia.dbmi.doc2hpo.service.MetaMapLiteParser;
-import edu.columbia.dbmi.doc2hpo.service.MetaMapParser;
 import edu.columbia.dbmi.doc2hpo.service.NcboParser;
-import edu.columbia.dbmi.doc2hpo.tool.CoreNLP;
 
 @CrossOrigin
 @Controller
 @RequestMapping("/parse")
 public class ParseController {
 	private static Logger logger = Logger.getLogger(ParseController.class);
-	private CoreNLP corenlp;
-	private MetaMapParser mmp;
 	private NcboParser ncbo;
 	private ACTrieParser actp;
 	private MetaMapLiteParser mmlp;
 
-	@Value("#{configProperties['MetamapBinPath']}")
-	private String metamapBinPath;
 
 	@Value("#{configProperties['NcboApiKey']}")
 	private String NcboApiKey;
@@ -59,8 +53,6 @@ public class ParseController {
 
 	@PostConstruct
 	public void init() throws FileNotFoundException, ClassNotFoundException, InstantiationException, NoSuchMethodException, IllegalAccessException, IOException {
-		this.corenlp = new CoreNLP();
-		this.mmp = new MetaMapParser(corenlp);
 		this.mmlp = new MetaMapLiteParser(metamapliteDataRoot);
 		this.actp = new ACTrieParser();
 		if(this.ncboUrl.trim().toLowerCase().equals("null")) {
@@ -76,7 +68,7 @@ public class ParseController {
 
 	@RequestMapping("/acdat")
 	@ResponseBody
-	public Map<String, Object> getTerm2(HttpSession httpSession, @RequestBody ParseJob pj) throws Exception {
+	public Map<String, Object> getTerm1(HttpSession httpSession, @RequestBody ParseJob pj) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		try {
@@ -91,7 +83,27 @@ public class ParseController {
 			map.put("hpoOption", false);
 			return map;
 		}catch (Exception e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("hmName2Id", "ERROR");
+		}
+		return map;
+		
+	}
+
+	@RequestMapping("/metamaplite")
+	@ResponseBody
+	public Map<String, Object> getTerm2(HttpSession httpSession, @RequestBody ParseJob pj) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			List<ParsingResults> hmName2Id = new ArrayList<ParsingResults>();
+			String content = pj.getNote();
+			boolean negex = pj.isNegex();
+			
+			hmName2Id = this.mmlp.parse(content,negex);
+			httpSession.setAttribute("hmName2Id", hmName2Id);
+			map.put("hmName2Id", hmName2Id);
+			map.put("hpoOption", false);
+		}catch (Exception e) {
 			e.printStackTrace();
 			map.put("hmName2Id", "ERROR");
 		}
@@ -105,92 +117,44 @@ public class ParseController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			List<ParsingResults> hmName2Id = new ArrayList<ParsingResults>();
-			List<String> theOptions = pj.getOption();
-			String content = pj.getNote();
-			boolean negex = pj.isNegex();
+			System.out.println(pj);
+			// List<ParsingResults> hmName2Id = new ArrayList<ParsingResults>();
+			// List<String> theOptions = pj.getOption();
 			
-			hmName2Id = this.ncbo.parse(content, theOptions,negex);
-			
-			httpSession.setAttribute("hmName2Id", hmName2Id);
-			map.put("hmName2Id", hmName2Id);
-			map.put("hpoOption", false);
+			// String content = pj.getNote();
+			// boolean negex = pj.isNegex();
+			// hmName2Id = this.ncbo.parse(content, theOptions,negex);
+			// httpSession.setAttribute("hmName2Id", hmName2Id);
+			// map.put("hmName2Id", hmName2Id);
+			// map.put("hpoOption", false);
 		}catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			map.put("hmName2Id", "ERROR");
 		}
 		return map;
-	}
-
-	@RequestMapping("/metamap")
-	@ResponseBody
-	public Map<String, Object> getTerm4(HttpSession httpSession, @RequestBody ParseJob pj) throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>();
-		try {
-			List<ParsingResults> hmName2Id = new ArrayList<ParsingResults>();
-			List<String> theOptions = pj.getOption();
-			String content = pj.getNote();
-			boolean negex = pj.isNegex();
-
-			
-			hmName2Id = this.mmp.parseBySentence(this.corenlp, content, theOptions, negex);
-			
-			httpSession.setAttribute("hmName2Id", hmName2Id);
-			map.put("hmName2Id", hmName2Id);
-			map.put("hpoOption", false);
-		}catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			map.put("hmName2Id", "ERROR");
-		}
-		return map;
-		
-	}
-	
-	@RequestMapping("/metamaplite")
-	@ResponseBody
-	public Map<String, Object> getTerm1(HttpSession httpSession, @RequestBody ParseJob pj) throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>();
-		try {
-			List<ParsingResults> hmName2Id = new ArrayList<ParsingResults>();
-			String content = pj.getNote();
-			boolean negex = pj.isNegex();
-			
-			hmName2Id = this.mmlp.parse(content,negex);
-			httpSession.setAttribute("hmName2Id", hmName2Id);
-			map.put("hmName2Id", hmName2Id);
-			map.put("hpoOption", false);
-		}catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			map.put("hmName2Id", "ERROR");
-		}
-		return map;
-		
 	}
 	
 	@RequestMapping("/ensemble")
 	@ResponseBody
-	public Map<String, Object> getTerm5(HttpSession httpSession, @RequestBody ParseJob pj) throws Exception {
+	public Map<String, Object> getTerm4(HttpSession httpSession, @RequestBody ParseJob pj) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			List<ParsingResults> hmName2Id1 = new ArrayList<ParsingResults>();
 			List<ParsingResults> hmName2Id2 = new ArrayList<ParsingResults>();
 			List<ParsingResults> hmName2Id3 = new ArrayList<ParsingResults>();
-			List<String> mmpOptions = new ArrayList<String>();
-			mmpOptions.add("-y");
-			mmpOptions.add("-a");
-			mmpOptions.add("-g");
-			mmpOptions.add("-K");
-			mmpOptions.add("-i");
 
 			String content = pj.getNote();
 			boolean negex = pj.isNegex();
-			
+
+			List<String> options = new ArrayList<String>();
+			options.add("longest_only=true");
+			options.add("whole_word_only=false");
+			options.add("exclude_numbers=true");
+
+		
 			hmName2Id1 = this.mmlp.parse(content,negex);
 			hmName2Id2 = this.actp.parse(this.actp, content, negex, false);
-			hmName2Id3 = this.mmp.parseBySentence(this.corenlp, content, mmpOptions, negex);
+			hmName2Id3 = this.ncbo.parse(content, options, negex);
 
 			
 			List<ParsingResults> hmName2Id = ListUtils.union(ListUtils.union(hmName2Id1, hmName2Id2),hmName2Id3);
@@ -199,7 +163,6 @@ public class ParseController {
 			map.put("hmName2Id", hmName2Id);
 			map.put("hpoOption", false);
 		}catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			map.put("hmName2Id", "ERROR");
 		}

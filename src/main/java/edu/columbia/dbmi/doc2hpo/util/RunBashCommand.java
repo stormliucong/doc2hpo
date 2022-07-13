@@ -28,14 +28,12 @@ public class RunBashCommand {
 		try {
 			br = new BufferedReader(new InputStreamReader(new FileInputStream(inputFile)));
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String strLine = null;
 		try {
 			strLine = br.readLine();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String Input = "";
@@ -44,14 +42,12 @@ public class RunBashCommand {
 			try {
 				strLine = br.readLine();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		try {
 			br.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String command = metamapDir+"/metamap16" + " -I -p -J -K -8 --conj cgab,genf,lbpr,lbtr,patf,dsyn,fndg";

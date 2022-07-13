@@ -11,7 +11,6 @@ import edu.columbia.dbmi.doc2hpo.util.FileUtil;
 public class DicPrepare {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		String voca=FileUtil.Readfile("/Users/cy2465/Downloads/hp.obo.txt");
 		//System.out.println("voca="+voca);
 		String[] terms=voca.split("\\[Term\\]");

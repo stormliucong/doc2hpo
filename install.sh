@@ -19,18 +19,22 @@ cp ./public_mm/src/javaapi/target/metamap-api-2.0.jar ./doc2hpo/src/main/webapp/
 cp ./public_mm/src/javaapi/dist/prologbeans.jar ./doc2hpo/src/main/webapp/WEB-INF/lib
 cp ./public_mm/src/javaapi/dist/MetaMapApi.jar ./doc2hpo/src/main/webapp/WEB-INF/lib
 #### 2. copy mmlite jar to lib
-cp ./public_mm_lite/target/metamaplite-3.6.2rc3.jar ./doc2hpo/src/main/webapp/WEB-INF/lib
+unzip public_mm_data_lite_base_2020aa.zip
+cp ./public_mm_lite/target/metamaplite-3.6.2rc6.jar ./doc2hpo/src/main/webapp/WEB-INF/lib
 cp ./public_mm_lite/lib/* ./doc2hpo/src/main/webapp/WEB-INF/lib
 cp ./public_mm_lite/config/* ./doc2hpo/properties
 #### 3. change config file (if necessary)
 ##### Important. Make sure you set everything correctly.
 ##### Otherwise there is a 404 error.
+```
+/home/cl3720/public_mm_lite/data
+```
 # change the name of config.properties_bak to config.properties
 # myproject/doc2hpo/src/main/webapp/WEB-INF/config.properties_bak:MetamapBinPath=/yourpathto/public_mm/bin
 # myproject/doc2hpo/src/main/webapp/WEB-INF/config.properties_bak:metamapliteconfiger=/yourpathto/doc2hpo/properties/metamaplite.properties
 # make sure this is actually changed. for real.
 mv doc2hpo/src/main/webapp/WEB-INF/config.properties_bak doc2hpo/src/main/webapp/WEB-INF/config.properties
 cd doc2hpo
-../apache-maven-3.6.3/bin/mvn clean validate install
+../apache-maven-3.6.0/bin/mvn clean validate install
 cp ./target/doc2hpo.war ../apache-tomcat-8.5.35/webapps/
 cd ..

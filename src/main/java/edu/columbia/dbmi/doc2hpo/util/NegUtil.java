@@ -29,7 +29,6 @@ public class NegUtil {
 		try {
 			System.out.println(nrt.negCheck("hypertension is good. Neither was complicated by edema, hypertension, or pre-eclampsia.", "hypertension", true));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

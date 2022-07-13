@@ -1,7 +1,5 @@
 package edu.columbia.dbmi.doc2hpo.pojo;
 
-import edu.stanford.nlp.simple.Sentence;
-
 public class SplittedSentence {
 	public String setence;
 	public String getSetence() {

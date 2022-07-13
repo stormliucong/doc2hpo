@@ -20,7 +20,6 @@ public class HpoCleaner {
 		try {
 			phenotypeFile = ResourceUtils.getFile("classpath:dictionary/hp.medlee.HP_0000118.txt");
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String cleandic = phenotypeFile.toString();
@@ -33,7 +32,6 @@ public class HpoCleaner {
 	}
 
 	public List<ParsingResults> getPhenotypeOnly(List<ParsingResults> pResults) {
-		// TODO Auto-generated method stub
 		List<ParsingResults> pResultsNew = new ArrayList<ParsingResults>();
 		for(ParsingResults result : pResults) {
 			if(this.hpSet.contains(result.getHpoId())){
@@ -44,7 +42,6 @@ public class HpoCleaner {
 	}
 	
 	public List<ParsingResults> changeHpoIdComma(List<ParsingResults> pResults) {
-		// TODO Auto-generated method stub
 		for(ParsingResults result : pResults) {
 			String hpoId = result.getHpoId().replaceAll("_", ":");
 			result.setHpoId(hpoId);
@@ -53,7 +50,6 @@ public class HpoCleaner {
 	}
 
 	public List<ParsingResults> removeAcrny(List<ParsingResults> pResults) {
-		// TODO Auto-generated method stub
 		List<ParsingResults> pResultsNew = new ArrayList<ParsingResults>();
 
 		ArrayList<String> acryn = new ArrayList<String>();

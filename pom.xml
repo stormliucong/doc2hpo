@@ -259,23 +259,23 @@
 			<classifier>models</classifier>
 		</dependency>
 		<!--metamap java api -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>metamap-api-2.0</groupId>
 			<artifactId>metamap-api-2.0</artifactId>
 			<scope>system</scope>
 			<version>1.0</version>
 			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/metamap-api-2.0.jar</systemPath>
-		</dependency>
+		</dependency> -->
 		<!-- <dependency> <groupId>MetaMapApi.jar</groupId> <artifactId>MetaMapApi.jar</artifactId> 
 			<scope>system</scope> <version>1.0</version> <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/MetaMapApi.jar</systemPath> 
 			</dependency> -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>prologbeans.jar</groupId>
 			<artifactId>prologbeans.jar</artifactId>
 			<scope>system</scope>
 			<version>1.0</version>
 			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/prologbeans.jar</systemPath>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>bioc</groupId>
 			<artifactId>bioc</artifactId>
@@ -287,8 +287,8 @@
 			<groupId>metamaplite</groupId>
 			<artifactId>metamaplite</artifactId>
 			<scope>system</scope>
-			<version>1.0.1</version>
-			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/metamaplite-3.6.2rc3.jar</systemPath>
+			<version>3.6.2</version>
+			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/metamaplite-3.6.2rc6.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>nlp-2.4.C.jar</groupId>
