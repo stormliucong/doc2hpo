@@ -13,6 +13,9 @@ doc2hpo.war
 /public_mm_lite/*
 public_mm_lite_3.6.2rc3_binaryonly.zip
 
+# configurtion file
+config.properties
+
 
 .factorypath
 .settings/org.eclipse.jdt.apt.core.prefs
@@ -20,3 +23,4 @@ public_mm_lite_3.6.2rc3_binaryonly.zip
 .settings/org.eclipse.jdt.core.prefs
 .vscode/settings.json
 .settings/org.eclipse.jdt.core.prefs
+
