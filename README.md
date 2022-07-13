@@ -115,6 +115,23 @@ print(r.json())
   #### 3. change config file (if necessary)
   ##### Important. Make sure you set everything correctly.
   ##### Otherwise there is a 404 error and some engines in doc2hpo might not work properly
+  ```
+  example configure file
+  ```bash
+  # please change the name of this file to config.properties_bak.
+  # setup the proxy you want to use. Put null if don't use
+  Proxy=null
+  # setup the proxy port you want to use. Put null if don't use
+  Port=null
+  # ncbo api url. use public one http://data.bioontology.org by default
+  NcboUrl=https://data.bioontology.org
+  # ncbo api key. use Cong's api in the public demo server. Input your own for internal server.
+  NcboApiKey=xxxxxxxxxxx 
+  # dir for metamaplite setting
+  metamapliteDataRoot=/home/cl3720/public_mm_lite/data
+  ```
+
+  ```
   cd ./doc2hpo/src/main/webapp/WEB-INF
   # change the name of config.properties_bak to config.properties
   mv config.properties_bak config.properties

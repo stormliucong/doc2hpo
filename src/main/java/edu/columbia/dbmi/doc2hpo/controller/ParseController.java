@@ -118,15 +118,15 @@ public class ParseController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			System.out.println(pj);
-			// List<ParsingResults> hmName2Id = new ArrayList<ParsingResults>();
-			// List<String> theOptions = pj.getOption();
+			List<ParsingResults> hmName2Id = new ArrayList<ParsingResults>();
+			List<String> theOptions = pj.getOption();
 			
-			// String content = pj.getNote();
-			// boolean negex = pj.isNegex();
-			// hmName2Id = this.ncbo.parse(content, theOptions,negex);
-			// httpSession.setAttribute("hmName2Id", hmName2Id);
-			// map.put("hmName2Id", hmName2Id);
-			// map.put("hpoOption", false);
+			String content = pj.getNote();
+			boolean negex = pj.isNegex();
+			hmName2Id = this.ncbo.parse(content, theOptions,negex);
+			httpSession.setAttribute("hmName2Id", hmName2Id);
+			map.put("hmName2Id", hmName2Id);
+			map.put("hpoOption", false);
 		}catch (Exception e) {
 			e.printStackTrace();
 			map.put("hmName2Id", "ERROR");
