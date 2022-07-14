@@ -1,7 +1,8 @@
 # doc2hpo
 doc2hpo is a java spring mvc based webapp to parse clinical note and get the HPO for phenolyzer analysis.
-## Demo
-https://impact.dbmi.columbia.edu/doc2hpo/
+## Demo website
+- Primary: https://impact.dbmi.columbia.edu/doc2hpo/ (Currently unavailable)
+- Backup: https://doc2hpo.wglab.org/
 
 ## RESTful API Example
 ```
@@ -55,7 +56,46 @@ r = requests.post(url,json = json)
 print(r.json())
 
 ```
- ## Installation
+## Deploy Doc2Hpo with Docker
+1. Clone the Doc2Hpo github repository
+```
+git clone https://github.com/stormliucong/doc2hpo.git
+cd doc2hpo
+```
+2. (Optional) Download MetaMapLite and UMLS if you don't have one. 
+Please visit https://lhncbc.nlm.nih.gov/ii/tools/MetaMap/run-locally/MetaMapLite.html for details.
+and check the download.sh file for the version requirement
+After download, unzip files.
+```
+unzip public_mm_lite_3.6.2rc6_binaryonly.zip
+unzip public_mm_data_lite_base_2020aa.zip
+```
+3. Change `config.properties`
+```
+# setup the proxy you want to use. Put null if don't use
+Proxy=null
+# setup the proxy port you want to use. Put null if don't use
+Port=null
+# ncbo api url. use public one http://data.bioontology.org by default
+NcboUrl=https://data.bioontology.org
+# ncbo api key. use Cong's api in the public demo server. Input your own for internal server.
+NcboApiKey=put-your-own-api-key-here
+# dir for metamaplite setting. (No need to change, if you follow this instruction.)
+metamapliteDataRoot=/code/public_mm_lite/data
+```
+4. Build the COHD docker image
+```bash
+docker build -t doc2hpo .
+```
+5. Run the COHD docker container (the second port mapping to 443 is only necessary if enabling HTTPS)
+```
+docker run -d -p [HOST:PORT]:8080 --name=doc2hpo-production doc2hpo
+```
+
+
+
+
+## [DEPRECATED] Instructions for manually deploying Doc2Hpo
   ### Step 0 : download everything you need
   ```bash 
   #### 0. install java if you don't have one
