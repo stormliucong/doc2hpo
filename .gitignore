@@ -12,9 +12,11 @@ doc2hpo.war
 /public_mm/*
 /public_mm_lite/*
 public_mm_lite_3.6.2rc3_binaryonly.zip
+*.zip
 
 # configurtion file
 
+.download
 
 .factorypath
 .settings/org.eclipse.jdt.apt.core.prefs
